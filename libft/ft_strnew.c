@@ -6,11 +6,12 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 12:36:23 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/24 12:40:11 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:24:43 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	    *ft_strnew(size_t size)
 {

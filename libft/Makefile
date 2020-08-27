@@ -62,9 +62,10 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./ft_btree_create_node.c\
 			./ft_skip_white_space.c\
 			./get_next_line.c\
-			./get_next_line_utils.c\	
+			./get_next_line_utils.c\
 			./ft_nb_character_in_word.c\
 			./ft_strnew.c\
+			./ft_btree_apply_suffix.c\
 
 MANDATORY_SRCS	=	${MANDATORY}
 

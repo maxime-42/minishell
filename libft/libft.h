@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/24 12:40:26 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/08/25 15:08:12 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char				*ft_strcpy(char *dest, char *src);
 char				**array_char(int line, int column);
 int 				ft_nb_character_in_word(char *word);
 char	    		*ft_strnew(size_t size);
+int					ft_skip_white_space(char *str);
 
 
 typedef struct		s_list
@@ -70,6 +71,7 @@ typedef struct		s_list
 typedef struct      s_btree
 {
     void			*content;
+	char			**command;
     struct	s_btree	*left;
     struct	s_btree	*right;
 }                   t_btree;
@@ -96,9 +98,9 @@ void				ft_list_remove_if(t_list **begin_list, void *data_ref,
 					int (*cmp)(), void (*free_fct)(void *));
 void				ft_list_remove_one_if(t_list **begin_list, void *data_ref,
 					int (*cmp)(), void (*free_fct)(void *));
-void				ft_btree_clear_btree(t_btree *root, void (*del)(void *));
+void				ft_btree_clear(t_btree *root, void (*del)(void *));
 void				ft_btree_del_one(t_btree *root, void (*del)(void *));
 t_btree				*ft_btree_create_node(void *item);
-
+void				ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *));
 
 #endif

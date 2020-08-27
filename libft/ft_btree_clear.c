@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:00:00 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/22 18:49:07 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/08/25 19:11:58 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	ft_btree_clear(t_btree *root, void (*del)(void *))
 	}
 	if (root)
 	{
-		(*del)(root->content);
+		(*del)(root);
 		root->left = 0;
 		root->right = 0;
 		free(root);
 		root = 0;
 	}
-	return ;
 }

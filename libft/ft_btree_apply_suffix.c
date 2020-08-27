@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_btree_create_node.c                             :+:      :+:    :+:   */
+/*   ft_btree_apply_suffix.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/22 18:46:34 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/25 15:56:22 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/08/25 15:02:51 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/08/25 18:57:36 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include  "libft.h"
 
-t_btree		*ft_btree_create_node(void *content)
+void	ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *))
 {
-	t_btree	*node;
-
-	if (!(node = malloc(sizeof(t_btree))))
-		return (0);
-	node->left = 0;
-	node->right = 0;
-	node->content = content;
-	return (node);
+	if (root)
+	{
+		ft_btree_apply_suffix(root->left, applyf);
+		ft_btree_apply_suffix(root->right, applyf);
+		(*applyf)(root);
+	}
 }
