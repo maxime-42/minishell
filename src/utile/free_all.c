@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 18:43:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/27 17:13:25 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/08/22 18:20:17 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/08/28 18:00:55 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "minishell.h"
 
-void		ft_lstadd_back(t_list **alst, t_list *new)
+void    clear_token(void *content)
 {
-	t_list	*tmp;
+   t_token  *token;
+    token = (t_token *)content;
+    ft_free_double_array((char **)token->value);
+    free(token);
+    (void)token;
+    (void)content;
+}
 
-	if (*alst)
-	{
-		tmp = *alst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->next = 0;
-	}
-	else
-	{
-		*alst = new;
-	}
+int free_all(t_info *info, int code_return)
+{
+    if (info->root)
+        ft_btree_clear(info->root, &clear_token);
+    return (code_return);
 }

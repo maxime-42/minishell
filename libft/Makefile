@@ -43,6 +43,7 @@ MANDATORY =		./ft_memset.c\
 				./ft_strcmp.c\
 				./ft_strstr.c\
 				./ft_strcpy.c\
+				./ft_free_double_array.c\
 
 BONUS	=	./ft_lstnew_bonus.c\
 			./ft_lstadd_front_bonus.c\
@@ -64,8 +65,10 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./get_next_line.c\
 			./get_next_line_utils.c\
 			./ft_nb_character_in_word.c\
-			./ft_strnew.c\
 			./ft_btree_apply_suffix.c\
+			./ft_free_double_array.c\
+			./ft_copy_double_array.c\
+			./ft_strnew.c\
 
 MANDATORY_SRCS	=	${MANDATORY}
 

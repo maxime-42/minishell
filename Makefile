@@ -6,6 +6,9 @@ CC = gcc -g -Wall -Wextra -Werror -I./include/
 NAME= minishell
 
 SRC	=	./src/main.c\
+		./src/parsing_input/expr.c\
+		./src/parsing_input/utile_parsing_input.c\
+		./src/utile/free_all.c\
 	
 
 OBJ = $(SRC:.c=.o)

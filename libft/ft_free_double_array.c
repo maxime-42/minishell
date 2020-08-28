@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_free_double_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 18:43:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/27 17:13:25 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/08/27 22:07:43 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/08/28 17:27:43 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
-void		ft_lstadd_back(t_list **alst, t_list *new)
+void    ft_free_double_array(char **array)
 {
-	t_list	*tmp;
+    int line;
 
-	if (*alst)
-	{
-		tmp = *alst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->next = 0;
-	}
-	else
-	{
-		*alst = new;
-	}
+    line = 0;
+    if (!array)
+        return ;
+    while (array[line])
+    {
+        free(array[line]);
+        array[line] = 0;
+        line++;
+    }
+    free(array);
+    array = 0;
 }

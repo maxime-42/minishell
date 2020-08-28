@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/25 15:08:12 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/08/28 18:07:54 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ int					ft_isspace (int c);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_strstr(char *str, char *to_find);
 char				*ft_strcpy(char *dest, char *src);
-char				**array_char(int line, int column);
 int 				ft_nb_character_in_word(char *word);
-char	    		*ft_strnew(size_t size);
 int					ft_skip_white_space(char *str);
-
+void    			ft_free_double_array(char **array);
+char        		**ft_copy_double_array(char **dest, char **src);
+char				**ft_array_char(int line, int column);
+char	    		*ft_strnew(size_t size);
 
 typedef struct		s_list
 {
@@ -102,5 +103,6 @@ void				ft_btree_clear(t_btree *root, void (*del)(void *));
 void				ft_btree_del_one(t_btree *root, void (*del)(void *));
 t_btree				*ft_btree_create_node(void *item);
 void				ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *));
+void				ft_test(t_btree *root, void (*applyf)(void *));
 
 #endif

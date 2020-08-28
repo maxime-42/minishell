@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:08:55 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 19:09:04 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/28 14:13:45 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-char		**array_char(int line, int column)
+char		**ft_array_char(int line, int column)
 {
 	char	**array;
 	int		i;
@@ -22,17 +23,17 @@ char		**array_char(int line, int column)
 		return (0);
 	while (++i < line)
 	{
-		if (!(array[i] = malloc(sizeof(char) * (column + 1))))
+		if ((array[i] = ft_strnew(column + 1)) == NULL)
 		{
 			while (++i <= 0)
 			{
 				free(array[i]);
 				array[i] = 0;
 			}
-			return (0);
+			free(array);
+			return (array = 0);
 		}
-		array[i][column] = '\0';
 	}
-	array[line] = 0;
+	array[i] = 0;
 	return (array);
 }
