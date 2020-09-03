@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/28 18:07:54 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/01 13:51:40 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void    			ft_free_double_array(char **array);
 char        		**ft_copy_double_array(char **dest, char **src);
 char				**ft_array_char(int line, int column);
 char	    		*ft_strnew(size_t size);
+void				ft_memdel(void **ap);
+void				ft_strdel(char **as);
+void    			ft_free_string(void *ptr);
+
 
 typedef struct		s_list
 {

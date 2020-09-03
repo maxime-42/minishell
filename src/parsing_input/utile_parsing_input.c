@@ -6,17 +6,49 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:32:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/28 17:59:50 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/03 17:06:20 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+// ('\f'), newline ('\n'), carriage return ('\r'), horizontal tab ('\t'), and vertical tab ('\v').
  
+ int               cmp(void *content, void *data_ref)
+ {
+     t_token        *token;
+    char            **array;
+
+    token = (t_token *)content;
+    array = token->value;
+    return (ft_strcmp(array[0], (char *)data_ref));
+ }
+ 
+ void   delete_space(t_list **begin)
+ {
+    char    *ispace[7];
+    int     index_ispace;
+
+    index_ispace = 0;
+    ispace[0] = "\f";
+    ispace[1] = "\n";
+    ispace[2] = "\r";
+    ispace[3] = "\t";
+    ispace[4] = "\v";
+    ispace[5] = " ";
+    ispace[6] = 0;
+    while (ispace[index_ispace])
+    {
+        printf("index %d:[%s]\n", index_ispace, ispace[index_ispace]);
+        ft_list_remove_if(begin, ispace[index_ispace], &cmp, clear_token);
+        index_ispace++;
+    }
+ }
+
 static  const t_token   array_token[] =
   {
     {"&&", and},
     {"||", or},
-    {"|", pipe},
+    {"|", pipee},
     {"<", redir_left},
     {">", redir_right},
     {"<<", double_redir_left},
@@ -24,6 +56,9 @@ static  const t_token   array_token[] =
     {";", semicolon},
     {"-", shortcut_option},
     {"--", long_option},
+    {"\"", double_quote},
+    {"'", single_quote},
+    {"\\", backslash},
     {0, 0},
   };
 
@@ -55,7 +90,7 @@ t_token_type    get_type_token(char *value)
         }
         i++;
     }
-    return (arg_command);
+    return (literale);
 }
 
 void     get_size_double_array(char **array, int *line, int *column)
