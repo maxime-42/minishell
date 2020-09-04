@@ -3,51 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_remove_if.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:06:52 by lenox             #+#    #+#             */
-/*   Updated: 2020/09/03 17:36:51 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/04 10:56:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-#include <stdio.h>
-
-void	remove_front(t_list **begin_list, void (*free_fct)(void *))
-{
-	t_list	*prev;
-
-	prev = *begin_list;
-	*begin_list = prev->next;
-	(*free_fct)(prev->content);
-	free(prev);
-	prev = 0;
-}
 
 void	ft_list_remove_if(t_list **begin_list, void *data_ref,
 		int (*cmp)(), void (*free_fct)(void *))
 {
-	t_list	*current;
 	t_list	*tmp;
 
-	if (!begin_list || !*begin_list)
-		return ;
-	if (!(*cmp)((*begin_list)->content, data_ref))
-		remove_front(begin_list, free_fct);
-	current = *begin_list;
-	while (current)
+	if (begin_list && *begin_list)
 	{
-		if (!(*cmp)(current->content, data_ref))
+		if (!(*cmp)((*begin_list)->content, data_ref))
 		{
-			tmp = current;
-			current = tmp->next;
+			tmp = (*begin_list);
+			(*begin_list) = tmp->next;
 			(*free_fct)(tmp->content);
 			free(tmp);
+			ft_list_remove_if(begin_list, data_ref, cmp, free_fct);
 		}
 		else
-		{
-			current = current->next;
-		}
+			ft_list_remove_if(&(*begin_list)->next, data_ref, cmp, free_fct);
 	}
 }

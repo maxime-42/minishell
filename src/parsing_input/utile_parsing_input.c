@@ -3,44 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   utile_parsing_input.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:32:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/03 17:06:20 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/04 14:03:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 // ('\f'), newline ('\n'), carriage return ('\r'), horizontal tab ('\t'), and vertical tab ('\v').
  
- int               cmp(void *content, void *data_ref)
+ void       delete_space(t_list **begin)
  {
-     t_token        *token;
-    char            **array;
-
-    token = (t_token *)content;
-    array = token->value;
-    return (ft_strcmp(array[0], (char *)data_ref));
- }
- 
- void   delete_space(t_list **begin)
- {
-    char    *ispace[7];
-    int     index_ispace;
-
-    index_ispace = 0;
-    ispace[0] = "\f";
-    ispace[1] = "\n";
-    ispace[2] = "\r";
-    ispace[3] = "\t";
-    ispace[4] = "\v";
-    ispace[5] = " ";
-    ispace[6] = 0;
-    while (ispace[index_ispace])
+    char    *is_space[7];
+    int     index_is_space;
+    t_token *token;
+    char    **array;
+    is_space[0] = "\f";
+    is_space[1] = "\n";
+    is_space[2] = "\r";
+    is_space[3] = "\t";
+    is_space[4] = "\v";
+    is_space[5] = " ";
+    is_space[6] = NULL;
+    index_is_space = -1;
+    token = (*begin)->content;
+    array = (char **)token->value;
+    //printf("array[0] = [%s]\n", array[0]);
+    while (is_space[++index_is_space])
     {
-        printf("index %d:[%s]\n", index_ispace, ispace[index_ispace]);
-        ft_list_remove_if(begin, ispace[index_ispace], &cmp, clear_token);
-        index_ispace++;
+        //printf("array[0] = [%s] | index_is_space = [%d]\n",array[0], index_is_space);
+        if (!ft_strcmp(array[0], is_space[index_is_space]))
+        {
+            ft_remove_front(begin, &clear_token);
+            delete_space(begin);
+            return ;
+        }
     }
  }
 

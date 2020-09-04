@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/01 13:51:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/04 11:28:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ void				ft_btree_del_one(t_btree *root, void (*del)(void *));
 t_btree				*ft_btree_create_node(void *item);
 void				ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *));
 void				ft_test(t_btree *root, void (*applyf)(void *));
+void        		ft_remove_front(t_list **begin, void (*free_fct)(void *));
+
 
 #endif
