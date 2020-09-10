@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 09:12:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/09 20:21:59 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/10 21:07:35 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,88 +64,69 @@ static  int     count_nb_backslashe(t_list *list)
     return (nb_backslashe);
 }
 
-static  void    remove_backslashe(t_list **begin, int nb_backslashe)
+t_list              *ptr_start(t_list **current, int nb_dereference)
 {
-    int         i;
+    t_list          *tmp;
+    int             i;
 
     i = 0;
-    while (i < nb_backslashe)
+    tmp = *current;
+    while (i < nb_dereference)
     {
-        ft_remove_front(begin, &clear_token);
+        change_type_of_token(&tmp, literal);
+        tmp = tmp->next;
         i++;
     }
+    return (tmp);
 }
 
-static  void    push_back_token(t_list **begin, char *data, t_token_type type, int nb_duplication)
+void            delete_useless_backslashe(t_list **current, int nb_backslashe)
 {
-    t_token     *token;
-    t_list      *node_to_add;
-    char        *token_value;
-    int         i;
-
-    i = -1;
-    while (++i < nb_duplication)
-    {
-        if (!(token_value = ft_strdup(data)))
-            exit(free_all(&g_info, ERROR));
-        if (!(token = create_token(token_value, type)))
-                exit(free_all(&g_info, ERROR));
-        node_to_add = ft_lstnew(token);
-        ft_lstadd_front(begin, node_to_add);
-    }
-}
-
-/*
-**  le but de cette fonction et d'intrepter le token en 
-**  fonction du token dans le maillot begin
-**  si le token et de type variable j'interprete la variable
-**  sinon je transforme le token qui est dans begin en lieteral puis
-**  je concatener tous les literale 
-*/
-
-static  void    has_interpret(t_list **begin)
-{
-    t_token     *token;
-    char        **array;
-    char        *value_var;
+    int         nb_del;
+    t_list      *to_del;
     
-    token = (t_token *)(*begin)->content;
-    if (token->type == variable)
+    nb_del = nb_backslashe / 2;
+    if ((nb_backslashe % 2))
     {
-        ft_remove_front(begin, &clear_token);
-        concate_token_same_type(begin, literal);
-        token = (*begin)->content;
-        array = token->value;
-        value_var = duplique_value_variable(g_info.list_env, array[0]);
-        free(array[0]);
-        array[0] = value_var;
+        nb_del += 1;
     }
-    else
+    nb_backslashe = nb_backslashe - nb_del;
+    while (nb_del > 0)
     {
-        change_type_of_token(begin, literal);
-        concate_token_same_type(begin, literal);
+        to_del = *current;
+        (*current) = to_del->next;
+        ft_list_remove_current_node(&g_info.list_input, to_del, &clear_token);
+        nb_del -= 1;
     }
 }
-
-void            interpret_backslashe(t_list **begin)
+void                interpret_backslashe(t_list **begin)
 {
-    int         nb_backslashe;
-    t_token     *token;
-
-    token = (t_list *)(*begin);
-    if (token->type != backslash)
+    int             nb_backslashe;
+    t_token_type    type;
+    t_list          *ptr_to_start;
+    
+    if (get_type_of_token(begin) != backslash)
         return ;
     nb_backslashe = count_nb_backslashe(*begin);
-    remove_backslashe(begin, nb_backslashe);
-    if (!*begin)
-        ;
+    delete_useless_backslashe(begin, nb_backslashe);
+    ptr_to_start = ptr_start(begin, nb_backslashe / 2);
+    type = get_type_of_token(&ptr_to_start);
+    if (!ptr_to_start)
+        return ;
     else if ((nb_backslashe % 2))
     {
-        change_type_of_token(begin, literal);
-        concate_token_same_type(begin, literal);
+        change_type_of_token(&ptr_to_start, literal);
+        //concate_token_same_type(&ptr_to_start, literal);
     }
     else
-        has_interpret(begin);
-    push_back_token(begin, "\\", literal, (nb_backslashe / 2));
+    {
+        if (type == variable)
+            interpret_variable(&ptr_to_start);
+        else
+        {
+            //change_type_of_token(&ptr_to_start, type);
+            concate_token_same_type(&ptr_to_start, type);
+        }
+    }
     concate_token_same_type(begin, literal);
 }

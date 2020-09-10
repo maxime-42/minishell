@@ -7,7 +7,6 @@
 #include "struct.h"
 #include <unistd.h>
 
-t_token_type        get_type_token(char *value);
 t_btree             *expr(char *line);
 int                 free_all(t_info *info, int code_return);
 void                create_ast(t_btree **root, t_token *token);
@@ -24,5 +23,9 @@ void                interpret_backslashe(t_list **begin);
 t_token             *create_token(char *token_value, t_token_type token_type);
 void                change_type_of_token(t_list **begin, t_token_type new_type);
 char                *duplique_value_variable(t_list *list_env, char *variable_name);
+t_token_type        get_type_of_token(t_list **current);
+void                interpret_variable(t_list **current);
+t_token_type        get_type_of_token(t_list **current);
+void                interpret_input(t_list **begin);
 
 #endif

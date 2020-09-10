@@ -15,9 +15,11 @@ SRC	=	./src/main.c\
 		./src/parsing/concate_token.c\
 		./src/parsing/duplique_value_variable.c\
 		./src/parsing/interpret_backslashe.c\
-		./src/parsing/get_type_token.c\
 		./src/parsing/create_token.c\
 		./src/parsing/change_type_of_token.c\
+		./src/parsing/interpret_variable.c\
+		./src/parsing/get_type_of_token.c\
+		./src/parsing/interpret_input.c\
 
 OBJ = $(SRC:.c=.o)
 

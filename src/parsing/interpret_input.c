@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:48:45 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/10 13:17:51 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/10 21:08:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static  t_token_type    get_type_of_quote(t_list **node)
 {
-    t_token *token;
+    t_token             *token;
 
     token = (*node)->content;
     if (token->type == single_quote)
@@ -28,37 +28,44 @@ static  t_token_type    get_type_of_quote(t_list **node)
     return (false);
 }
 
-static  t_list  *go_to_next(t_list **current)
+  void      go_to_next(t_list **current)
 {
-    t_list  *next;
-
-    if (!current)
-        ;
-    next = (*current)->next;
-    while (next && get_type_of_quote(next) != single_quote)
+    if (!current || !*current)
+        return ;
+    while (get_type_of_quote(current) != single_quote)
     {
-        next = next->next;
+        change_type_of_token(current, literal);
+        *current = (*current)->next;
     }
-    (*current) = next;
 }
 
-void        interpret_input(t_list **begin)
+void                interpret_input(t_list **begin)
 {
-    t_list  *current;
+    // t_list  *tmp;
 
-    current = *begin;
-    while (current)
+    // tmp = *begin;
+    if (!begin || !*begin)
+        return ;
+    // t_list **tmp;
+
+    // tmp = begin;
+    while ((*begin))
     {
-        if (get_type_of_quote(&current) == single_quote)
+        // printf("____________dans la boucle_______\n");
+        if (get_type_of_quote(begin) == single_quote)
         {
-            go_to_next(current);
+           ;// go_to_next(begin);
         }
         else
         {
-            interpret_backslashe(&current);
-            interpret_variable(&current);
+            interpret_backslashe(begin);
+            interpret_variable(begin);
+            // printf("___________test_______________\n");
+            // print_token((*begin)->content);
+            
         }
-        if (current)
-            current = current->next;
+        if (*begin)
+            *begin = (*begin)->next;
     }
+    // *begin = *tmp;
 }

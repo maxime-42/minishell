@@ -6,13 +6,13 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 18:19:59 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/08 18:20:02 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/10 18:32:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 
 void	ft_list_remove_current_node(t_list **begin_list, t_list *to_del, void (*free_fct)(void *))
 {
@@ -26,6 +26,7 @@ void	ft_list_remove_current_node(t_list **begin_list, t_list *to_del, void (*fre
 			(*begin_list) = tmp->next;
 			(*free_fct)(tmp->content);
 			free(tmp);
+			tmp = 0;
 			return ;			
 		}
 		else
