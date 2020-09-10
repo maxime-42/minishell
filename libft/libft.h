@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/04 11:28:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 18:19:50 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
-char				**ft_split(char const *s, char c);
+char				**ft_split(char *s, char *str);
 char				*ft_itoa(int n);
 char				*ft_strdup(const char *s1);
 void				ft_putchar_fd(char c, int fd);
@@ -58,13 +58,15 @@ char				*ft_strstr(char *str, char *to_find);
 char				*ft_strcpy(char *dest, char *src);
 int 				ft_nb_character_in_word(char *word);
 int					ft_skip_white_space(char *str);
-void    			ft_free_double_array(char **array);
+//void    			ft_free_double_array(char **array);
 char        		**ft_copy_double_array(char **dest, char **src);
 char				**ft_array_char(int line, int column);
 char	    		*ft_strnew(size_t size);
 void				ft_memdel(void **ap);
 void				ft_strdel(char **as);
 void    			ft_free_string(void *ptr);
+void        		ft_free_double_array(void *ptr);
+
 
 
 typedef struct		s_list
@@ -109,6 +111,7 @@ t_btree				*ft_btree_create_node(void *item);
 void				ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *));
 void				ft_test(t_btree *root, void (*applyf)(void *));
 void        		ft_remove_front(t_list **begin, void (*free_fct)(void *));
+void				ft_list_remove_current_node(t_list **begin_list, t_list *to_del, void (*free_fct)(void *));
 
 
 #endif

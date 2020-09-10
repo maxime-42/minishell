@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile_parsing_input.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 11:32:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/04 14:03:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 12:06:14 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,19 @@
  
  void       delete_space(t_list **begin)
  {
-    char    *is_space[7];
+    char    *is_space;
     int     index_is_space;
     t_token *token;
     char    **array;
-    is_space[0] = "\f";
-    is_space[1] = "\n";
-    is_space[2] = "\r";
-    is_space[3] = "\t";
-    is_space[4] = "\v";
-    is_space[5] = " ";
-    is_space[6] = NULL;
+    
+    is_space = "\f\n\r\t\v ";
     index_is_space = -1;
     token = (*begin)->content;
     array = (char **)token->value;
-    //printf("array[0] = [%s]\n", array[0]);
     while (is_space[++index_is_space])
     {
         //printf("array[0] = [%s] | index_is_space = [%d]\n",array[0], index_is_space);
-        if (!ft_strcmp(array[0], is_space[index_is_space]))
+        if (array[0][0] == is_space[index_is_space])
         {
             ft_remove_front(begin, &clear_token);
             delete_space(begin);
@@ -42,54 +36,7 @@
     }
  }
 
-static  const t_token   array_token[] =
-  {
-    {"&&", and},
-    {"||", or},
-    {"|", pipee},
-    {"<", redir_left},
-    {">", redir_right},
-    {"<<", double_redir_left},
-    {">>", redir_right},
-    {";", semicolon},
-    {"-", shortcut_option},
-    {"--", long_option},
-    {"\"", double_quote},
-    {"'", single_quote},
-    {"\\", backslash},
-    {0, 0},
-  };
 
-static  t_bool  is_operator(t_token_type type)
-{
-
-    if ((type >= 0 && type < NB_OPERATOR))
-        return (true);
-    return (false);
-}
-
-t_token_type    get_type_token(char *value)
-{
-    int         i;
-    int         size;
-    static  unsigned int is_command = 0;
-
-    i = 0;
-    if (++is_command == 1)
-        return (command);
-    while (array_token[i].value)
-    {
-        size = ft_strlen(array_token[i].value);
-        if (!ft_memcmp(array_token[i].value, value, size))
-        {
-            if (is_operator(array_token[i].type) == true)
-                is_command = 0;
-            return (array_token[i].type);
-        }
-        i++;
-    }
-    return (literale);
-}
 
 void     get_size_double_array(char **array, int *line, int *column)
 {

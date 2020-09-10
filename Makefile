@@ -6,10 +6,18 @@ CC = gcc -g -Wall -Wextra -Werror -I./include/
 NAME= minishell
 
 SRC	=	./src/main.c\
-		./src/parsing_input/expr.c\
-		./src/parsing_input/utile_parsing_input.c\
 		./src/utile/free_all.c\
-	
+		./src/parsing/expr.c\
+		./src/parsing/init_env.c\
+		./src/parsing/utile_parsing_input.c\
+		./src/parsing/get_value_of_variable_env.c\
+		./src/parsing/transform_input_in_list_token.c\
+		./src/parsing/concate_token.c\
+		./src/parsing/duplique_value_variable.c\
+		./src/parsing/interpret_backslashe.c\
+		./src/parsing/get_type_token.c\
+		./src/parsing/create_token.c\
+		./src/parsing/change_type_of_token.c\
 
 OBJ = $(SRC:.c=.o)
 

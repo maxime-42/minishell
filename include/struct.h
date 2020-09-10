@@ -14,15 +14,14 @@ typedef enum        s_token_type
     double_redir_left,//5
     double_redir_right,//6
     semicolon,//7
-    shortcut_option,//8
-    option_command,//9
-    long_option,//10
-    single_quote,//11
-    double_quote,//12
-    backslash,//13
-    literale,//14
-    var,//15
-    command,//16
+    option_command,//8
+    single_quote,//9
+    double_quote,//10
+    backslash,//11
+    literal,//12
+    variable,//13
+    command,//14
+    space,//15
 }                   t_token_type;
 
 typedef struct      s_token
@@ -35,6 +34,8 @@ typedef struct      info
 {
     t_btree         *root;
     t_list          *list_env;
+    t_list          *list_input;
+    char            *str_input;
     void            *generic_ptr;
     int             ret;
 }                   t_info;

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
+/*   change_type_of_token.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 18:46:32 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/09 13:51:36 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/09 09:42:46 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/09 09:44:07 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void     change_type_of_token(t_list **begin, t_token_type new_type)
 {
-	if (alst)
-		new->next = *alst;
-	else
-		new->next = 0;
-	*alst = new;
+    t_token     *token;
+
+    token = (*begin)->content;
+    if (token->type != new_type)
+    {
+        token->type = new_type;
+    }
 }

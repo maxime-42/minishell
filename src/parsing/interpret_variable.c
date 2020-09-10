@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_double_array.c                             :+:      :+:    :+:   */
+/*   interpret_variable.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 22:07:43 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/05 12:28:46 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/10 13:23:27 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/10 13:31:10 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "minishell.h"
 
-void        ft_free_double_array(void *ptr)
+t_bool  check_is_variable(t_list **begin)
 {
-    int     line;
-    char    **array;
+    t_token *token;
 
-    array = (char **)ptr;
-    line = 0;
-    if (!array)
+    token = (*begin)->content;
+
+    if (token->type == variable)
+        return (true);
+    return (false);
+}
+
+void        interpret_variable(t_list **current)
+{
+
+    if (!*current)
         return ;
-    while (array[line])
-    {
-        free(array[line]);
-        array[line] = 0;
-        line++;
-    }
-    free(array);
-    array = 0;
+    if (check_is_variable(current) == false)
+        return ;
+    ft_list_remove_current_node(&g_info.list_input, *current, clear_token);
 }

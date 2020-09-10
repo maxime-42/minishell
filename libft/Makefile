@@ -73,6 +73,8 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./ft_strdel.c\
 			./ft_free_string.c\
 			./ft_remove_front.c\
+			./ft_list_remove_current_node.c\
+
 
 MANDATORY_SRCS	=	${MANDATORY}
 

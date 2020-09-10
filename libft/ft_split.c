@@ -3,60 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:38:43 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/06 19:22:19 by lenox            ###   ########.fr       */
+/*   Updated: 2020/09/06 10:02:38 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-static	int		nb_word(char *s, char c)
+int				is_charset(char c, char *str)
+{
+	while (str && *str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+int				nb_word(char *s, char *str)
 {
 	int	line;
 
 	line = 0;
-	while (s && *s && *s == c)
+	if (s && !*s)
+		return (line);
+	line += (!(is_charset(*s, str)));
+	while (s && *s && !(is_charset(*s, str)))
 		s++;
-	if (s && *s && *s != c)
-		line++;
-	while (s && *s && *s != c)
+	while (s && *s && (is_charset(*s, str)))
 		s++;
-	if (s && *s && *s == c)
-		line += nb_word(s, c);
+	if (s && *s)
+		return (line += nb_word(s, str));
 	return (line);
 }
 
-static	int		nb_char(char *s, char c)
+int				nb_char(char *s, char *str)
 {
-	int	nbr_char;
+	int		i;
 
-	nbr_char = 0;
-	while (s && s[nbr_char] && s[nbr_char] != c)
-		nbr_char++;
-	return (nbr_char);
+	i = 0;
+	while (s && *s && (is_charset(s[i], str)))
+		s++;
+	while (s && s[i] && !(is_charset(s[i], str)))
+		i++;
+	return (i);
 }
 
-char			**ft_split(char *s, char c)
+static	char	**ft_free_array(char **array, int line)
 {
-	int			nb_w;
-	int			i;
-	int			j;
-	char		**tab;
+	ft_putstr_fd("error:\nmalloc failure\n", 1);
+    while (--line >= 0)
+    {
+        free(array[line]);
+        array[line] = 0;
+    }
+    free(array);
+    array = 0;
+	return (0);
+}
+
+char			**ft_split(char *s, char *str)
+{
+	int		nb_w;
+	int		i;
+	int		j;
+	char	**tab;
 
 	i = -1;
-	nb_w = nb_word(s, c);
-	if (!s || !(tab = malloc(sizeof(char *) * (nb_w + 1))))
+	nb_w = nb_word(s, str);
+	if (!(tab = malloc(sizeof(char *) * (nb_w + 1))))
 		return (0);
 	while (++i < nb_w)
 	{
-		while (*s == c)
+		while (*s && (is_charset(*s, str)))
 			s++;
-		if (!(tab[i] = malloc(sizeof(char) * (nb_char(s, c) + 1))))
-			return (0);
+		if (*s && !(tab[i] = malloc(sizeof(char) * (nb_char(s, str) + 1))))
+			return (ft_free_array(tab, i));
 		j = 0;
-		while (*s && *s != c)
+		while (*s && !(is_charset(*s, str)))
 		{
 			tab[i][j++] = *s;
 			s++;
