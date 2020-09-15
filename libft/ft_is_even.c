@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_type_of_token.c                                :+:      :+:    :+:   */
+/*   ft_is_even.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 12:01:22 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 10:00:37 by lenox            ###   ########.fr       */
+/*   Created: 2020/09/11 17:23:16 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/11 17:25:30 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 
-t_token_type	get_type_of_token(t_list **current)
-{
-	t_token		*token;
+#include "libft.h"
 
-	if (!current || !*current)
-		return (ERROR);
-	token = (*current)->content;
-	return (token->type);
+/*
+**      n&1 is 1, then odd, else even
+*/
+t_bool  ft_is_even(int n)  
+{  
+
+    if (!(n & 1))
+        return (true);  
+    return (false);
 }

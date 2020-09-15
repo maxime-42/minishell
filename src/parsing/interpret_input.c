@@ -5,67 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/10 12:48:45 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/10 21:08:57 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/14 12:15:19 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static  t_token_type    get_type_of_quote(t_list **node)
+void				interpret_input(t_list **begin)
 {
-    t_token             *token;
+	t_token_type	type_quote;
 
-    token = (*node)->content;
-    if (token->type == single_quote)
-    {
-        return (single_quote);
-    }
-    else if (token->type == double_quote)
-    {
-        return (double_quote);
-    }
-    return (false);
-}
-
-  void      go_to_next(t_list **current)
-{
-    if (!current || !*current)
-        return ;
-    while (get_type_of_quote(current) != single_quote)
-    {
-        change_type_of_token(current, literal);
-        *current = (*current)->next;
-    }
-}
-
-void                interpret_input(t_list **begin)
-{
-    // t_list  *tmp;
-
-    // tmp = *begin;
-    if (!begin || !*begin)
-        return ;
-    // t_list **tmp;
-
-    // tmp = begin;
-    while ((*begin))
-    {
-        // printf("____________dans la boucle_______\n");
-        if (get_type_of_quote(begin) == single_quote)
-        {
-           ;// go_to_next(begin);
-        }
-        else
-        {
-            interpret_backslashe(begin);
-            interpret_variable(begin);
-            // printf("___________test_______________\n");
-            // print_token((*begin)->content);
-            
-        }
-        if (*begin)
-            *begin = (*begin)->next;
-    }
-    // *begin = *tmp;
+	if (!begin || !*begin)
+		return ;
+	while ((*begin))
+	{
+		type_quote = get_type_of_token(begin);
+		if (type_quote == single_quote || type_quote == double_quote)
+			dealt_quote(begin);
+		else
+		{
+			interpret_backslashe(begin);
+			interpret_variable(begin);
+			if (get_type_of_token(begin) == literal)
+				concate_token_same_type(begin, literal);
+		}
+		if (*begin)
+			*begin = (*begin)->next;
+	}
 }

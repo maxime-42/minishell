@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/10 21:09:07 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/15 12:14:38 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,35 @@ int main(int ac, char **av, char **env)
     g_info.list_env = 0;
 
     g_info.list_env = init_env(env);
-    str_input = promp();
-    g_info.str_input = str_input;
+    g_info.str_input = promp();
+    parsing_input(g_info.str_input);
+        /* free_all(&g_info, 0); */
+	/* printf("\n_________________avant____________\n"); */
+	/* ft_lstiter(g_info.list_input, &print_token); */
 
-    g_info.list_input = transform_input_in_list_token(str_input);
-    printf("\n_________________avant____________\n");
-    ft_lstiter(g_info.list_input, &print_token);
-    tmp = g_info.list_input;
-    // interpret_input(&tmp);
-    // tmp = tmp->next;
-    // interpret_variable(&tmp);
-    //interpret_variable(&tmp);
-    //interpret_backslashe(&tmp);
-    //interpret_backslashe(&g_info.list_input);
-      interpret_input(&tmp);
-    printf("\n_________________apres____________\n");
+	/* printf("\n_________________apres____________\n"); */
+	/* ft_lstiter(g_info.list_input, &print_token); */
+
+    /* return 0; */
+    // g_info.list_input = transform_input_in_list_token(str_input);
+    // printf("\n_________________avant____________\n");
     // ft_lstiter(g_info.list_input, &print_token);
-    ft_lstiter(g_info.list_input, &print_token);
+    // tmp = g_info.list_input;
+    // interpret_input(&tmp);
+    // printf("\n_________________apres____________\n");
+    // // ft_lstiter(g_info.list_input, &print_token);
+    // ft_lstiter(g_info.list_input, &print_token);
     //tmp = interprete_backslash(g_info.list_input, &nb_backslash);
+    printf("___________ast_____________\n");
+    ft_test(g_info.root, &print_token);
+      // ft_lstclear(&g_info.list_input, &clear_token);
+
     free_all(&g_info, 0);
-    //ft_btree_clear(g_info.root, &clear_token);
+    
     (void)array;
     (void)ac;
     (void)token;
+    (void)str_input;
     (void)nb_backslash;
     (void)tmp;
     (void)av;

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_type_of_token.c                                :+:      :+:    :+:   */
+/*   ft_nb_line_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 12:01:22 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 10:00:37 by lenox            ###   ########.fr       */
+/*   Created: 2020/09/12 18:11:43 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/12 18:24:13 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 
-t_token_type	get_type_of_token(t_list **current)
+int     ft_nb_line_array(char **array)
 {
-	t_token		*token;
+    int line;
 
-	if (!current || !*current)
-		return (ERROR);
-	token = (*current)->content;
-	return (token->type);
+    line = 0;
+    while (array[line])
+    {
+        line++;
+    }
+    return (line);
 }

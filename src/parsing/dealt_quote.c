@@ -1,100 +1,113 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   dealt_quote.c                                      :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2020/09/03 10:16:32 by mkayumba          #+#    #+#             */
-// /*   Updated: 2020/09/10 12:21:33 by mkayumba         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dealt_quote.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/14 12:58:11 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/14 13:06:31 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "minishell.h"
+#include "minishell.h"
 
-// static  t_list      *get_closing_quote(t_list *open_quote)
-// {
-//     t_list  *current;
-  
-//     current = 
-//     ft_putstr_fd("erreur:\nnot find close quote", 1);
-//     exit(free_all(&g_info, ERROR));
-// }
+static	void			delete_close_quote(t_list **begin, t_token_type type)
+{
+	t_list				*to_del;
 
-// static  t_bool      is_quote(t_list **begin)
-// {
-//     t_token         *token;
+	if (get_type_of_token(begin) == type)
+	{
+		to_del = *begin;
+		*begin = to_del->next;
+		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
+	}
+	else if (get_type_of_token(&(*begin)->next) == type)
+	{
+		*begin = (*begin)->next;
+		to_del = *begin;
+		*begin = to_del->next;
+		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
+	}
+	else
+	{
+		ft_putstr_fd("error\n: wsh missing are quote close quote\n", 1);
+		exit(free_all(&g_info, ERROR));
+	}
+}
 
-//     token = (*begin)->content;
-//     if (token->type == single_quote)
-//         return (true);
-//     else if (token->type == double_quote)
-//         return (true);
-//     return (false);
-// }
+/*
+** tous les token qui se trouve entre le quote sont transforme en literal
+*/
 
-// static  t_token_type    get_type_quote(t_list **node)
-// {
-//     t_token *token;
+static	void			change_everything_in_literal_inside_quote
+	(t_list **begin, t_token_type type_to_find)
+{
+	t_list				*tmp;
+	t_token_type		type;
 
-//     token = (*node)->content;
-//     if (token->type == single_quote)
-//     {
-//         return (single_quote);
-//     }
-//     return (double_quote);
-// }
+	tmp = *begin;
+	while (tmp)
+	{
+		type = get_type_of_token(&tmp);
+		if (type == type_to_find)
+			return ;
+		if (type != literal)
+		{
+			change_type_of_token(&tmp, literal);
+		}
+		tmp = tmp->next;
+	}
+	ft_putstr_fd("error:\nmissing are quote close quote\n", 1);
+	exit(free_all(&g_info, ERROR));
+}
 
-// // static  void    put_everything_in_literal_type(t_list **begin, t_list *quote_close)
-// // {
-// //     t_list  *current;
+static void				dealt_double_quote
+	(t_list **begin, t_token_type type_quote)
+{
+	t_token_type		type;
+	t_list				*tmp;
+	int					count;
 
-// //     current = *begin;
-// //     while (current != quote_close)
-// //     {
-// //         change_type_of_token(&current, literal);
-// //         current = current->next;
-// //     }
-// //     ft_remove_front(begin, &clear_token);
-// //     ft_list_remove_current_node(begin, quote_close, &clear_token);
-// // }
+	count = 0;
+	tmp = *begin;
+	while (tmp)
+	{
+		type = get_type_of_token(&tmp);
+		if (type == type_quote)
+			return ;
+		interpret_backslashe(&tmp);
+		interpret_variable(&tmp);
+		count += 1;
+		if (count == 1)
+		{
+			if (*begin != tmp)
+				*begin = tmp;
+		}
+		tmp = tmp->next;
+	}
+}
 
-// void                dealt_quote(t_list **begin)
-// {
-//     t_token         *token;
-//     t_token_type    type_quote;
-//     t_list          *quote_close;
-//     int             nb_token_between;
+void					dealt_quote(t_list **begin)
+{
+	t_list				*to_del;
+	t_token_type		type_quote;
 
-//     type_quote = get_type_quote(begin);
-//     printf("nb_token_between : [%d]\n", nb_token_between);
-//     if (!nb_token_between)
-//     {
-//         printf("juste un espace\n");
-//     }
-//     else if (type_quote == single_quote)
-//     {
-//         printf("simple quote\n");
-//     }
-//     else if (type_quote == double_quote)
-//     {
-//         printf("double quote\n");
-//     }
-// }
-
-// void                quote(t_list **begin)
-// {
-//     t_list  *current;
-//     t_list  quote_closing;
-
-//     if (!*begin || is_quote(begin) == false)
-//         return ;
-//     quote_closing = get_closig_quote(begin);
-//     current = *begin;
-//     while (current)
-//     {
-
-
-//     }
-    
-// }
+	to_del = *begin;
+	*begin = to_del->next;
+	type_quote = get_type_of_token(&to_del);
+	ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
+	if (!*begin)
+	{
+		ft_putstr_fd("error:\nclose quote missing\n", 1);
+		exit(free_all(&g_info, ERROR));
+	}
+	if (type_quote == single_quote || type_quote == double_quote)
+	{
+		if (type_quote == double_quote)
+			dealt_double_quote(begin, type_quote);
+		change_everything_in_literal_inside_quote(begin, type_quote);
+		concate_token_same_type(begin, literal);
+		delete_close_quote(begin, type_quote);
+	}
+}

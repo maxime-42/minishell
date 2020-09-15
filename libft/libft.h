@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/08 18:19:50 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/12 18:24:30 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define LIBFT_H
 # include <string.h>
 # include <ctype.h>
+
+typedef enum        s_bool
+{
+    false,
+    true,
+}                   t_bool;
 
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -66,7 +72,9 @@ void				ft_memdel(void **ap);
 void				ft_strdel(char **as);
 void    			ft_free_string(void *ptr);
 void        		ft_free_double_array(void *ptr);
-
+t_bool  			ft_is_even(int n);
+void        		ft_get_size_array(char **array, int *line, int *column);
+int     			ft_nb_line_array(char **array);
 
 
 typedef struct		s_list
@@ -82,12 +90,6 @@ typedef struct      s_btree
     struct	s_btree	*left;
     struct	s_btree	*right;
 }                   t_btree;
-
-typedef enum        s_bool
-{
-    false,
-    true,
-}                   t_bool;
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **alst, t_list *new);
