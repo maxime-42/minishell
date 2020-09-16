@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/12 18:24:30 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/15 15:17:24 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-t_list				*ft_list_find(t_list *begin_list, void *data_ref, size_t n,
-					int (*cmp)());
+/* t_list				*ft_list_find(t_list *begin_list, void *data_ref, size_t n, */
+/* 					int (*cmp)()); */
 void				ft_list_remove_if(t_list **begin_list, void *data_ref,
 					int (*cmp)(), void (*free_fct)(void *));
 void				ft_list_remove_one_if(t_list **begin_list, void *data_ref,
@@ -114,6 +114,5 @@ void				ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *));
 void				ft_test(t_btree *root, void (*applyf)(void *));
 void        		ft_remove_front(t_list **begin, void (*free_fct)(void *));
 void				ft_list_remove_current_node(t_list **begin_list, t_list *to_del, void (*free_fct)(void *));
-
-
+t_list				*ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)());
 #endif

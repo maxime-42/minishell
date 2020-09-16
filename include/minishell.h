@@ -28,4 +28,5 @@ void                interpret_input(t_list **begin);
 void                dealt_quote(t_list **begin);
 void                test_free(void *ptr);
 void				parsing_input(char *str_input);
+void				my_setenv(char *name, char *value);
 #endif

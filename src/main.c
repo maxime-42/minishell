@@ -6,12 +6,11 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/15 12:14:38 by lenox            ###   ########.fr       */
+/*   Updated: 2020/09/16 12:19:53 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void    print_token(void *ptr)
 {
@@ -52,7 +51,7 @@ void        print_str(void *ptr)
     char    *array;
     
     array = (char *)ptr;
-    printf("%s\n", array);
+    printf("=> [%s]\n\n", array);
 }
 
 int main(int ac, char **av, char **env)
@@ -70,14 +69,17 @@ int main(int ac, char **av, char **env)
     g_info.list_env = 0;
 
     g_info.list_env = init_env(env);
-    g_info.str_input = promp();
-    parsing_input(g_info.str_input);
+    // g_info.str_input = promp();
+    // parsing_input(g_info.str_input);
         /* free_all(&g_info, 0); */
 	/* printf("\n_________________avant____________\n"); */
 	/* ft_lstiter(g_info.list_input, &print_token); */
 
 	/* printf("\n_________________apres____________\n"); */
 	/* ft_lstiter(g_info.list_input, &print_token); */
+    my_setenv("nom de famille", "KAYUMBA");
+    printf("_______________environement___________\n");
+	ft_lstiter(g_info.list_env, &print_str);
 
     /* return 0; */
     // g_info.list_input = transform_input_in_list_token(str_input);
@@ -89,8 +91,8 @@ int main(int ac, char **av, char **env)
     // // ft_lstiter(g_info.list_input, &print_token);
     // ft_lstiter(g_info.list_input, &print_token);
     //tmp = interprete_backslash(g_info.list_input, &nb_backslash);
-    printf("___________ast_____________\n");
-    ft_test(g_info.root, &print_token);
+    // printf("___________ast_____________\n");
+    // ft_test(g_info.root, &print_token);
       // ft_lstclear(&g_info.list_input, &clear_token);
 
     free_all(&g_info, 0);

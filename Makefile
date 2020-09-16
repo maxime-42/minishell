@@ -21,6 +21,7 @@ SRC	=	./src/main.c\
 		./src/parsing/interpret_variable.c\
 		./src/parsing/interpret_input.c\
 		./src/parsing/dealt_quote.c\
+		./src/utile/my_setenv.c\
 
 OBJ = $(SRC:.c=.o)
 
