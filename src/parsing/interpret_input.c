@@ -6,11 +6,23 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 12:15:19 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:04:40 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// static	void			join_all_close_literal()
+// {
+// 	t_list				*begin;
+
+// 	begin = g_info.list_input;
+// 	while (begin)
+// 	{
+// 		concate_token_same_type(&begin, literal);
+// 		begin = begin->next;
+// 	}
+// }
 
 void				interpret_input(t_list **begin)
 {
@@ -33,4 +45,5 @@ void				interpret_input(t_list **begin)
 		if (*begin)
 			*begin = (*begin)->next;
 	}
+	// join_all_close_literal();
 }

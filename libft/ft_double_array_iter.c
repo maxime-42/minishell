@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_double_array_iter.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 14:22:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/18 09:18:46 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/16 17:03:44 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/17 18:15:02 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char		*ft_strdup(const char *s1)
+void    ft_double_array_iter(char **array, void (*fct)(char *))
 {
-	char	*dup;
-	int		i;
+    int index;
 
-	i = 0;
-	if (!(dup = malloc(sizeof(char) * (ft_strlen(s1) + 1))))
-	{	
-		ft_putstr_fd("error:\nmalloc failure\n", 1);
-		return (0);
-	}
-	while (s1[i])
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+    index = 0;
+    while (array[index])
+    {
+        (*fct)(array[index]);
+        index++;
+    }
 }

@@ -32,7 +32,6 @@ MANDATORY =		./ft_memset.c\
 				./ft_putendl_fd.c\
 				./ft_putnbr_fd.c\
 				./ft_strchr.c\
-				./ft_strrchr.c\
 				./ft_isascii.c\
 				./ft_isprint.c\
 				./ft_strmapi.c\
@@ -77,6 +76,12 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./ft_is_even.c\
 			./ft_get_size_array.c\
 			./ft_nb_line_array.c\
+			./ft_double_array_iter.c\
+			./ft_sorted_list_insert.c\
+			./ft_btree_insert_data.c\
+			./ft_str_count_ncharacter.c\
+			./ft_strndup.c\
+			./ft_strchr.c\
 
 MANDATORY_SRCS	=	${MANDATORY}
 

@@ -6,11 +6,27 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/16 12:19:53 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/09/21 09:48:27 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+/*
+**  si s1 < s2 retour negatif
+**  si si s1 > retour positive 
+*/
 #include "minishell.h"
+
+void	dfs_inorder(t_btree *root)
+{
+	if (!root)
+		return ;
+    char    *str;
+    str = root->content;
+	dfs_inorder(root->left);
+	printf("%s ", str);
+	dfs_inorder(root->right);
+}
 
 void    print_token(void *ptr)
 {
@@ -28,7 +44,6 @@ void    print_token(void *ptr)
     }
     printf("\n");
 }
-
 
 char    *promp()
 {
@@ -51,59 +66,41 @@ void        print_str(void *ptr)
     char    *array;
     
     array = (char *)ptr;
-    printf("=> [%s]\n\n", array);
+    printf("[%s]\n", array);
 }
 
 int main(int ac, char **av, char **env)
 {
-    char    *str_input;
-    int     nb_backslash;
-    t_list  *tmp;
-    t_token *token;
-    char    **array;
+    char        *str_input;
+    t_list      *tmp;
+    t_token     *token;
+    char        **array;
     
-    nb_backslash = 0;
     g_info.root = 0;
     g_info.str_input = 0;
     g_info.list_input = 0;
     g_info.list_env = 0;
 
     g_info.list_env = init_env(env);
-    // g_info.str_input = promp();
-    // parsing_input(g_info.str_input);
-        /* free_all(&g_info, 0); */
-	/* printf("\n_________________avant____________\n"); */
-	/* ft_lstiter(g_info.list_input, &print_token); */
-
-	/* printf("\n_________________apres____________\n"); */
-	/* ft_lstiter(g_info.list_input, &print_token); */
-    my_setenv("nom de famille", "KAYUMBA");
-    printf("_______________environement___________\n");
-	ft_lstiter(g_info.list_env, &print_str);
-
-    /* return 0; */
-    // g_info.list_input = transform_input_in_list_token(str_input);
-    // printf("\n_________________avant____________\n");
-    // ft_lstiter(g_info.list_input, &print_token);
-    // tmp = g_info.list_input;
-    // interpret_input(&tmp);
-    // printf("\n_________________apres____________\n");
-    // // ft_lstiter(g_info.list_input, &print_token);
-    // ft_lstiter(g_info.list_input, &print_token);
-    //tmp = interprete_backslash(g_info.list_input, &nb_backslash);
-    // printf("___________ast_____________\n");
-    // ft_test(g_info.root, &print_token);
-      // ft_lstclear(&g_info.list_input, &clear_token);
-
+    g_info.str_input = promp();
+    parsing_input(g_info.str_input);
+    printf("_________________AST_________________\n");
+    ft_test(g_info.root, &print_token);
+    token = g_info.root->content;
+    my_echo(token->value);
+    // my_export(token->value);
+    // my_unset(token->value);
+    // my_setenv("PWDD=", "KAYUMBA");
+    // ft_lstiter(g_info.list_env, print_str);
+    // dfs_inorder(node);
+    // ft_btree_clear(node, test_free);
     free_all(&g_info, 0);
-    
     (void)array;
     (void)ac;
     (void)token;
     (void)str_input;
-    (void)nb_backslash;
     (void)tmp;
     (void)av;
     (void)env;
-    return (0);
+    return (g_info.ret);
 }

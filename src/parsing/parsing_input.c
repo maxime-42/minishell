@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expr.c                                             :+:      :+:    :+:   */
+/*   parsing_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:26:53 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/15 12:13:56 by lenox            ###   ########.fr       */
+/*   Updated: 2020/09/17 20:05:52 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_token			*term(t_list **begin)
 	token = 0;
 	is_command += 1;
 	delete_space(begin);
+	concate_token_same_type(begin, literal);
 	if (begin && *begin)
 	{
 		token = (t_token *)(*begin)->content;
@@ -67,7 +68,7 @@ void			parsing_input(char *str_input)
 	printf("\n_________________tokenizer____________\n");
 	ft_lstiter(g_info.list_input, &print_token);
 	interpret_input(&input);
-	printf("\n_________________concatenation des token____________\n");
+	printf("\n___________concatenation des token____________\n");
 	ft_lstiter(g_info.list_input, &print_token);
 	input = g_info.list_input;
 	root = 0;

@@ -24,9 +24,18 @@ char                *duplique_value_variable(t_list *list_env, char *variable_na
 t_token_type        get_type_of_token(t_list **current);
 void                interpret_variable(t_list **current);
 void                interpret_input(t_list **begin);
-// void                change_the_next_type_too(t_list **begin, t_token_type new_type);
+// void             change_the_next_type_too(t_list **begin, t_token_type new_type);
 void                dealt_quote(t_list **begin);
 void                test_free(void *ptr);
 void				parsing_input(char *str_input);
 void				my_setenv(char *name, char *value);
+void                my_pwd(char **cmd);
+int		            cmp(char *s1, char *s2);
+void                my_echo(char **cmd);
+void                my_export(char **cmd);
+void                my_unset(char **cmd);
+void                my_pwd(char **cmd);
+void                my_echo(char **cmd);
+
+
 #endif

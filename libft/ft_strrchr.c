@@ -1,29 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 16:56:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2019/11/05 16:21:34 by mkayumba         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "libft.h"
 
-#include <stdlib.h>
-
-char	*ft_strrchr(const char *s, int c)
+char    *strrchr(const char *s, int c)
 {
-	char	*tmp;
+    int index_s;
 
-	tmp = 0;
-	while (*s)
-	{
-		if (*s == c)
-			tmp = (char*)s;
-		s++;
-	}
-	if (*s == c)
-		tmp = (char*)s;
-	return (tmp);
+    index_s = (int)ft_strlen(s);
+    while (index_s >= 0)
+    {
+        if (s[index_s] == c)
+            return (s + index_s);
+        index_s++;
+    }
+    return (0);
 }

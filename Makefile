@@ -7,6 +7,7 @@ NAME= minishell
 
 SRC	=	./src/main.c\
 		./src/utile/free_all.c\
+		./src/utile/cmp.c\
 		./src/parsing/parsing_input.c\
 		./src/parsing/init_env.c\
 		./src/parsing/utile_parsing_input.c\
@@ -21,7 +22,11 @@ SRC	=	./src/main.c\
 		./src/parsing/interpret_variable.c\
 		./src/parsing/interpret_input.c\
 		./src/parsing/dealt_quote.c\
-		./src/utile/my_setenv.c\
+		./src/bultins/my_setenv.c\
+		./src/bultins/my_export.c\
+		./src/bultins/my_unset.c\
+		./src/bultins/my_pwd.c\
+		./src/bultins/my_echo.c
 
 OBJ = $(SRC:.c=.o)
 

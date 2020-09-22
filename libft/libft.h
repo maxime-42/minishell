@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/15 15:17:24 by lenox            ###   ########.fr       */
+/*   Updated: 2020/09/21 13:13:07 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 char				*ft_strchr(const char *s, int c);
-char				*ft_strrchr(const char *s, int c);
 int					ft_isascii(int c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					lenght_nbr(int nb);
@@ -75,7 +74,10 @@ void        		ft_free_double_array(void *ptr);
 t_bool  			ft_is_even(int n);
 void        		ft_get_size_array(char **array, int *line, int *column);
 int     			ft_nb_line_array(char **array);
-
+void    			ft_double_array_iter(char **array, void (*fct)(char *));
+int     			ft_str_count_ncharacter(char *str, char n);
+char				*ft_strndup(const char *s1, int n);
+char				*strrchr(const char *s, int c);
 
 typedef struct		s_list
 {
@@ -115,4 +117,7 @@ void				ft_test(t_btree *root, void (*applyf)(void *));
 void        		ft_remove_front(t_list **begin, void (*free_fct)(void *));
 void				ft_list_remove_current_node(t_list **begin_list, t_list *to_del, void (*free_fct)(void *));
 t_list				*ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)());
+void	    		ft_sorted_list_insert(t_list **begin_list, void *data, int (*cmp)());
+void				ft_btree_insert_data(t_btree **root, void *item, int (*cmpf)());
+
 #endif
