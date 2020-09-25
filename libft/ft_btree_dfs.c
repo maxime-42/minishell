@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nb_line_array.c                                 :+:      :+:    :+:   */
+/*   ft_btree_dfs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 13:41:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/25 13:42:04 by lenox            ###   ########.fr       */
+/*   Created: 2020/09/25 15:46:02 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 15:46:50 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_nb_line_array(char **array)
-{
-	int line;
+#include "libft.h"
 
-	line = 0;
-	while (array[line])
-	{
-		line++;
-	}
-	return (line);
+void	ft_btree_dfs_inorder(t_btree *root, void (*ptr_function)())
+{
+	if (!root)
+		return ;
+	ft_btree_dfs_inorder(root->left, ptr_function);
+	(*ptr_function)(root->content);
+	ft_btree_dfs_inorder(root->right, ptr_function);
 }

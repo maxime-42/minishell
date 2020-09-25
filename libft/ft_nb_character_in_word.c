@@ -5,25 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:16:52 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/25 17:24:40 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 15:19:48 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 15:20:05 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_nb_character_in_word(char *word)
+int		ft_nb_character_in_word(char *word)
 {
-    int count;
+	int count;
 
-    count = 0;
-    if (!word)
-        return (count);
-    while (word[count])
-    {
-        if (ft_isspace(word[count]))
-            return (count);
-        count++;
-    }
-    return (count);
+	count = 0;
+	if (!word)
+		return (count);
+	while (word[count])
+	{
+		if (ft_isspace(word[count]))
+			return (count);
+		count++;
+	}
+	return (count);
 }

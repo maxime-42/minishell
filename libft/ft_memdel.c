@@ -5,18 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 11:50:51 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/01 13:55:33 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 14:16:28 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 15:17:38 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void ft_memdel(void **ap)
+void	ft_memdel(void **ap)
 {
-    if (ap && *ap)
-    {
-        free(*ap);
-        *ap = 0;
-    }
+	if (ap && *ap)
+	{
+		free(*ap);
+		*ap = 0;
+	}
 }

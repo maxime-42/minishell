@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_btree_apply_suffix.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 15:02:51 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/28 18:07:23 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 16:15:27 by lenox             #+#    #+#             */
+/*   Updated: 2020/09/25 16:15:47 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "libft.h"
+#include "libft.h"
 
 void	ft_btree_apply_suffix(t_btree *root, void (*applyf)(void *))
 {

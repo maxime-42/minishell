@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 17:38:43 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/06 10:02:38 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 13:32:23 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 13:40:37 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int				nb_char(char *s, char *str)
 static	char	**ft_free_array(char **array, int line)
 {
 	ft_putstr_fd("error:\nmalloc failure\n", 1);
-    while (--line >= 0)
-    {
-        free(array[line]);
-        array[line] = 0;
-    }
-    free(array);
-    array = 0;
+	while (--line >= 0)
+	{
+		free(array[line]);
+		array[line] = 0;
+	}
+	free(array);
+	array = 0;
 	return (0);
 }
 

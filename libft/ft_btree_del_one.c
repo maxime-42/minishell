@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_del_one_btree.c                                 :+:      :+:    :+:   */
+/*   ft_btree_del_one.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/22 18:04:43 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/22 18:50:08 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 16:04:21 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 16:12:39 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
 void	ft_btree_del_one(t_btree *root, void (*del)(void *))

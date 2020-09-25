@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:36:23 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/28 10:24:05 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 15:50:40 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 15:50:57 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char	    *ft_strnew(size_t size)
+char		*ft_strnew(size_t size)
 {
 	char	*str;
 

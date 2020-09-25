@@ -5,21 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/11 17:23:16 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/11 17:25:30 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 15:43:23 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 15:45:04 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 
 /*
-**      n&1 is 1, then odd, else even
+**	n&1 is 1, then odd, else even
 */
-t_bool  ft_is_even(int n)  
-{  
 
-    if (!(n & 1))
-        return (true);  
-    return (false);
+t_bool	ft_is_even(int n)
+{
+	if (!(n & 1))
+		return (true);
+	return (false);
 }

@@ -5,21 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 13:49:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/01 13:54:54 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 13:52:01 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 13:53:08 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-void    ft_free_string(void *ptr)
+void		ft_free_string(void *ptr)
 {
-    char    *str;
-    
-    if (ptr)
-    {
-        str = (char *)ptr;
-        free(str);
-        str = 0;
-    }
+	char	*str;
+
+	if (ptr)
+	{
+		ft_bzero(ptr, ft_strlen(ptr));
+		str = (char *)ptr;
+		free(str);
+		str = 0;
+	}
 }

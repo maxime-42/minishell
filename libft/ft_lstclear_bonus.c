@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:48:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/07/30 19:27:28 by lenox            ###   ########.fr       */
+/*   Updated: 2020/09/23 15:14:00 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 			previous = current;
 			current = current->next;
 			(*del)(previous->content);
+			ft_bzero(previous, sizeof(previous));
 			free(previous);
 			previous = 0;
 		}

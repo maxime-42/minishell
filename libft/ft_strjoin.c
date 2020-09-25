@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 17:39:31 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/18 10:34:31 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/25 15:52:15 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/25 15:52:17 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	j = -1;
 	if (!s1 || !s2)
 		return (0);
-	// if (!(s3 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-	// 	return (0);
 	if (!(s3 = ft_strnew((ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (0);
 	while (s1[i])
