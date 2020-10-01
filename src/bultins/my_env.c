@@ -8,6 +8,7 @@ void    print_env(void *content)
     if (ft_strchr(var_env, '='))
     {
         ft_putstr_fd(var_env, 1);
+        ft_putstr_fd("\n", 1);
     }
 }
 
@@ -16,4 +17,5 @@ void    my_env(char **cmd)
     if (!g_info.list_env)
         return ;
     ft_lstiter(g_info.list_env, print_env);
+    (void)cmd;
 }

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/21 09:48:27 by lenox            ###   ########.fr       */
+/*   Updated: 2020/10/01 12:00:03 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,89 +17,75 @@
 */
 #include "minishell.h"
 
-void	dfs_inorder(t_btree *root)
+t_builtin			g_array_builtin[] = {
+	{"echo", my_echo},
+	{"cd", my_cd},
+	{"pwd", my_pwd},
+	{"export", my_export},
+	{"unset", my_unset},
+	{"env", my_env},
+	{"exit", my_exit},
+	{0, 0},
+};
+
+// void            find_command(t_token *token)
+// {
+//     int         i;
+//     char        **cmd;
+
+//     // if (is_operator(token->type) == true)
+//     // {
+//     //    ft_putstr_fd("\n_______nothing a this moment________\n\n ", 1); 
+//     // }
+//     // else
+//     // {
+//         i = -1;
+//         cmd = (char **)token->value;
+//         while (g_array_builtin[++i].value)
+//         {
+//             if (!ft_strcmp(g_array_builtin[i].value, cmd[0]))
+// 		    {
+// 			    g_array_builtin[i].ptr_fct(cmd);
+//                 return ;
+// 		    }
+//         }
+//         exec_cmd_syst(&g_info, cmd);
+//     // }
+// }
+
+void            print_string(char *ptr)
 {
-	if (!root)
-		return ;
-    char    *str;
-    str = root->content;
-	dfs_inorder(root->left);
-	printf("%s ", str);
-	dfs_inorder(root->right);
+    printf("[%s]\n", (char*)ptr);
 }
 
-void    print_token(void *ptr)
+int             main(int ac, char **av, char **env)
 {
-    t_token *token;
-    int     i;
-    char    **array;
-
-    i = 0;
-    token = (t_token *)ptr;
-    array = (char **)token->value;
-    while (array[i])
-    {
-        printf("value:[%s]\ttype: [%d]\n", array[i], token->type);
-        i++;
-    }
-    printf("\n");
-}
-
-char    *promp()
-{
-    char    *input;
-
-    get_next_line(0, &input);
-    return (input);
-}
-
-void        print_tab(void *ptr)
-{
-    char    **array;
-    
-    array = (char **)ptr;
-    printf("[%s]\n", array[0]);
-}
-
-void        print_str(void *ptr)
-{
-    char    *array;
-    
-    array = (char *)ptr;
-    printf("[%s]\n", array);
-}
-
-int main(int ac, char **av, char **env)
-{
-    char        *str_input;
-    t_list      *tmp;
-    t_token     *token;
-    char        **array;
-    
-    g_info.root = 0;
-    g_info.str_input = 0;
-    g_info.list_input = 0;
-    g_info.list_env = 0;
-
     g_info.list_env = init_env(env);
-    g_info.str_input = promp();
-    parsing_input(g_info.str_input);
-    printf("_________________AST_________________\n");
-    ft_test(g_info.root, &print_token);
-    token = g_info.root->content;
-    my_echo(token->value);
-    // my_export(token->value);
-    // my_unset(token->value);
-    // my_setenv("PWDD=", "KAYUMBA");
-    // ft_lstiter(g_info.list_env, print_str);
-    // dfs_inorder(node);
-    // ft_btree_clear(node, test_free);
-    free_all(&g_info, 0);
-    (void)array;
+    g_info.list_path = 0;
+    g_info.tab_var_env = 0;
+    g_info.stack = 0;
+    while (1)
+    {
+        ft_putstr_fd(">", 0);
+        get_next_line(0, &g_info.str_input);
+        g_info.root = 0;
+        g_info.list_input = 0;
+        parsing_input(g_info.str_input);
+        update_tab_var_env(g_info.list_env);
+        update_cmd_path(&g_info);
+        ft_btree_dfs_inorder(g_info.root, print_token);
+		// travel_ast(g_info.root);
+		// t_btree	*node = g_info.root;
+		// dealt_command(node->content);
+		// node = g_info.root;
+		// while (node->left->left)
+		// 	node = node->left;
+		// push_cmd_in_stack(&node, get_type_node(&node));
+        // ft_lstiter(g_info.stack, &print_token);
+        //  free_all(&g_info, 0);
+       exit(free_all(&g_info, ERROR));
+    }
     (void)ac;
-    (void)token;
-    (void)str_input;
-    (void)tmp;
     (void)av;
     (void)env;
     return (g_info.ret);

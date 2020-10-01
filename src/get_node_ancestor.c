@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_btree_del_one.c                                 :+:      :+:    :+:   */
+/*   get_node_ancestor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 16:04:21 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/29 11:38:50 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/29 10:57:33 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/30 11:10:02 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "minishell.h"
 
-void	ft_btree_del_one(t_btree *root, void (*del)(void *))
+t_btree				*get_node_ancestor(t_btree *node)
 {
-	if (root)
+	t_btree			*ancestor;
+
+	ancestor = (t_btree *)g_info.root;
+	if (node == ancestor)
 	{
-		(*del)(root->content);
-		root->left = 0;
-		root->right = 0;
+		return (0);
 	}
+	while (ancestor && ancestor != node && ancestor->left)
+	{
+		if (ancestor->left == node)
+			return (ancestor);
+		ancestor = ancestor->left;
+	}
+	return (ancestor);
 }

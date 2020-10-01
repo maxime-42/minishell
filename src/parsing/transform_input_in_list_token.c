@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 15:55:13 by lenox            ###   ########.fr       */
+/*   Updated: 2020/09/29 11:37:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 static	t_token			g_array_token[] = {
 	{"&&", and},
 	{"||", or},
-	{"|", pipee},
+	{"|", pipeline},
 	{"<", redir_left},
 	{">", redir_right},
 	{"<<", double_redir_left},
@@ -65,13 +65,14 @@ static	int				clear(t_list **begin)
 static	t_token_type	define_type_of_token(char *value)
 {
 	int					i;
-	int					size;
+	// int					size;
 
 	i = 0;
 	while (g_array_token[i].value)
 	{
-		size = ft_strlen(g_array_token[i].value);
-		if (!ft_memcmp(g_array_token[i].value, value, size))
+		// size = ft_strlen(g_array_token[i].value);
+		// if (!ft_memcmp(g_array_token[i].value, value, size))
+		if (!ft_strcmp(g_array_token[i].value, value))
 		{
 			return (g_array_token[i].type);
 		}

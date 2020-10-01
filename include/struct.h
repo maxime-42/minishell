@@ -8,7 +8,7 @@ typedef enum        s_token_type
 {
     and,//0
     or,//1
-    pipee,//2
+    pipeline,//2
     redir_left,//3
     redir_right,//4
     double_redir_left,//5
@@ -22,6 +22,7 @@ typedef enum        s_token_type
     variable,//13
     command,//14
     space,//15
+	eof,//16
 }                   t_token_type;
 
 typedef struct      s_token
@@ -30,12 +31,28 @@ typedef struct      s_token
     t_token_type    type;
 }                   t_token;
 
+
+typedef struct      s_builtin
+{
+    char            *value;
+    void            (*ptr_fct)();
+}                   t_builtin;
+
+typedef struct      s_operator
+{
+   t_token_type     type;
+    void            (*ptr_fct)();
+}                   t_operator;
+
 typedef struct      info
 {
     t_btree         *root;
     t_list          *list_env;
     t_list          *list_input;
     char            *str_input;
+    t_list           *list_path;
+    char            **tab_var_env;
+    t_list          *stack;
     void            *generic_ptr;
     int             ret;
 }                   t_info;

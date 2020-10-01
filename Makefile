@@ -7,7 +7,10 @@ NAME= minishell
 
 SRC	=	./src/main.c\
 		./src/utile/free_all.c\
+		./src/utile/update_tab_var_env.c\
 		./src/utile/cmp.c\
+		./src/utile/utile.c\
+		./src/utile/update_cmd_paths.c\
 		./src/parsing/parsing_input.c\
 		./src/parsing/init_env.c\
 		./src/parsing/utile_parsing_input.c\
@@ -26,7 +29,16 @@ SRC	=	./src/main.c\
 		./src/bultins/my_export.c\
 		./src/bultins/my_unset.c\
 		./src/bultins/my_pwd.c\
-		./src/bultins/my_echo.c
+		./src/bultins/my_echo.c\
+		./src/bultins/my_env.c\
+		./src/bultins/my_cd.c\
+		./src/bultins/my_exit.c\
+		./src/exec_cmd_syst.c\
+		./src/get_node_ancestor.c\
+		./src/dealt_command_and_operator.c\
+		./src/dealt_operator/pipeline.c\
+		./src/travel_ast.c\
+		./src/utile/get_type_node.c\
 
 OBJ = $(SRC:.c=.o)
 

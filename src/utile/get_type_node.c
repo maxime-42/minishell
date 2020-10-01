@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_btree_del_one.c                                 :+:      :+:    :+:   */
+/*   get_type_node.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 16:04:21 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/29 11:38:50 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/09/30 14:12:41 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/09/30 14:12:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "minishell.h"
 
-void	ft_btree_del_one(t_btree *root, void (*del)(void *))
+t_token_type	get_type_node(t_btree **node)
 {
-	if (root)
-	{
-		(*del)(root->content);
-		root->left = 0;
-		root->right = 0;
-	}
+	t_token		*token;
+
+	if (!node || !*node)
+		return (eof);
+	token = (*node)->content;
+	return (token->type);
 }

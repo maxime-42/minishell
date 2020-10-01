@@ -9,7 +9,7 @@ static	void	error_(char *path)
 	ft_putstr_fd(": ", 1);
     ft_putstr_fd(strerror(errno), 1);
 	ft_putstr_fd("\n", 1);
-	g_info.ret = 1;
+	g_info.ret = 127;
 }
 
 void            my_pwd(char **cmd)

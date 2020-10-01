@@ -18,13 +18,14 @@ static  void    error_(char *str)
     ft_putstr_fd("bash: unset: «", 1);
     ft_putstr_fd(str, 1);
     ft_putstr_fd(" » : identifiant non valable\n", 1);
-    g_info.ret = 1;
+    g_info.ret = 127;
 }
-void        my_unset(char **cmd)
+
+void            my_unset(char **cmd)
 {
-    t_list  *to_del;
-    int     index;
-    t_list  *begin;
+    t_list      *to_del;
+    int         index;
+    t_list      *begin;
 
     index = 0;
     begin = g_info.list_env;
@@ -39,6 +40,6 @@ void        my_unset(char **cmd)
             g_info.ret = 0;
         }
         else
-            g_info.ret = 1;
+            g_info.ret = 127;
     }
 }

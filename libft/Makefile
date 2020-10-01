@@ -79,7 +79,6 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./ft_double_array_iter.c\
 			./ft_sorted_list_insert.c\
 			./ft_btree_insert_data.c\
-			./ft_str_count_ncharacter.c\
 			./ft_strndup.c\
 			./ft_strchr.c\
 			./ft_btree_dfs.c\
