@@ -39,6 +39,12 @@ SRC	=	./src/main.c\
 		./src/dealt_operator/pipeline.c\
 		./src/travel_ast.c\
 		./src/utile/get_type_node.c\
+		./src/dealt_operator/simple_redirection_right.c\
+		./src/dealt_operator/utile_redirection.c\
+		./src/dealt_operator/simple_redir_left.c\
+		./src/dealt_operator/double_redir_right.c\
+		./src/dealt_operator/my_semicolon.c\
+		./src/handle_signal.c\
 
 OBJ = $(SRC:.c=.o)
 

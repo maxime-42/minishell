@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:42:20 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/30 19:08:33 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:50:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 ** ft_lstdelone(to_del, &free_nothing); => 	pop top of stack 
 */
 
+void				check_nb_command(t_list **stack)
+{
+	if (ft_lstsize(*stack) == 1)
+		return ;
+	ft_lstdelone(*stack, &free_nothing);
+	*stack = 0;
+}
+
 void				my_pipeline(t_info *info)
 {
 	int				fd[2];
@@ -28,6 +36,7 @@ void				my_pipeline(t_info *info)
 	t_list			*to_del;
 
 	backup_fd = 0;
+	//check_nb_command(&info->stack);
 	while (info->stack)
 	{
 		pipe(fd);

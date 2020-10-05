@@ -4,12 +4,14 @@
 
 static	void	error_(char *cmd)
 {
-	ft_putstr_fd("gros bash: ", 1);
+	ft_putstr_fd("gros bash:", 1);
 	ft_putstr_fd(cmd, 1);
 	ft_putstr_fd(": ", 1);
 	ft_putstr_fd(strerror(errno), 1);
 	ft_putstr_fd("\n", 1);
 	g_info.ret = ERROR_BASH;
+	// printf("_____________print token______________\n");
+	// ft_lstiter(g_info.list_input, print_token);
 }
 
 static char		*join_path_and_cmd(char *path, char *cmd)

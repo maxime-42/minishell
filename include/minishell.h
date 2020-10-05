@@ -48,12 +48,21 @@ pid_t				create_process(void);
 void				exec_cmd_syst(t_info *info, char **cmd);
 t_btree				*get_node_ancestor(t_btree *node);
 void				dealt_command(t_token *token);
-void				dealt_operator(t_btree **node);
+void				dealt_operator(t_token_type type);
 void				my_pipeline(t_info *info);
-void				travel_ast(t_btree *root);
 void				print_file(int fd);
 t_token_type		get_type_node(t_btree **node);
 void                free_nothing(void *ptr);
+void				my_simple_redirection_right(t_info *info);
+t_token				*get_command(t_list **stack);
+char				*get_file_name(t_list **stack);
+void				my_simple_redirection_left(t_info *info);
+void				my_double_redirection_right(t_info *info);
+void				my_and(t_info *info);
+void				my_or(t_info *info);
+void				travel_ast(t_info *info, t_btree *root);
+void				my_semiconlon(t_info *info);
+void				handle_sigint(int sig);
 
 
 #endif

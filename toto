@@ -1,0 +1,13 @@
+total 160
+drwxr-xr-x 2 lenox lenox   4096 sept. 22 10:52 include
+drwxr-xr-x 2 lenox lenox   4096 oct.   1 15:47 libft
+-rw-r--r-- 1 lenox lenox   1493 oct.   1 13:31 Makefile
+-rwxr-xr-x 1 lenox lenox 142064 oct.   1 15:47 minishell
+-rw-r--r-- 1 lenox lenox     39 août  27 13:30 README.md
+drwxr-xr-x 7 lenox lenox   4096 oct.   1 15:47 src
+-rw-r--r-- 1 lenox lenox      0 oct.   1 15:47 toto
+  PID TTY          TIME CMD
+ 3846 pts/1    00:00:00 memcheck-amd64-
+ 3848 pts/1    00:00:00 memcheck-amd64-
+ 3849 pts/1    00:00:00 ps
+ 9688 pts/1    00:00:01 bash

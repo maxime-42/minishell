@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:06:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/30 19:04:41 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/02 16:45:21 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ static t_btree		*start_node(t_btree *root)
 	t_token			*token;
 	t_token_type	type;
 
+	if (!root)
+		return (0);
 	start = root;
-	// type = get_type_of_token(start->content);
 	token = start->content;
 	type = token->type;
 	while (is_operator(type) == true)
@@ -94,30 +95,46 @@ static t_btree		*start_node(t_btree *root)
 	return (start);
 }
 
-void				travel_ast(t_btree *root)
+void				travel_ast(t_info *info, t_btree *root)
 {
-	t_token			*token;
 	t_btree			*start;
+	t_token_type	type;
 
-	if (!root)
+	if (!(start = start_node(root)))
 		return ;
-	start = start_node(root);
-	while (1)
+
+	while (start)
 	{
-		token = start->content;
-		if (is_operator(token->type) == true)
+		// token = start->content;
+		type = get_type_node(&start);
+
+		if (is_operator(type) == true)
 		{
-			push_cmd_in_stack(&root, get_type_node(&root));
-			dealt_operator(&start);
-			return ;
+			// printf("is operator\n\n");
+			// print_token(start->content);
+	        // ft_btree_dfs_inorder(start, print_token);
+			// return ;
+			push_cmd_in_stack(&start, type);
+			// printf("______print stack___________\n");
+	       	// ft_lstiter(g_info.stack, &print_token);
+			dealt_operator(type);
+			// return ;
 		}
-		else
+		else if (is_operator(type) != true)
 		{
+			// printf("is not operator\n\n");
 			dealt_command(start->content);
-			// start = get_node_ancestor(start);
-			return ;
+			start = get_node_ancestor(start);
 		}
-		if (start == (t_btree *)root)
-			return ;
+		else if (info->stack)
+		{
+			// printf("in stack\n");
+			dealt_command(start->content);
+		}
+		// if (!info->stack)
+		// {
+		// 	printf("______stack empty____________\n");
+		// 	return ;
+		// }
 	}
 }

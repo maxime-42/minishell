@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/17 20:04:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:38:32 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,4 @@ void				interpret_input(t_list **begin)
 		if (*begin)
 			*begin = (*begin)->next;
 	}
-	// join_all_close_literal();
 }

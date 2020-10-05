@@ -24,13 +24,14 @@ void    print_token(void *ptr)
 	}
     token = (t_token *)ptr;
     array = (char **)token->value;
+	printf("type: [%d]\n", token->type);
     while (array && array[i])
     {
-        printf("value:[%s]\ttype: [%d]\n", array[i], token->type);
+		// printf("value:[%s]\ttype: [%d]\n", array[i], token->type);
+		printf("value:[%s]\n", array[i]);
         i++;
     }
     printf("\n");
-    
 }
 
 void        print_tab(void *ptr)

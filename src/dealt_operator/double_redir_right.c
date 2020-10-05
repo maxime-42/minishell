@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-static	void		error_(char *file_name)
+static void			error_(char *file_name)
 {
 	ft_putstr_fd("bash: ", 1);
 	ft_putstr_fd(file_name, 1);
@@ -15,17 +15,17 @@ static	void		error_(char *file_name)
 	g_info.ret = ERROR_BASH;
 }
 
-void				my_simple_redirection_right(t_info *info)
+void				my_double_redirection_right(t_info *info)
 {
 	int				fd;
 	t_token			*token;
 	char			*file_name;
-
+	
 	if (!info->stack)
 		return ;
 	token = get_command(&info->stack);
 	file_name = get_file_name(&info->stack);
-	if ((fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644)) == ERROR)
+	if ((fd = open(file_name, O_CREAT | O_RDWR | O_APPEND, 0644)) == ERROR)
 	{
 		error_(file_name);
 		return ;
@@ -35,7 +35,7 @@ void				my_simple_redirection_right(t_info *info)
 		dup2(fd, 1);
 		close(fd);
 		dealt_command(token);
-		exit(info->ret);
+		exit (info->ret);
 	}
 	wait(NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:26:53 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/22 14:45:15 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/03 01:38:28 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_token			*term(t_list **begin)
 	}
 	return (token);
 }
-
+// ls                   | wc
 void			parsing_input(char *str_input)
 {
 	t_btree		*root;
@@ -66,9 +66,9 @@ void			parsing_input(char *str_input)
 
 	g_info.list_input = transform_input_in_list_token(str_input);
 	input = g_info.list_input;
-	// printf("\n_________________tokenizer____________\n");
-	// ft_lstiter(g_info.list_input, &print_token);
+	ft_lstiter(g_info.list_input, &print_token);
 	interpret_input(&input);
+
 	// printf("\n___________concatenation des token____________\n");
 	// ft_lstiter(g_info.list_input, &print_token);
 	input = g_info.list_input;
@@ -85,52 +85,3 @@ void			parsing_input(char *str_input)
 		input = input->next;
 	}
 }
-
-// t_token			*term(t_list **begin)
-// {
-// 	t_token		*token;
-// 	static	int	is_command = 0;
-
-// 	token = 0;
-// 	is_command += 1;
-// 	delete_space(begin);
-// 	concate_token_same_type(begin, literal);
-// 	if (begin && *begin)
-// 	{
-// 		token = (t_token *)(*begin)->content;
-// 		if (is_command == 1)
-// 			token->type = command;
-// 		if (is_operator(token->type) == true)
-// 			is_command = 0;
-// 		return (token);
-// 	}
-// 	return (token);
-// }
-
-// void			parsing_input(char *str_input)
-// {
-// 	t_btree		*root;
-// 	t_token		*token;
-// 	t_list		*input;
-
-// 	g_info.list_input = transform_input_in_list_token(str_input);
-// 	input = g_info.list_input;
-// 	printf("\n_________________tokenizer____________\n");
-// 	ft_lstiter(g_info.list_input, &print_token);
-// 	interpret_input(&input);
-// 	printf("\n___________concatenation des token____________\n");
-// 	ft_lstiter(g_info.list_input, &print_token);
-// 	input = g_info.list_input;
-// 	root = 0;
-// 	while (input)
-// 	{
-// 		if ((token = term(&input)))
-// 		{
-// 			create_ast(&root, token);
-// 			g_info.root = root;
-// 		}
-// 		else
-// 			return ;
-// 		input = input->next;
-// 	}
-// }

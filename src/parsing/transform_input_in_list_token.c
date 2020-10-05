@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/29 11:37:57 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:34:18 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static	t_token			g_array_token[] = {
 	{"&&", and},
 	{"||", or},
 	{"|", pipeline},
-	{"<", redir_left},
-	{">", redir_right},
+	{"<", simple_redir_left},
+	{">", simple_redir_right},
 	{"<<", double_redir_left},
-	{">>", redir_right},
+	{">>", double_redir_right},
 	{";", semicolon},
 	{"\"", double_quote},
 	{"'", single_quote},
@@ -65,13 +65,10 @@ static	int				clear(t_list **begin)
 static	t_token_type	define_type_of_token(char *value)
 {
 	int					i;
-	// int					size;
 
 	i = 0;
 	while (g_array_token[i].value)
 	{
-		// size = ft_strlen(g_array_token[i].value);
-		// if (!ft_memcmp(g_array_token[i].value, value, size))
 		if (!ft_strcmp(g_array_token[i].value, value))
 		{
 			return (g_array_token[i].type);
@@ -79,6 +76,36 @@ static	t_token_type	define_type_of_token(char *value)
 		i++;
 	}
 	return (literal);
+}
+
+/*
+** ici je copie les character de l'input dans "dest" qui est la valeur du token
+** src ce l'input
+** si le charater courrent :
+**	 || ou && >> on copie les deux character de l'input 
+**	 dans dest (index et index + 1)
+** sinon on copie qu'un seul character de l'input dans dest
+*/
+static int				copy_(char *dest, char *src, int index_src)
+{
+	if (src[index_src] == '>' && src[index_src + 1] == '>')
+	{
+		dest[0] = src[index_src++];
+		dest[1] = src[index_src];
+	}
+	else if (src[index_src] == '|' && src[index_src + 1] == '|')
+	{
+		dest[0] = src[index_src++];
+		dest[1] = src[index_src];
+	}	
+	else if (src[index_src] == '&' && src[index_src + 1] == '&')
+	{
+		dest[0] = src[index_src++];
+		dest[1] = src[index_src];
+	}
+	else
+		dest[0] = src[index_src];
+	return (index_src);
 }
 
 t_list					*transform_input_in_list_token(char *input)
@@ -93,9 +120,9 @@ t_list					*transform_input_in_list_token(char *input)
 	index_input = -1;
 	while (input[++index_input])
 	{
-		if (!(token_value = ft_strnew(2)))
+		if (!(token_value = ft_strnew(4)))
 			exit(clear(&begin));
-		token_value[0] = input[index_input];
+		index_input = copy_(token_value, input, index_input);
 		if (!(token = create_token(token_value,
 		define_type_of_token(token_value))))
 		{
