@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_input_in_list_token.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/02 17:34:18 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/05 17:39:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@
 */
 
 static	t_token			g_array_token[] = {
-	{"&&", and},
-	{"||", or},
+	{"&", and},
 	{"|", pipeline},
 	{"<", simple_redir_left},
 	{">", simple_redir_right},
-	{"<<", double_redir_left},
-	{">>", double_redir_right},
 	{";", semicolon},
 	{"\"", double_quote},
 	{"'", single_quote},
@@ -49,27 +46,22 @@ static	t_token			g_array_token[] = {
 	{0, 0},
 };
 
-t_bool					is_operator(t_token_type type)
-{
-	if ((type >= 0 && type < NB_OPERATOR))
-		return (true);
-	return (false);
-}
+/*
+** cette fonction definie renvoyer un token en fonction du charactere
+** qui est passer en parametre, selon le tableau de token
+*/
 
-static	int				clear(t_list **begin)
-{
-	ft_lstclear(begin, &clear_token);
-	return (ERROR);
-}
-
-static	t_token_type	define_type_of_token(char *value)
+static	t_token_type	type_of_token(char charset)
 {
 	int					i;
+	char				*str;
 
 	i = 0;
 	while (g_array_token[i].value)
 	{
-		if (!ft_strcmp(g_array_token[i].value, value))
+		// if (!ft_strcmp(g_array_token[i].value, value))
+		str = g_array_token[i].value;
+		if (str[0] == charset)
 		{
 			return (g_array_token[i].type);
 		}
@@ -79,58 +71,25 @@ static	t_token_type	define_type_of_token(char *value)
 }
 
 /*
-** ici je copie les character de l'input dans "dest" qui est la valeur du token
-** src ce l'input
-** si le charater courrent :
-**	 || ou && >> on copie les deux character de l'input 
-**	 dans dest (index et index + 1)
-** sinon on copie qu'un seul character de l'input dans dest
+** les but de transform_input_in_list_token et 
+** de mettre chaque caractere dans un token 
 */
-static int				copy_(char *dest, char *src, int index_src)
+void					*transform_input_in_list_token(char *input)
 {
-	if (src[index_src] == '>' && src[index_src + 1] == '>')
-	{
-		dest[0] = src[index_src++];
-		dest[1] = src[index_src];
-	}
-	else if (src[index_src] == '|' && src[index_src + 1] == '|')
-	{
-		dest[0] = src[index_src++];
-		dest[1] = src[index_src];
-	}	
-	else if (src[index_src] == '&' && src[index_src + 1] == '&')
-	{
-		dest[0] = src[index_src++];
-		dest[1] = src[index_src];
-	}
-	else
-		dest[0] = src[index_src];
-	return (index_src);
-}
-
-t_list					*transform_input_in_list_token(char *input)
-{
-	t_list				*begin;
 	t_list				*new;
-	int					index_input;
 	char				*token_value;
 	t_token				*token;
 
-	begin = 0;
-	index_input = -1;
-	while (input[++index_input])
+	g_info.list_input = 0; 
+	while (input && *input)
 	{
-		if (!(token_value = ft_strnew(4)))
-			exit(clear(&begin));
-		index_input = copy_(token_value, input, index_input);
-		if (!(token = create_token(token_value,
-		define_type_of_token(token_value))))
-		{
-			exit(clear(&begin));
-		}
+		if (!(token_value = ft_strndup(input, 1)))
+			exit(free_all(&g_info, ERROR));
+		if (!(token = create_token(token_value,	type_of_token(*token_value))))
+			exit(free_all(&g_info, ERROR));
 		if (!(new = ft_lstnew(token)))
-			exit(clear(&begin));
-		ft_lstadd_back(&begin, new);
+			exit(free_all(&g_info, ERROR));
+		ft_lstadd_back(&g_info.list_input, new);
+		input++;
 	}
-	return (begin);
 }

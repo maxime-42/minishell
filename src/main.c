@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/02 16:26:46 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/05 14:23:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ int             main(int ac, char **av, char **env)
         parsing_input(g_info.str_input);
         update_tab_var_env(g_info.list_env);
         update_cmd_path(&g_info);
+        free_all(&g_info, 0);
+		// exit(free_all(&g_info, ERROR));
 		// printf("\n\n___________btree_dfs_inorder____________\n");
         // ft_btree_dfs_inorder(g_info.root, print_token);
 		// node = g_info.root;
 		// print_token(node->content);
-		travel_ast(&g_info, g_info.root);
+		// travel_ast(&g_info, g_info.root);
 		// t_btree	*node = g_info.root;
 		// dealt_command(node->content);
 		// node = g_info.root;
@@ -63,7 +65,7 @@ int             main(int ac, char **av, char **env)
 		// 	node = node->left;
 		// push_cmd_in_stack(&node, get_type_node(&node));
         // ft_lstiter(g_info.stack, &print_token);
-         free_all(&g_info, 0);
+        //  free_all(&g_info, 0);
     //    exit(free_all(&g_info, ERROR));
     }
     (void)ac;

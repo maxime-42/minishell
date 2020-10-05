@@ -9,6 +9,7 @@ SRC	=	./src/main.c\
 		./src/utile/free_all.c\
 		./src/utile/update_tab_var_env.c\
 		./src/utile/cmp.c\
+		./src/utile/is_operator.c\
 		./src/utile/utile.c\
 		./src/utile/update_cmd_paths.c\
 		./src/parsing/parsing_input.c\

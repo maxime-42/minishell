@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:26:53 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/03 01:38:28 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/05 14:18:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void			parsing_input(char *str_input)
 	g_info.list_input = transform_input_in_list_token(str_input);
 	input = g_info.list_input;
 	ft_lstiter(g_info.list_input, &print_token);
-	interpret_input(&input);
+	printf("\n\n");
+	return ;
+	// interpret_input(&input);
 
 	// printf("\n___________concatenation des token____________\n");
 	// ft_lstiter(g_info.list_input, &print_token);
