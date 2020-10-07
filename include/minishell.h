@@ -19,7 +19,6 @@ void				clear_token(void *content);
 t_list				*init_env(char **env);
 t_token				*factor(char *token_value, t_token_type token_type);
 char				*get_value_of_variable_env(t_list *list_env, char *name);
-void				*transform_input_in_list_token(char *input);
 void				concate_token_same_type(t_list **begin, t_token_type type);
 t_bool				is_operator(t_token_type type);
 void				interpret_backslashe(t_list **begin);
@@ -63,6 +62,6 @@ void				my_or(t_info *info);
 void				travel_ast(t_info *info, t_btree *root);
 void				my_semiconlon(t_info *info);
 void				handle_sigint(int sig);
-
+void				transform_input_in_list_token(char *input);
 
 #endif

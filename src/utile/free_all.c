@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:20:17 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/30 15:07:55 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/06 15:35:10 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void    clear_token(void *content)
    
     token = (t_token *)content;
     if (token->value)
+	{
         ft_free_double_array(token->value);
-    free(token);
+		token->value = 0;
+	}
+	free(token);
     (void)token;
     (void)content;
 }
@@ -68,7 +71,9 @@ int free_all(t_info *info, int code_return)
     if (info->str_input)
         free(info->str_input);
     if (info->list_input)
+	{
         ft_lstclear(&info->list_input, &clear_token);
+	}
     if (info->list_path)
     {
         ft_lstclear(&info->list_path, ft_free_string);

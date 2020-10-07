@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:26:53 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/05 14:18:52 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/06 17:49:18 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static	void	delete_space(t_list **begin)
 	}
 }
 
-
 t_token			*term(t_list **begin)
 {
 	t_token		*token;
@@ -57,23 +56,23 @@ t_token			*term(t_list **begin)
 	}
 	return (token);
 }
-// ls                   | wc
+
 void			parsing_input(char *str_input)
 {
 	t_btree		*root;
 	t_token		*token;
 	t_list		*input;
+	t_info		 *info;
 
-	g_info.list_input = transform_input_in_list_token(str_input);
-	input = g_info.list_input;
-	ft_lstiter(g_info.list_input, &print_token);
-	printf("\n\n");
+	info = &g_info;
+	transform_input_in_list_token(str_input);
+	input = info->list_input;
+	interpret_input(&input);
+	ft_lstiter(info->list_input, &print_token);
+	printf("\n");
 	return ;
-	// interpret_input(&input);
-
 	// printf("\n___________concatenation des token____________\n");
 	// ft_lstiter(g_info.list_input, &print_token);
-	input = g_info.list_input;
 	root = 0;
 	while (input)
 	{
