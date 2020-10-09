@@ -3,7 +3,7 @@
 
 #define NB_TOKEN	10
 #define NB_OPERATOR 8
-
+#define STR_OPERATOR "><>|&;"
 typedef enum		s_token_type
 {
 	and,//0
@@ -53,7 +53,6 @@ typedef struct		info
 	t_list			*list_path;
 	char			**tab_var_env;
 	t_list			*stack;
-	void			*generic_ptr;
 	int				ret;
 	int				new_fd;
 }					t_info;

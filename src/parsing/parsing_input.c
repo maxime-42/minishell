@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:26:53 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/08 20:27:54 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/09 16:49:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** fonction term:
-**	 la fonction terme permet de trouver :
-**		  -la valeur du token
-**		  -le type du token
-**	  un token est delimiter par des espaces exemple :
-**	  ls -l ici on a deux token ls et -l
-**	  chaque appel de cette fonction retourne un token
-*/
 
 static	void	delete_space(t_list **begin)
 {
@@ -59,6 +49,11 @@ static	void	delete_space(t_list **begin)
 // 	return (token);
 // }
 
+/*
+**This function returns a pointer on token
+**The token is located inside linked list 
+**The token, it is located inside linked list
+*/
 t_token			*get_token(t_list **begin)
 {
 	t_token		*token;
