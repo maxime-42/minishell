@@ -1,13 +1,12 @@
-total 160
-drwxr-xr-x 2 lenox lenox   4096 sept. 22 10:52 include
-drwxr-xr-x 2 lenox lenox   4096 oct.   1 15:47 libft
--rw-r--r-- 1 lenox lenox   1493 oct.   1 13:31 Makefile
--rwxr-xr-x 1 lenox lenox 142064 oct.   1 15:47 minishell
+total 172
+drwxr-xr-x 2 lenox lenox   4096 oct.   6 11:25 include
+drwxr-xr-x 2 lenox lenox   4096 oct.   8 20:36 libft
+-rw-r--r-- 1 lenox lenox      0 oct.   8 16:45 ls
+-rw-r--r-- 1 lenox lenox   1717 oct.   8 13:56 Makefile
+-rwxr-xr-x 1 lenox lenox 153456 oct.   8 20:30 minishell
 -rw-r--r-- 1 lenox lenox     39 août  27 13:30 README.md
-drwxr-xr-x 7 lenox lenox   4096 oct.   1 15:47 src
--rw-r--r-- 1 lenox lenox      0 oct.   1 15:47 toto
+drwxr-xr-x 8 lenox lenox   4096 oct.   8 20:36 src
+-rw-r--r-- 1 lenox lenox      0 oct.   8 20:37 toto
   PID TTY          TIME CMD
- 3846 pts/1    00:00:00 memcheck-amd64-
- 3848 pts/1    00:00:00 memcheck-amd64-
- 3849 pts/1    00:00:00 ps
- 9688 pts/1    00:00:01 bash
+11449 pts/2    00:00:00 bash
+31407 pts/2    00:00:00 ps

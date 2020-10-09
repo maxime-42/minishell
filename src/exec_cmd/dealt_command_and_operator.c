@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:59:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/02 15:24:05 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 14:01:10 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,11 @@ static t_operator			g_array_operator[] = {
 ** in the table of g_array_operator[] or command_systeme(&g_info, cmd);
 */
 
-// void						dealt_operator(tyt_btree **node)
 void						dealt_operator(t_token_type type)
 {
 	int						i;
-	// t_token					*token;
 
 	i = -1;
-	// if (!node || !*node)
-	// 	return ;
-	// token = (*node)->content;
-	// if (is_operator(token->type) != true)
-	// 	return ;
 	while (++i < NB_OPERATOR)
 	{
 		if (g_array_operator[i].type == type)

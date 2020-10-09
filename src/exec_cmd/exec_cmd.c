@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   travel_ast.c                                       :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:06:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/02 16:45:21 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 17:05:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** next_token consiste a recupere la commande de l'operateur
-** si root n'est pas un operateur on retourne le token de root
-** sinon ce le token de la feuille de droite qui est retourner
-*/
 
 static t_token		*next_token(t_btree **root)
 {
@@ -36,23 +30,15 @@ static t_token		*next_token(t_btree **root)
 }
 
 /*
-** les but de cette fonction consiste de mettre les commandes d'un operateur (type_op) dans la stack
-** un operateur a deux fils 
-**            les fils left est une commande si seulement si ce pas un operateur
-**			  les fils right et toujours une commande
-** left child:
-** 	dans notre cas dans l'arbre ast les fils left est une commandes seulement si c'etais la premiere commande dans l'input
-**
+**The goal of the function it consist to put the left child and right child 
+** in stack if they are not operators typing
 */
-
 static void			push_cmd_in_stack(t_btree **node, t_token_type type_op)
 {
 	t_token			*token;
 	t_token_type	type;
 	t_list			*new;
 
-
-	g_info.stack = 0;
 	type = get_type_node(&(*node)->left);
 	if (is_operator(type) != true)
 		*node = (*node)->left;
@@ -69,10 +55,8 @@ static void			push_cmd_in_stack(t_btree **node, t_token_type type_op)
 }
 
 /*
-** start node : retourne un pointeur surle dernier operateur de l'ast
-** si ya pas d'operateur il retouner le node qui a etait passer en parametre
+** This function return the last node of type operator in ast
 */
-
 static t_btree		*start_node(t_btree *root)
 {
 	t_btree			*start;
@@ -86,6 +70,8 @@ static t_btree		*start_node(t_btree *root)
 	type = token->type;
 	while (is_operator(type) == true)
 	{
+		// if (!start->left)
+		// 	printf("left vaut null\n");
 		token = start->left->content;
 		type = token->type;
 		if (is_operator(type) != true)
@@ -95,30 +81,28 @@ static t_btree		*start_node(t_btree *root)
 	return (start);
 }
 
-void				travel_ast(t_info *info, t_btree *root)
+void				exec_cmd(t_info *info, t_btree *root)
 {
 	t_btree			*start;
 	t_token_type	type;
 
-	if (!(start = start_node(root)))
+	if (!root || !(start = start_node(root)))
 		return ;
-
+	return ;
 	while (start)
 	{
-		// token = start->content;
 		type = get_type_node(&start);
 
 		if (is_operator(type) == true)
 		{
-			// printf("is operator\n\n");
-			// print_token(start->content);
-	        // ft_btree_dfs_inorder(start, print_token);
-			// return ;
 			push_cmd_in_stack(&start, type);
-			// printf("______print stack___________\n");
-	       	// ft_lstiter(g_info.stack, &print_token);
+			printf("\n_______push in stack_____\n");
+			ft_lstiter(g_info.stack, &print_token);
+			printf("\n");
 			dealt_operator(type);
-			// return ;
+			printf("\n_______after exec operato in stack_____\n");
+			ft_lstiter(g_info.stack, &print_token);
+			printf("\n");
 		}
 		else if (is_operator(type) != true)
 		{
@@ -128,13 +112,7 @@ void				travel_ast(t_info *info, t_btree *root)
 		}
 		else if (info->stack)
 		{
-			// printf("in stack\n");
 			dealt_command(start->content);
 		}
-		// if (!info->stack)
-		// {
-		// 	printf("______stack empty____________\n");
-		// 	return ;
-		// }
 	}
 }

@@ -6,27 +6,21 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/06 15:24:37 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 15:38:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 /*
-**	le but de cette fonction consiste a
-**	stranformer une string a un liste de token
-**	etape 1:
-**  dans cette fonction je met chaque charactere de
-**	l'input dans une string => value
-**	etape 2:
-**	ensuite je definie le type de cette string
-**	'value' avec la fonction get_type
-**	etape 3:
-**	ensuite je crée un token avec les attribue des etapes precedent 1 et 2
-**	etape 4:
-**  puis le token et mis dans un maillot puis un push addback
+**The goal of this file consist to create a list of token
+**who content one character of input string 
 */
 
+/*
+** Each character  will be identifier by one of these types
+*/
 static	t_token			g_tab_token[] = {
 	{"&", and},
 	{"|", pipeline},
@@ -45,12 +39,11 @@ static	t_token			g_tab_token[] = {
 	{"$", variable},
 	{0, 0},
 };
-
 /*
-** cette fonction definie renvoyer un token en fonction du charactere
-** qui est passer en parametre, selon le tableau de token
+** type_of_token(char charset)
+** This function defines the type of token for the character inside token
+** the type of token depend of table => g_tab_token
 */
-
 static	t_token_type	type_of_token(char charset)
 {
 	int					i;
@@ -59,7 +52,6 @@ static	t_token_type	type_of_token(char charset)
 	i = 0;
 	while (g_tab_token[i].value)
 	{
-		// if (!ft_strcmp(g_tab_token[i].value, value))
 		str = g_tab_token[i].value;
 		if (str[0] == charset)
 		{
@@ -71,8 +63,12 @@ static	t_token_type	type_of_token(char charset)
 }
 
 /*
-** les but de transform_input_in_list_token et 
-** de mettre chaque caractere dans un token 
+** transform_input_in_list_token
+** This function puts each character of string input in token,
+** then put this token in linked list
+**Step one get one character of the input string 
+**step two create token with this character 
+**step three add this token in linked list
 */
 void					transform_input_in_list_token(char *input)
 {
@@ -80,13 +76,16 @@ void					transform_input_in_list_token(char *input)
 	char				*value;
 	t_token				*token;
 
+	value = 0;
 	g_info.list_input = 0; 
 	while (input && *input)
 	{
-		if (!(value = malloc(sizeof(char) * (2))))
+		// if (!(value = malloc(sizeof(char) * (1 + 1))))
+		if (!(value = ft_strnew(2)))
 			exit(free_all(&g_info, ERROR));
 		value[0] = input[0];
-		value[1] = '\0';
+		// value[1] = (char)0;
+		printf("input value: [%s]\n", value);
 		if (!(token = create_token(value, type_of_token(*value))))
 			exit(free_all(&g_info, ERROR));
 		if (!(new = ft_lstnew(token)))

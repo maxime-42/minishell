@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:11:35 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 15:17:49 by lenox            ###   ########.fr       */
+/*   Updated: 2020/10/08 21:16:05 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static	void		update_array(t_btree **root, t_token *new_token)
 	token_root->value = new_array;
 }
 
-void				create_ast(t_btree **root, t_token *token)
+void				create_ast(t_btree **root, t_token *token, int nb_node)
 {
 	t_btree			*node;
 	t_token			*root_token;
@@ -80,7 +80,10 @@ void				create_ast(t_btree **root, t_token *token)
 	else
 	{
 		root_token = (*root)->content;
-		if (is_operator(root_token->type) == true)
+		// if (nb_node == 1)
+		// 	init_node(&(*root)->left, token);
+		// get_type_node(root_token);
+		 if (is_operator(root_token->type) == true)
 		{
 			if (!(*root)->right)
 				init_node(&(*root)->right, token);
@@ -90,4 +93,5 @@ void				create_ast(t_btree **root, t_token *token)
 		else
 			update_array(root, token);
 	}
+	(void)nb_node;
 }

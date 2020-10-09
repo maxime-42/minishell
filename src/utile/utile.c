@@ -24,11 +24,11 @@ void    print_token(void *ptr)
 	}
     token = (t_token *)ptr;
     array = (char **)token->value;
-	printf("type: [%d] ", token->type);
+	printf("type: [%d]\n", token->type);
     while (array && array[i])
     {
 		// printf("value:[%s]\ttype: [%d]\n", array[i], token->type);
-		printf("value : [%s]\n", array[i]);
+		printf("index : [%d] value : [%s]\n", i, array[i]);
         i++;
     }
 }

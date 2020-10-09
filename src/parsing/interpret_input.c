@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/06 18:39:11 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 14:04:02 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void			error_(t_list **current, int nb_print, t_token_type type)
 {
-	char	**tab;
-	t_token	*token;
-	int		i;
+	char			**tab;
+	t_token			*token;
+	int				i;
 
 	i = -1;
 	if (type == semicolon)
@@ -54,14 +54,17 @@ static void			interpret_operator(t_list **current, t_token_type type_op)
 {
 	if (type_op == simple_redir_left)
 		change_type_of_token(current, double_redir_left);
-	else if (type_op == double_redir_right)
+	else if (type_op == simple_redir_right)
 		change_type_of_token(current, double_redir_right);
 	else if (type_op == and)
 		change_type_of_token(current, and);
 	else if (type_op == pipeline)
 		change_type_of_token(current, or);
 }
-
+/*
+** I count numbers of operators if it superior at two so error
+** Else i concatenate the next two token
+*/
 static void			handle_operator(t_list **current)
 {
 	int				nb_operator;
@@ -83,7 +86,11 @@ static void			handle_operator(t_list **current)
 		interpret_operator(current, type);
 	}
 }
-
+/*
+** This function allows interpret every character who needs to be interpreted
+** like variables, double quote or simply, backslash and dealt operator
+** every character is located in token of linked list 
+*/
 void				interpret_input(t_list **begin)
 {
 	t_token_type	type_quote;

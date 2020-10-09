@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 18:20:17 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/06 15:35:10 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 13:12:47 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int free_all(t_info *info, int code_return)
         ft_btree_clear(info->root, &clear_token);
         // ft_btree_clear(info->root, &clear_token);
         ft_lstclear(&info->list_input, &free_nothing);
+		info->root = 0;
         info->list_input = 0;
     }
     if (info->list_env)

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:42:20 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/02 14:50:44 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 16:28:04 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,35 @@
 ** ft_lstdelone(to_del, &free_nothing); => 	pop top of stack 
 */
 
-void				check_nb_command(t_list **stack)
-{
-	if (ft_lstsize(*stack) == 1)
-		return ;
-	ft_lstdelone(*stack, &free_nothing);
-	*stack = 0;
-}
-
 void				my_pipeline(t_info *info)
 {
 	int				fd[2];
 	int				backup_fd;
 	t_list			*to_del;
+	int				pid;
 
 	backup_fd = 0;
-	//check_nb_command(&info->stack);
+	// printf("______________stack content___________\n");
+	// ft_lstiter(g_info.stack, &print_token);
+	// printf("\n");
 	while (info->stack)
 	{
 		pipe(fd);
-		if ((fork()) == 0)
+		if ((pid = fork()) == 0)
 		{
 			dup2(backup_fd, 0);
 			if (info->stack->next)
 				dup2(fd[1], 1);
 			close(fd[0]);
-				dealt_command(info->stack->content);
+			dealt_command(info->stack->content);
 			exit(info->ret);
 		}
-		wait(NULL);
 		backup_fd = fd[0];
 		close(fd[1]);
 		to_del = info->stack;
 		info->stack = to_del->next;
 		ft_lstdelone(to_del, &free_nothing);
 	}
+	while (pid != -1)
+		pid = wait(NULL);
 }

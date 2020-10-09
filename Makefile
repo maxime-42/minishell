@@ -34,18 +34,18 @@ SRC	=	./src/main.c\
 		./src/bultins/my_env.c\
 		./src/bultins/my_cd.c\
 		./src/bultins/my_exit.c\
-		./src/exec_cmd_syst.c\
-		./src/get_node_ancestor.c\
-		./src/dealt_command_and_operator.c\
-		./src/dealt_operator/pipeline.c\
-		./src/travel_ast.c\
 		./src/utile/get_type_node.c\
+		./src/dealt_operator/pipeline.c\
 		./src/dealt_operator/simple_redirection_right.c\
 		./src/dealt_operator/utile_redirection.c\
 		./src/dealt_operator/simple_redir_left.c\
 		./src/dealt_operator/double_redir_right.c\
 		./src/dealt_operator/my_semicolon.c\
-		./src/handle_signal.c\
+		./src/exec_cmd/handle_signal.c\
+		./src/exec_cmd/exec_cmd.c\
+		./src/exec_cmd/exec_cmd_syst.c\
+		./src/exec_cmd/dealt_command_and_operator.c\
+		./src/exec_cmd/get_node_ancestor.c\
 
 OBJ = $(SRC:.c=.o)
 

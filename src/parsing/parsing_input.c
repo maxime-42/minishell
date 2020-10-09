@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:26:53 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/06 17:49:18 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/08 20:27:54 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,54 +35,78 @@ static	void	delete_space(t_list **begin)
 		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
 	}
 }
+/*
+** this function put the content of node in token then return the token
+** the content it is a token
+*/
+// t_token			*get_token(t_list **begin)
+// {
+// 	t_token		*token;
+// 	 static	int	is_command = 0;
 
-t_token			*term(t_list **begin)
+// 	token = 0;
+// 	 is_command += 1;
+// 	delete_space(begin);
+// 	concate_token_same_type(begin, literal);
+// 	if (begin && *begin)
+// 	{
+// 		token = (t_token *)(*begin)->content;
+// 		if (is_command == 1)
+// 			token->type = command;
+// 		if (is_operator(token->type) == true)
+// 			is_command = 0;
+// 	}
+// 	return (token);
+// }
+
+t_token			*get_token(t_list **begin)
 {
 	t_token		*token;
-	static	int	is_command = 0;
 
 	token = 0;
-	is_command += 1;
 	delete_space(begin);
 	concate_token_same_type(begin, literal);
 	if (begin && *begin)
 	{
 		token = (t_token *)(*begin)->content;
-		if (is_command == 1)
-			token->type = command;
-		if (is_operator(token->type) == true)
-			is_command = 0;
-		return (token);
 	}
 	return (token);
 }
+/*
+** this function let met create ast 
+** i recovery each token inside linked list one by one 
+*/
 
 void			parsing_input(char *str_input)
 {
 	t_btree		*root;
 	t_token		*token;
 	t_list		*input;
-	t_info		 *info;
+	int			nb_node;
 
-	info = &g_info;
 	transform_input_in_list_token(str_input);
-	input = info->list_input;
-	interpret_input(&input);
-	ft_lstiter(info->list_input, &print_token);
+	input = g_info.list_input;
+	printf("_________tokenizer_________\n");
+	ft_lstiter(g_info.list_input, &print_token);
 	printf("\n");
-	return ;
-	// printf("\n___________concatenation des token____________\n");
-	// ft_lstiter(g_info.list_input, &print_token);
+	interpret_input(&input);
+
+	input = g_info.list_input;
+	printf("_________concatenation_________\n");
+	ft_lstiter(g_info.list_input, &print_token);
+	printf("\n");
 	root = 0;
+	nb_node = 0;
 	while (input)
 	{
-		if ((token = term(&input)))
+		if ((token = get_token(&input)))
 		{
-			create_ast(&root, token);
+			create_ast(&root, token, nb_node);
 			g_info.root = root;
 		}
 		else
 			return ;
+		nb_node++;
 		input = input->next;
 	}
 }

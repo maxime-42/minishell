@@ -13,7 +13,7 @@
 #include <unistd.h>
 
 int					free_all(t_info *info, int code_return);
-void				create_ast(t_btree **root, t_token *token);
+void				create_ast(t_btree **root, t_token *token, int nb_node);
 void				print_token(void *ptr);
 void				clear_token(void *content);
 t_list				*init_env(char **env);
@@ -59,7 +59,7 @@ void				my_simple_redirection_left(t_info *info);
 void				my_double_redirection_right(t_info *info);
 void				my_and(t_info *info);
 void				my_or(t_info *info);
-void				travel_ast(t_info *info, t_btree *root);
+void				exec_cmd(t_info *info, t_btree *root);
 void				my_semiconlon(t_info *info);
 void				handle_sigint(int sig);
 void				transform_input_in_list_token(char *input);
