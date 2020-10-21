@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:17:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 12:25:48 by lenox            ###   ########.fr       */
+/*   Updated: 2020/10/17 18:40:39 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void			concate_token_same_type(t_list **begin, t_token_type type)
 
 	if (!begin || !*begin || !(*begin)->next)
 		return ;
-	if (get_type_of_token(begin) != type)
+	if (get_token_type((*begin)->content) != type)
 		return ;
-	if (get_type_of_token(&(*begin)->next) != type)
+	if (get_token_type((*begin)->next->content) != type)
 		return ;
 	if (!(new_token = concate_two_token((*begin)->content,
 	(*begin)->next->content, type)))

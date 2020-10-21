@@ -20,7 +20,8 @@ void    print_token(void *ptr)
     i = 0;
 	if (!ptr)
 	{
-		printf("[null]\n");
+		// printf("[null]\n");
+		return ;
 	}
     token = (t_token *)ptr;
     array = (char **)token->value;
@@ -46,7 +47,7 @@ void        print_str(void *ptr)
     char    *array;
     
     array = (char *)ptr;
-    printf("[%s]\n", array);
+    printf("[%s] ", array);
 }
 
 void		print_file(int fd)

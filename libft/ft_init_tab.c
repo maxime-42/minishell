@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_type_of_token.c                                :+:      :+:    :+:   */
+/*   ft_init_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 12:01:22 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 10:00:37 by lenox            ###   ########.fr       */
+/*   Created: 2020/10/15 20:22:19 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/10/15 20:22:23 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_token_type	get_type_of_token(t_list **current)
+void	ft_init_tab(char **tab, int nb_line)
 {
-	t_token		*token;
+	int	line;
 
-	if (!current || !*current)
-		return (ERROR);
-	token = (*current)->content;
-	return (token->type);
+	line = 0;
+	while (line < nb_line)
+	{
+		tab[line++] = 0;
+	}
+	tab[line] = 0;
 }

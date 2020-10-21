@@ -6,8 +6,12 @@ void    my_echo(char **cmd)
     int new_line;
 
     index = 1;
-    if (!(new_line = ft_strcmp(cmd[1], "-n")))
-        index = 2;
+	new_line = 1;
+	if (cmd[1])
+	{
+    	if (!(new_line = ft_strcmp(cmd[1], "-n")))
+        	index = 2;
+	}
     while (cmd[index])
     {
         ft_putstr_fd(cmd[index], 1);

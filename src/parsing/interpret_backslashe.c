@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:59:40 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 16:17:05 by lenox            ###   ########.fr       */
+/*   Updated: 2020/10/17 18:45:38 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,13 @@ void				interpret_backslashe(t_list **begin)
 	t_token_type	type;
 	t_list			*ptr_to_start;
 
-	if (get_type_of_token(begin) != backslash)
+	if (get_token_type((*begin)->content) != backslash)
 		return ;
 	nb_backslashe = count_nb_backslashe(*begin);
 	delete_useless_backslashe(begin, nb_backslashe);
 	if (!(ptr_to_start = ptr_start(begin, nb_backslashe / 2)))
 		return ;
-	type = get_type_of_token(&ptr_to_start);
+	type = get_token_type(ptr_to_start->content);
 	if ((nb_backslashe % 2))
 		change_type_of_token(&ptr_to_start, literal);
 	else

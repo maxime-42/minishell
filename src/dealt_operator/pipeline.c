@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:42:20 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/08 16:28:04 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:15:49 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void				my_pipeline(t_info *info)
 	int				pid;
 
 	backup_fd = 0;
-	// printf("______________stack content___________\n");
-	// ft_lstiter(g_info.stack, &print_token);
-	// printf("\n");
 	while (info->stack)
 	{
 		pipe(fd);

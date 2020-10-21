@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:54:21 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/25 16:02:23 by lenox            ###   ########.fr       */
+/*   Updated: 2020/10/15 20:22:04 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void				ft_double_array_iter(char **array, void (*fct)(char *));
 int					ft_str_count_ncharacter(char *str, char n);
 char				*ft_strndup(const char *s1, int n);
 char				*strrchr(const char *s, int c);
+void				ft_init_tab(char **tab, int nb_line);
+
 
 typedef struct		s_list
 {

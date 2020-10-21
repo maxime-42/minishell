@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/08 14:04:02 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/17 18:51:13 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void			handle_operator(t_list **current)
 	
 	if (!current || !*current)
 		return ;
-	type = get_type_of_token(current);
+	type = get_token_type((*current)->content);
 	if (is_operator(type) != true)
 		return ;
 	nb_operator = count_nb_operator(*current, type);
@@ -97,7 +97,7 @@ void				interpret_input(t_list **begin)
 
 	while (begin && *begin)
 	{
-		type_quote = get_type_of_token(begin);
+		type_quote = get_token_type((*begin)->content);
 		if (type_quote == single_quote || type_quote == double_quote)
 			dealt_quote(begin);
 		else

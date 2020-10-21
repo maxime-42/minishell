@@ -20,7 +20,7 @@ typedef enum		s_token_type
 	backslash,//11
 	literal,//12
 	variable,//13
-	command,//14
+	status,//14
 	space,//15
 	eof,//16
 }					t_token_type;

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:58:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 13:06:31 by lenox            ###   ########.fr       */
+/*   Updated: 2020/10/17 18:58:36 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static	void			delete_close_quote(t_list **begin, t_token_type type)
 {
 	t_list				*to_del;
 
-	if (get_type_of_token(begin) == type)
+	if (get_token_type((*begin)->content) == type)
 	{
 		to_del = *begin;
 		*begin = to_del->next;
 		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
 	}
-	else if (get_type_of_token(&(*begin)->next) == type)
+	else if (get_token_type((*begin)->content) == type)
 	{
 		*begin = (*begin)->next;
 		to_del = *begin;
@@ -49,7 +49,7 @@ static	void			change_everything_in_literal_inside_quote
 	tmp = *begin;
 	while (tmp)
 	{
-		type = get_type_of_token(&tmp);
+		type = get_token_type(tmp->content);
 		if (type == type_to_find)
 			return ;
 		if (type != literal)
@@ -73,7 +73,7 @@ static void				dealt_double_quote
 	tmp = *begin;
 	while (tmp)
 	{
-		type = get_type_of_token(&tmp);
+		type = get_token_type(tmp->content);
 		if (type == type_quote)
 			return ;
 		interpret_backslashe(&tmp);
@@ -95,7 +95,7 @@ void					dealt_quote(t_list **begin)
 
 	to_del = *begin;
 	*begin = to_del->next;
-	type_quote = get_type_of_token(&to_del);
+	type_quote = get_token_type(to_del->content);
 	ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
 	if (!*begin)
 	{

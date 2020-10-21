@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_export.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/20 13:04:11 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/10/20 13:04:13 by mkayumba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void            print_env(void *content)
@@ -75,7 +87,7 @@ void            my_export(char **cmd)
     {
         sorted_list = sort_var_env(g_info.list_env);
         ft_lstiter(sorted_list, &print_env);
-        ft_lstclear(&sorted_list, &test_free);
+        ft_lstclear(&sorted_list, &free_nothing);
     }
     else
     {

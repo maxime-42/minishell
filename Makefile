@@ -14,14 +14,15 @@ SRC	=	./src/main.c\
 		./src/utile/update_cmd_paths.c\
 		./src/parsing/parsing_input.c\
 		./src/parsing/init_env.c\
-		./src/parsing/utile_parsing_input.c\
+		./src/parsing/create_ast.c\
 		./src/parsing/get_value_of_variable_env.c\
 		./src/parsing/transform_input_in_list_token.c\
 		./src/parsing/concate_token.c\
 		./src/parsing/duplique_value_variable.c\
-		./src/parsing/get_type_of_token.c\
 		./src/parsing/interpret_backslashe.c\
 		./src/parsing/create_token.c\
+		./src/parsing/special_case_redirection.c\
+		./src/parsing/get_elem_token.c\
 		./src/parsing/change_type_of_token.c\
 		./src/parsing/interpret_variable.c\
 		./src/parsing/interpret_input.c\
@@ -34,7 +35,6 @@ SRC	=	./src/main.c\
 		./src/bultins/my_env.c\
 		./src/bultins/my_cd.c\
 		./src/bultins/my_exit.c\
-		./src/utile/get_type_node.c\
 		./src/dealt_operator/pipeline.c\
 		./src/dealt_operator/simple_redirection_right.c\
 		./src/dealt_operator/utile_redirection.c\
@@ -47,6 +47,7 @@ SRC	=	./src/main.c\
 		./src/exec_cmd/dealt_command_and_operator.c\
 		./src/exec_cmd/get_node_ancestor.c\
 
+		
 OBJ = $(SRC:.c=.o)
 
 all	:$(NAME)

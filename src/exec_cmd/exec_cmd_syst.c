@@ -1,17 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cmd_syst.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/10/19 18:56:39 by mkayumba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 
-static	void	error_(char *cmd)
+static	int	error_(char *cmd)
 {
-	ft_putstr_fd("gros bash:", 1);
+	ft_putstr_fd("bash:", 1);
 	ft_putstr_fd(cmd, 1);
 	ft_putstr_fd(": ", 1);
 	ft_putstr_fd(strerror(errno), 1);
 	ft_putstr_fd("\n", 1);
-	g_info.ret = ERROR_BASH;
-	// printf("_____________print token______________\n");
-	// ft_lstiter(g_info.list_input, print_token);
+	return (ERROR_BASH);
 }
 
 static char		*join_path_and_cmd(char *path, char *cmd)
@@ -48,24 +58,32 @@ static void		child_process(t_info *info, char **cmd)
 		}
 	}
 	if (ret != SUCCESS)
-		error_(cmd[0]);
-	exit(ret == ERROR ? ERROR_BASH : SUCCESS);
+		exit(error_(cmd[0]));
+	exit(SUCCESS);
 }
 
 static void		father_process(t_info *info, int child_pid)
 {
 	int			child_status;
 
+	child_status = 0;
+	
 	wait(&child_status);
 	if (WIFSIGNALED(child_status))
 	{
-		;// ;printf("______process finish by a signal__________");
+		//printf("______process finish by a signal__________");
+		if (WTERMSIG(child_status) == SIGINT)
+			g_info.ret = SIGINT;
 	}
 	if (WIFEXITED(child_status))
 	{
-		info->ret = SUCCESS;
+		;
+		// info->ret = child_status;
+		// printf("quel by ret = %d\n", ret);
+		// printf("info.ret = %d\n", g_info.ret);
 		// printf("_____________everything finish normally__________\n");
 	}
+	g_info.ret = WEXITSTATUS(child_status);
 	// if (WTERMSIG(child_status) == SIGSEGV)
 	// {
 	//	 ft_putstr_fd("Segmentation fault\n", 1);

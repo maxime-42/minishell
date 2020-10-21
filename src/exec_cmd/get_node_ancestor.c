@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:57:33 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/30 11:10:02 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/19 18:08:26 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_btree				*get_node_ancestor(t_btree *node)
 	t_btree			*ancestor;
 
 	ancestor = (t_btree *)g_info.root;
-	if (node == ancestor)
+	if (!node || node == ancestor)
 	{
 		return (0);
 	}

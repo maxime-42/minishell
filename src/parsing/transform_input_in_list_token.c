@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/08 15:38:57 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:38:45 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 
 /*
-**The goal of this file consist to create a list of token
+**The goal of this file consist to create a list (linked list ) of token
 **who content one character of input string 
+*/
+
+/*
+**	fonction create_token:
+**	la fonction factor créer un token et l'initialiser
+**	le token est initialiser avec les variable qui sont passer en parametre
 */
 
 /*
@@ -37,6 +43,7 @@ static	t_token			g_tab_token[] = {
 	{"\v", space},
 	{" ", space},
 	{"$", variable},
+	{"?", status},
 	{0, 0},
 };
 /*
@@ -80,14 +87,11 @@ void					transform_input_in_list_token(char *input)
 	g_info.list_input = 0; 
 	while (input && *input)
 	{
-		// if (!(value = malloc(sizeof(char) * (1 + 1))))
-		if (!(value = ft_strnew(2)))
+		value = ft_strnew(2);
+		if (!value)
 			exit(free_all(&g_info, ERROR));
 		value[0] = input[0];
-		// value[1] = (char)0;
-		printf("input value: [%s]\n", value);
-		if (!(token = create_token(value, type_of_token(*value))))
-			exit(free_all(&g_info, ERROR));
+		token = create_token(value, type_of_token(*value));
 		if (!(new = ft_lstnew(token)))
 			exit(free_all(&g_info, ERROR));
 		ft_lstadd_back(&g_info.list_input, new);
