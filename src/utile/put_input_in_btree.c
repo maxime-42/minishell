@@ -1,4 +1,4 @@
-#include "minishell"
+#include "minishell.h"
 
 /*
 ** Here I initializer node of a binary tree
@@ -22,8 +22,15 @@ static void		init_node(t_btree **node, t_list *list)
 */
 static void			push_left_or_right(t_btree **root, t_list *list, t_token_type type)
 {
+	t_btree			*node;
+	t_token_type	type_root;
+	
+	node = 0;
+	type_root = get_token_type((*root)->content);
 	if (!(*root))
 		init_node(root, list);
+	else if (type_root == semicolon && type != semicolon)
+		push_left_or_right(&(*root)->right, list, type);
 	else if (is_operator(type) == true)
 	{
 		init_node(&node, list);
@@ -40,24 +47,24 @@ static void			push_left_or_right(t_btree **root, t_list *list, t_token_type type
 **Here I define the begin and the end of a list
 **The attribute "next" of node operator is always be null
 */
-t_list			split_list(t_btree **root, t_list **current  t_list **begin)
+t_list			split_list(t_btree **root, t_list **prev,  t_list **begin)
 {
-	t_list		*tmp;
-	t_list		*prev;
-	
-	tmp = current;
+	t_list		*save;
+	t_token		*token;
+
 	if ((*prev)->next)
-		(*prev)->next = 0;
-	push_left_or_right(root, *begin, literal);
-	if (tmp->next)
 	{
-		tmp = tmp->next;
-		current->next = 0;
-		*begin = current;
+		save = (*prev)->next;
+		(*prev)->next = 0;
+		push_left_or_right(root, *begin, literal);
 	}
-	push_left_or_right(root, *begin, operator);
-	*begin = tmp;
-	*current = tmp;
+	if (save->next)
+	{
+		*prev = save->next;
+		save->next = 0;
+		token = save->content;
+		push_left_or_right(root, save, token->type);
+	}
 }
 
 /*
@@ -69,13 +76,13 @@ void			put_input_in_btree(t_btree **root, t_list *current)
 	t_list		*prev;
 	t_list		*begin;
 
-	begin = current
+	begin = current;
 	while (current)
 	{
 		token = current->content;
 		if (is_operator(token->type) == true)
 		{
-			split_list(root, current  begin);
+			split_list(root, prev, begin);
 		}
 		prev = current;
 		current = current->next;
