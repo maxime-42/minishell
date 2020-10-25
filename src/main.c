@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/20 16:33:09 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:34:49 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int             main(int ac, char **av, char **env)
 		update_tab_var_env(g_info.list_env);
 		update_cmd_path(&g_info);
 		parsing_input(g_info.str_input);
-		create_ast(&g_info.root, g_info.list_input);
+		// create_ast(&g_info.root, g_info.list_input);
 		//printf("______ast_________\n");
 		// ft_btree_dfs_inorder(g_info.root, print_token);
 		//ft_lstiter(g_info.list_input, &print_token);
-		exec_cmd(&g_info, g_info.root);
+		// exec_cmd(&g_info, g_info.root);
 		// exit(free_all(&g_info, ERROR));
 		free_all(&g_info, 0);
     }

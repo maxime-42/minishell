@@ -26,8 +26,7 @@ void	clear_token(void *content)
 	token = (t_token *)content;
 	if (token && token->value)
 	{
-		ft_free_double_array(token->value);
-		token->value = 0;
+		ft_memdel(&token->value);
 	}
 	free(token);
 	(void)token;

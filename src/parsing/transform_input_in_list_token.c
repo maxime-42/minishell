@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/19 12:38:45 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/25 09:14:24 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static	t_token_type	type_of_token(char charset)
 }
 
 /*
+** this function is a Tokenization it dividing each character in token.
 ** transform_input_in_list_token
 ** This function puts each character of string input in token,
 ** then put this token in linked list

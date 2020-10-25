@@ -14,24 +14,13 @@ void	dfs_inorder(t_btree *root)
 void    print_token(void *ptr)
 {
     t_token *token;
-    int     i;
-    char    **array;
+    char    *array;
 
-    i = 0;
 	if (!ptr)
-	{
-		// printf("[null]\n");
 		return ;
-	}
     token = (t_token *)ptr;
-    array = (char **)token->value;
-	printf("type: [%d]\n", token->type);
-    while (array && array[i])
-    {
-		// printf("value:[%s]\ttype: [%d]\n", array[i], token->type);
-		printf("index : [%d] value : [%s]\n", i, array[i]);
-        i++;
-    }
+    array = (char *)token->value;
+	printf("[%s] type: [%d]\n", array, token->type);
 }
 
 void        print_tab(void *ptr)

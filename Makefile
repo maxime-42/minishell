@@ -14,6 +14,8 @@ SRC	=	./src/main.c\
 		./src/utile/update_cmd_paths.c\
 		./src/parsing/parsing_input.c\
 		./src/parsing/init_env.c\
+		./src/parsing/handle_operator.c\
+		./src/parsing/check_syntaxe_error.c\
 		./src/parsing/create_ast.c\
 		./src/parsing/get_value_of_variable_env.c\
 		./src/parsing/transform_input_in_list_token.c\
