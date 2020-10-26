@@ -60,7 +60,6 @@ void				exec_cmd(t_info *info, t_btree *root);
 void				my_semiconlon(t_info *info);
 void				handle_sig_int(int sig);
 void				handle_sig_quit(int sig);
-void				transform_input_in_list_token(char *input);
 void				special_case_redirection(t_list *current);
 char				**get_token_value(t_token *token);
 t_token_type		get_token_type(t_token *token);
@@ -68,5 +67,7 @@ void				print_str(void *ptr);
 void				create_ast(t_btree **root, t_list *input);
 void				handle_operator(t_list **current);
 void				check_syntax_operator(t_list **current, t_token_type type);
+void				tokenizer(char *input);
+void				check_quote_open_and_close(t_token_type type, t_info *info);
 
 #endif

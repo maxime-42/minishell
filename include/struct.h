@@ -4,6 +4,11 @@
 #define NB_TOKEN	10
 #define NB_OPERATOR 8
 #define STR_OPERATOR "><>|&;"
+
+# define FLAGS_SINGLE_QUOTE	0
+# define FLAGS_DOUBLE_QUOTE	1
+# define FLAGS_OPERATOR	2
+
 typedef enum		s_token_type
 {
 	and,//0
@@ -51,6 +56,7 @@ typedef struct		info
 	t_list			*list_input;
 	char			*str_input;
 	t_list			*list_path;
+	unsigned char	status : 3; 
 	char			**tab_var_env;
 	t_list			*stack;
 	int				ret;

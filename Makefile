@@ -18,7 +18,7 @@ SRC	=	./src/main.c\
 		./src/parsing/check_syntaxe_error.c\
 		./src/parsing/create_ast.c\
 		./src/parsing/get_value_of_variable_env.c\
-		./src/parsing/transform_input_in_list_token.c\
+		./src/parsing/tokenizer.c\
 		./src/parsing/concate_token.c\
 		./src/parsing/duplique_value_variable.c\
 		./src/parsing/interpret_backslashe.c\

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_input_in_list_token.c                    :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/25 09:14:24 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/26 16:54:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ static	t_token_type	type_of_token(char charset)
 
 /*
 ** this function is a Tokenization it dividing each character in token.
-** transform_input_in_list_token
+** this function transforme input string in sequence of token
 ** This function puts each character of string input in token,
 ** then put this token in linked list
-**Step one get one character of the input string 
-**step two create token with this character 
-**step three add this token in linked list
+** Step one get one character of the input string 
+** step two create token with this character 
+** step three add this token in linked list
 */
-void					transform_input_in_list_token(char *input)
+void					tokenizer(char *input)
 {
 	t_list				*new;
 	char				*value;
