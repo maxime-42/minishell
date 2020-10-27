@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 15:53:00 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/26 18:03:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/27 12:03:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void				check_quote_open_and_close(t_token_type type, t_info *info)
 ** i verify after token of type  operator the next one must be token of type literal excepte space
 ** i ignore token of type space
 */
-void				check_next_token_after_operator(t_token *token, t_info *info)
+void				check_token_operator(t_token *token, t_info *info)
 {
 	if (token->type !=  space)
 	{
@@ -62,3 +62,12 @@ void				check_next_token_after_operator(t_token *token, t_info *info)
 		}
 	}
 }
+
+// void				check_nb_operator(t_token *token)
+// {
+	// int				nb;
+// 
+	// if (is_operator(token->type) != true)
+		// return ;
+	// 
+// }

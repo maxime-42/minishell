@@ -11,6 +11,7 @@ void	dfs_inorder(t_btree *root)
 	dfs_inorder(root->right);
 }
 
+
 void    print_token(void *ptr)
 {
     t_token *token;

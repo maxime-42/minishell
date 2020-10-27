@@ -33,10 +33,19 @@ void	clear_token(void *content)
 	(void)content;
 }
 
+void	free_btree(void *ptr)
+{
+	t_list *list;
+
+	list = (t_list *)ptr;
+	ft_lstclear(&list, clear_token);
+}
+
 int free_all(t_info *info, int code_return)
 {
-	ft_btree_clear(info->root, &clear_token);
-	ft_lstclear(&info->list_input, &clear_token);
+	// ft_btree_clear(info->root, &clear_token);
+	ft_btree_clear(info->root, &free_btree);
+	//ft_lstclear(&info->list_input, &clear_token);
 	info->root = 0;
 	info->list_input = 0;
 	if (code_return == ERROR)

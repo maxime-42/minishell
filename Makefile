@@ -9,12 +9,12 @@ SRC	=	./src/main.c\
 		./src/utile/free_all.c\
 		./src/utile/update_tab_var_env.c\
 		./src/utile/cmp.c\
+		./src/utile/put_input_list_in_btree.c\
 		./src/utile/is_operator.c\
 		./src/utile/utile.c\
 		./src/utile/update_cmd_paths.c\
 		./src/parsing/parsing_input.c\
 		./src/parsing/init_env.c\
-		./src/parsing/handle_operator.c\
 		./src/parsing/check_syntaxe_error.c\
 		./src/parsing/create_ast.c\
 		./src/parsing/get_value_of_variable_env.c\

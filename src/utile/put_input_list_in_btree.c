@@ -6,31 +6,35 @@
 ** The first child is always be at left side 
 ** then the left child is going be obligatorily type operator and child at right  of
 */
-static void			push_left_or_right(t_btree **root, t_list *list)
+t_bool				push_left_or_right(t_btree **root, t_list *list)
 {
-	t_btree			*node;
-	t_token_type	type_root;
-	
-	node = 0;
+	t_token_type	type;
+	t_bool			bool;
+
+	bool = false;
 	if (*root)
-		type_root = get_token_type((*root)->content);
+		type = get_token_type((*root)->content);
 	if (!(*root))
 	{
 		*root = ft_btree_create_node(list);
 		if (!*root)
 			exit(free_all(&g_info, ERROR));
+		return (true);
 	}
-	else if (/*is_operator(type_root) == true && */!(*root)->left)
-		push_left_or_right(&(*root)->left, list);
-	else if (/*is_operator(type_root) == true &&*/ !(*root)->right)
+	// type = get_token_type((*root)->left->content);
+	if (is_operator(type) == true)
+		bool = push_left_or_right(&(*root)->left, list);
+	if (bool != true && is_operator(type) == true)
 		push_left_or_right(&(*root)->right, list);
+	(void)type;
+	return (bool);
 }
 
 /*
 **Here I define the begin and the end of a list
 **The attribute "next" of node operator is always be null
 */
-t_list			*split_list(t_btree **root, t_list **prev,  t_list **begin)
+void			split_list(t_btree **root, t_list **prev,  t_list **begin)
 {
 	t_list		*save;
 	t_list		*next;
@@ -59,7 +63,7 @@ void			put_input_list_in_btree(t_btree **root, t_list *current)
 		token = current->content;
 		if (is_operator(token->type) == true)
 		{
-			split_list(root, prev, &begin);
+			split_list(root, &prev, &begin);
 			current = begin;
 		}
 		prev = current;

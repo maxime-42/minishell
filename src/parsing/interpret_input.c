@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/26 17:47:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/27 12:13:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,14 @@ void				interpret_input(t_list **begin)
 	g_info.status = 0;
 	while (begin && *begin)
 	{
-		
 		type = get_token_type((*begin)->content);
-		// if (type  == single_quote || type == double_quote)
-		// dealt_quote(begin);
 		check_quote_open_and_close(type, &g_info);
-		if (g_info.status == 0)
+		if (!(g_info.status & (FLAGS_DOUBLE_QUOTE)))
 		{
 			interpret_backslashe(begin);
 			interpret_variable(begin);
-			concate_token_same_type(begin, literal);
-			handle_operator(begin);
-			// check_syntax_operator(*begin, type);
+			concate_token_same_type(begin, type);
+			check_token_operator((*begin)->content, &g_info);
 		}
 		if (*begin)
 			*begin = (*begin)->next;
