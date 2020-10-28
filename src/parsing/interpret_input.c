@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/27 12:13:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/28 14:28:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 ** like variables, double quote or simply, backslash and dealt operator
 ** every character is located in token of linked list 
 */
+void				count_nb_separator(t_token_type type)
+{
+	if (is_separator(type) == true)
+	{
+		g_info.size_tab++;
+	}		
+}
 
 void				interpret_input(t_list **begin)
 {
@@ -32,6 +39,7 @@ void				interpret_input(t_list **begin)
 			interpret_backslashe(begin);
 			interpret_variable(begin);
 			concate_token_same_type(begin, type);
+			count_nb_separator(type);
 			check_token_operator((*begin)->content, &g_info);
 		}
 		if (*begin)

@@ -94,9 +94,9 @@ void			create_ast(t_btree **root, t_list *input)
 		token = input->content;
 		if (is_operator(token->type) == true)
 		{
-			token = new_token(&join, literal);
+			//token = new_token(&join, literal);
 			push_left_or_right(root, token);
-			token = input->content;
+			//token = input->content;
 			join = join_arg(join, token->value);
 			token = new_token(&join, token->type);
 			push_left_or_right(root, token);

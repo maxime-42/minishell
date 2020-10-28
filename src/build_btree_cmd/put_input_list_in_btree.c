@@ -69,5 +69,5 @@ void			put_input_list_in_btree(t_btree **root, t_list *current)
 		prev = current;
 		current = current->next;
 	}
-	push_left_or_right(root, begin);
+	//push_left_or_right(root, begin);
 }

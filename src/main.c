@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/27 16:51:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/28 14:56:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int             main(int ac, char **av, char **env)
 	g_info.root = 0;
 	g_info.tab_var_env = 0;
 	g_info.str_input = 0;
+	g_info.size_tab = 0;
 	int r = 0;
     while (1)
     {

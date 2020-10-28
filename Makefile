@@ -13,20 +13,17 @@ SRC	=	./src/main.c\
 		./src/utile/is_operator.c\
 		./src/utile/utile.c\
 		./src/utile/update_cmd_paths.c\
+		./src/utile/get_elem_token.c\
 		./src/parsing/parsing_input.c\
 		./src/parsing/init_env.c\
 		./src/parsing/check_syntaxe_error.c\
 		./src/parsing/create_ast.c\
-		./src/parsing/get_value_of_variable_env.c\
 		./src/parsing/tokenizer.c\
 		./src/parsing/concate_token.c\
-		./src/parsing/duplique_value_variable.c\
 		./src/parsing/interpret_backslashe.c\
 		./src/parsing/create_token.c\
 		./src/parsing/special_case_redirection.c\
-		./src/parsing/get_elem_token.c\
 		./src/parsing/change_type_of_token.c\
-		./src/parsing/interpret_variable.c\
 		./src/parsing/interpret_input.c\
 		./src/parsing/dealt_quote.c\
 		./src/bultins/my_setenv.c\
@@ -42,6 +39,9 @@ SRC	=	./src/main.c\
 		./src/dealt_operator/utile_redirection.c\
 		./src/dealt_operator/simple_redir_left.c\
 		./src/dealt_operator/double_redir_right.c\
+		./src/variable_env/get_value_of_variable_env.c\
+		./src/variable_env/interpret_variable.c\
+		./src/variable_env/duplique_value_variable.c\
 		./src/dealt_operator/my_semicolon.c\
 		./src/exec_cmd/handle_signal.c\
 		./src/exec_cmd/exec_cmd.c\

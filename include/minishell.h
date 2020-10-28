@@ -70,5 +70,6 @@ void				tokenizer(char *input);
 void				check_quote_open_and_close(t_token_type type, t_info *info);
 void				check_token_operator(t_token *token, t_info *info);
 void				put_input_list_in_btree(t_btree **root, t_list *current);
+t_bool				is_separator(t_token_type type);
 
 #endif

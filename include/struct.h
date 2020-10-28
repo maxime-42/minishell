@@ -3,6 +3,7 @@
 
 #define NB_TOKEN	10
 #define NB_OPERATOR 8
+#define NB_SEPERATOR 3
 #define STR_OPERATOR "><>|&;"
 
 # define FLAGS_SINGLE_QUOTE	0
@@ -13,12 +14,12 @@ typedef enum		s_token_type
 {
 	and,//0
 	or,//1
-	pipeline,//2
+	semicolon,//2
 	simple_redir_left,//3
 	simple_redir_right,//4
 	double_redir_left,//5
 	double_redir_right,//6
-	semicolon,//7
+	pipeline,//7
 	option_command,//8
 	single_quote,//9
 	double_quote,//10
@@ -51,7 +52,7 @@ typedef struct		s_operator
 
 typedef struct		info
 {
-	t_btree			*root;
+	t_token			*tab;
 	t_list			*list_env;
 	t_list			*list_input;
 	char			*str_input;
@@ -59,6 +60,7 @@ typedef struct		info
 	unsigned char	status : 3; 
 	char			**tab_var_env;
 	t_list			*stack;
+	int				size_tab;
 	int				ret;
 	int				new_fd;
 }					t_info;
