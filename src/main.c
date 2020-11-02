@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/28 14:56:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/02 20:27:53 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int             main(int ac, char **av, char **env)
 {
     g_info.list_env = init_env(env);
     g_info.list_path = 0;
-    g_info.stack = 0;
 	g_info.ret = 0;
-	g_info.root = 0;
 	g_info.tab_var_env = 0;
 	g_info.str_input = 0;
 	g_info.size_tab = 0;
@@ -69,12 +67,9 @@ int             main(int ac, char **av, char **env)
 		update_tab_var_env(g_info.list_env);
 		update_cmd_path(&g_info);
 		parsing_input(g_info.str_input);
-		put_input_list_in_btree(&g_info.root, g_info.list_input);
-		// printf("\n");
-		// create_ast(&g_info.root, g_info.list_input);
-		//printf("______ast_________\n");
-		ft_btree_dfs_inorder(g_info.root, &print_list);
-		//ft_lstiter(g_info.list_input, &print_token);
+		// t_list	*tmp = g_info.list_input;
+		// ft_lstiter(tmp, &print_token);
+		btree_of_cmd(g_info.list_input);
 		// exec_cmd(&g_info, g_info.root);
 		// exit(free_all(&g_info, ERROR));
 		free_all(&g_info, 0);

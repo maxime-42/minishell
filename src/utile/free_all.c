@@ -33,20 +33,23 @@ void	clear_token(void *content)
 	(void)content;
 }
 
-void	free_btree(void *ptr)
+void	btree_free_content(void *content)
 {
-	t_list *list;
-
-	list = (t_list *)ptr;
-	ft_lstclear(&list, clear_token);
+   t_token  *token;
+   
+	if (!content)
+		return ;
+	token = (t_token *)content;
+	ft_free_double_array(token->value);
+	free(token);
+	(void)token;
+	(void)content;
 }
 
 int free_all(t_info *info, int code_return)
 {
 	// ft_btree_clear(info->root, &clear_token);
-	ft_btree_clear(info->root, &free_btree);
-	//ft_lstclear(&info->list_input, &clear_token);
-	info->root = 0;
+	ft_lstclear(&info->list_input, &clear_token);
 	info->list_input = 0;
 	if (code_return == ERROR)
 	{
@@ -59,7 +62,5 @@ int free_all(t_info *info, int code_return)
 	info->list_path = 0;
 	free(info->tab_var_env);
 	info->tab_var_env = 0;
-	ft_lstclear(&info->stack, free_nothing);
-	info->stack = 0;
 	return (code_return);
 }

@@ -3,8 +3,8 @@
 
 #define NB_TOKEN	10
 #define NB_OPERATOR 8
-#define NB_SEPERATOR 3
-#define STR_OPERATOR "><>|&;"
+#define BEGIN_SEPARATOR 3
+#define END_SEPARATOR 7
 
 # define FLAGS_SINGLE_QUOTE	0
 # define FLAGS_DOUBLE_QUOTE	1
@@ -59,7 +59,7 @@ typedef struct		info
 	t_list			*list_path;
 	unsigned char	status : 3; 
 	char			**tab_var_env;
-	t_list			*stack;
+	t_list			*list_btree;
 	int				size_tab;
 	int				ret;
 	int				new_fd;

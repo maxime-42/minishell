@@ -6,50 +6,47 @@ CC = gcc -g -Wall -Wextra -Werror -I./include/
 NAME= minishell
 
 SRC	=	./src/main.c\
-		./src/utile/free_all.c\
-		./src/utile/update_tab_var_env.c\
-		./src/utile/cmp.c\
-		./src/utile/put_input_list_in_btree.c\
-		./src/utile/is_operator.c\
-		./src/utile/utile.c\
-		./src/utile/update_cmd_paths.c\
-		./src/utile/get_elem_token.c\
-		./src/parsing/parsing_input.c\
-		./src/parsing/init_env.c\
-		./src/parsing/check_syntaxe_error.c\
-		./src/parsing/create_ast.c\
-		./src/parsing/tokenizer.c\
-		./src/parsing/concate_token.c\
-		./src/parsing/interpret_backslashe.c\
-		./src/parsing/create_token.c\
-		./src/parsing/special_case_redirection.c\
-		./src/parsing/change_type_of_token.c\
-		./src/parsing/interpret_input.c\
+		./src/parsing/check_syntaxe_operator.c\
 		./src/parsing/dealt_quote.c\
-		./src/bultins/my_setenv.c\
-		./src/bultins/my_export.c\
-		./src/bultins/my_unset.c\
-		./src/bultins/my_pwd.c\
+		./src/parsing/interpret_backslashe.c\
+		./src/parsing/interpret_input.c\
+		./src/parsing/dealt_multiples_redirections.c\
+		./src/parsing/parsing_input.c\
+		./src/parsing/special_case_redirection.c\
+		./src/dealt_token/concate_token.c\
+		./src/dealt_token/create_token.c\
+		./src/dealt_token/get_elem_token.c\
+		./src/dealt_token/handler_type_token.c\
+		./src/dealt_token/tokenizer.c\
+		./src/bultins/my_cd.c\
 		./src/bultins/my_echo.c\
 		./src/bultins/my_env.c\
-		./src/bultins/my_cd.c\
 		./src/bultins/my_exit.c\
-		./src/dealt_operator/pipeline.c\
-		./src/dealt_operator/simple_redirection_right.c\
-		./src/dealt_operator/utile_redirection.c\
-		./src/dealt_operator/simple_redir_left.c\
-		./src/dealt_operator/double_redir_right.c\
-		./src/variable_env/get_value_of_variable_env.c\
-		./src/variable_env/interpret_variable.c\
+		./src/bultins/my_export.c\
+		./src/bultins/my_pwd.c\
+		./src/bultins/my_setenv.c\
+		./src/bultins/my_unset.c\
+		./src/bultins/put_env_in_array.c\
+		./src/dealt_seperator/double_redir_right.c\
+		./src/dealt_seperator/redirections.c\
+		./src/dealt_seperator/pipeline.c\
+		./src/dealt_seperator/simple_redir_left.c\
+		./src/dealt_seperator/simple_redirection_right.c\
 		./src/variable_env/duplique_value_variable.c\
-		./src/dealt_operator/my_semicolon.c\
-		./src/exec_cmd/handle_signal.c\
-		./src/exec_cmd/exec_cmd.c\
-		./src/exec_cmd/exec_cmd_syst.c\
-		./src/exec_cmd/dealt_command_and_operator.c\
-		./src/exec_cmd/get_node_ancestor.c\
+		./src/variable_env/get_value_of_variable_env.c\
+		./src/variable_env/init_env.c\
+		./src/variable_env/interpret_variable.c\
+		./src/variable_env/update_cmd_paths.c\
+		./src/variable_env/update_tab_var_env.c\
+		./src/exec/build_ast.c\
+		./src/exec/dealt_exec_cmd.c\
+		./src/exec/btree_of_cmd.c\
+		./src/exec/exec_program_with_execve.c\
+		./src/utile/cmp.c\
+		./src/utile/free_all.c\
+		./src/utile/handle_signal.c\
+		./src/utile/utile.c\
 
-		
 OBJ = $(SRC:.c=.o)
 
 all	:$(NAME)

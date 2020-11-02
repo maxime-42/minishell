@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd_syst.c                                    :+:      :+:    :+:   */
+/*   exec_program_with_execve.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/19 18:56:39 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/10/31 21:01:01 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ static void		father_process(t_info *info, int child_pid)
 	}
 	if (WIFEXITED(child_status))
 	{
-		;
-		// info->ret = child_status;
+		info->ret = child_status;
 		// printf("quel by ret = %d\n", ret);
 		// printf("info.ret = %d\n", g_info.ret);
 		// printf("_____________everything finish normally__________\n");

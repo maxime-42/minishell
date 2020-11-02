@@ -1,16 +1,26 @@
 #include "minishell.h"
 
-void	dfs_inorder(t_btree *root)
+void    print_token_tab(void *ptr)
 {
-	if (!root)
-		return ;
-    char    *str;
-    str = root->content;
-	dfs_inorder(root->left);
-	printf("%s ", str);
-	dfs_inorder(root->right);
-}
+    t_token *token;
+    char    **array;
+	int		i;
 
+	i = 0;
+	if (!ptr)
+	{
+		printf("NULL print_token_tab\n");
+		return ;
+	}
+    token = (t_token *)ptr;
+    array = (char **)token->value;
+	while (array[i])
+	{
+		ft_putstr_fd(array[i], 1);
+		ft_putstr_fd(" ", 1);
+		i++;
+	}
+}
 
 void    print_token(void *ptr)
 {
@@ -24,13 +34,7 @@ void    print_token(void *ptr)
 	printf("[%s] type: [%d]\n", array, token->type);
 }
 
-void        print_tab(void *ptr)
-{
-    char    **array;
-    
-    array = (char **)ptr;
-    printf("[%s]\n", array[0]);
-}
+
 
 void        print_str(void *ptr)
 {
