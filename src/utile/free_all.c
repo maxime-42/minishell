@@ -56,8 +56,6 @@ int free_all(t_info *info, int code_return)
 		ft_lstclear(&info->list_env, &ft_free_string);
 		info->list_env = 0;
 	}
-	ft_free_string(info->str_input);
-	info->str_input = 0;
 	ft_lstclear(&info->list_path, ft_free_string);
 	info->list_path = 0;
 	free(info->tab_var_env);

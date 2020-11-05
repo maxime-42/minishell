@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/26 16:54:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/05 18:04:05 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-/*
-**The goal of this file consist to create a list (linked list ) of token
-**who content one character of input string 
-*/
-
-/*
-**	fonction create_token:
-**	la fonction factor créer un token et l'initialiser
-**	le token est initialiser avec les variable qui sont passer en parametre
-*/
+#include <unistd.h>
 
 /*
 ** Each character  will be identifier by one of these types
@@ -51,22 +40,25 @@ static	t_token			g_tab_token[] = {
 ** This function defines the type of token for the character inside token
 ** the type of token depend of table => g_tab_token
 */
-static	t_token_type	type_of_token(char charset)
+static	t_token_type	define_type(char charset)
 {
 	int					i;
 	char				*str;
-
+	t_token_type		type;
+	
 	i = 0;
+	type = literal;
 	while (g_tab_token[i].value)
 	{
 		str = g_tab_token[i].value;
 		if (str[0] == charset)
 		{
-			return (g_tab_token[i].type);
+			type = g_tab_token[i].type;
+			return (type);
 		}
 		i++;
 	}
-	return (literal);
+	return (type);
 }
 
 /*
@@ -78,24 +70,44 @@ static	t_token_type	type_of_token(char charset)
 ** step two create token with this character 
 ** step three add this token in linked list
 */
+
 void					tokenizer(char *input)
 {
 	t_list				*new;
 	char				*value;
 	t_token				*token;
+	t_token_type		type;
 
-	value = 0;
-	g_info.list_input = 0; 
-	while (input && *input)
+	value = ft_strdup(input);
+	if (!value)
+		exit(free_all(&g_info, ERROR));
+	type = define_type(value[0]);
+	token = create_token(value, type);
+	if (!(new = ft_lstnew(token)))
+		exit(free_all(&g_info, ERROR));
+	ft_lstadd_back(&g_info.list_input, new);
+}
+
+void		promp()
+{
+	char	buf[2];
+	int		r;
+
+	g_info.list_input = 0;
+	buf[0] = '\0';
+	// ft_putstr_fd("\n> ", 0);
+	while (buf[0] != '\n')
 	{
-		value = ft_strnew(2);
-		if (!value)
-			exit(free_all(&g_info, ERROR));
-		value[0] = input[0];
-		token = create_token(value, type_of_token(*value));
-		if (!(new = ft_lstnew(token)))
-			exit(free_all(&g_info, ERROR));
-		ft_lstadd_back(&g_info.list_input, new);
-		input++;
+		r = read(0, buf, 1);
+		buf[r] = '\0';
+		if (buf[0] == CTRL_D)
+		{
+			if (!g_info.list_input)
+				exit(free_all(&g_info, ERROR));
+			else
+				buf[r] = '\0';
+		}
+		else
+			tokenizer(buf);
 	}
 }

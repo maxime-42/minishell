@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:59:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/02 21:18:29 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/05 21:48:17 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void				dealt_exec_cmd(t_btree *root)
 		find_cmd(root->content);
 	else if (is_right_side_redirection(type) || type == simple_redir_left)
 		redirections(root);
-// 		my_simple_redirection_right(root);
-// 	else if (type == simple_redir_right)
-// 		my_simple_redirection_right(root);
-// 	else if (type == double_redir_right)
-// 	{
-// 		printf("double redirection a droite\n");
-// 		my_double_redirection_right(root);
-// 	}
+	else if (type == pipeline)
+		the_pipelines(root, 1, 0);
 }

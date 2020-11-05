@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/31 21:01:01 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/05 17:22:15 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static void		child_process(t_info *info, char **cmd)
 		while (ret != SUCCESS && list_path)
 		{
 			path_cmd = join_path_and_cmd(list_path->content, cmd[0]);
-			if ((ret = execve(path_cmd, cmd, info->tab_var_env)) == ERROR)
+			ret = execve(path_cmd, cmd, info->tab_var_env);
+			if (ret == ERROR)
 				list_path = list_path->next;
 			else
 				ret = SUCCESS;
@@ -72,8 +73,13 @@ static void		father_process(t_info *info, int child_pid)
 	if (WIFSIGNALED(child_status))
 	{
 		//printf("______process finish by a signal__________");
-		if (WTERMSIG(child_status) == SIGINT)
-			g_info.ret = SIGINT;
+		g_info.ret = WTERMSIG(child_status);
+	// 	if (WTERMSIG(child_status) == SIGINT)
+	// 		g_info.ret = SIGINT;
+	// 	else if (WIFSTOPPED(child_status))
+	// 		g_info.ret = WSTOPSIG(child_status);
+	// 	if (WIFSIGNALED(child_status))
+	// 		g_info.ret = 128 + WTERMSIG(child_status);
 	}
 	if (WIFEXITED(child_status))
 	{
@@ -105,7 +111,9 @@ static void		father_process(t_info *info, int child_pid)
 void			exec_cmd_syst(t_info *info, char **cmd)
 {
 	int			pid;
-
+	
+	update_tab_var_env(info->list_env);
+	update_cmd_path(info);
 	if (!info->list_path)
 		return ;
 	if ((pid = fork())== 0)

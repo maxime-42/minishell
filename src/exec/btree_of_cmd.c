@@ -6,25 +6,32 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/02 16:27:13 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/04 13:35:52 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		exec_operator(t_list **input_list)
+t_bool		dealt_separator(t_list **input_list, int ret)
 {
 	t_token *token;
 
 	if (!*input_list)
-		return ;
+		return (false);
 	token = (*input_list)->content;
-	if (is_operator(token->type) == true)
+	*input_list = (*input_list)->next;
+	if (token->type == and)
 	{
-		printf("%s\n", (char *)token->value);
-
-		*input_list = (*input_list)->next;
+		if (ret != SUCCESS)
+			return (false);
 	}
+	else if (token->type == or)
+	{
+		if (ret == SUCCESS)
+			return (false);
+	}
+	printf("%s\n", (char *)token->value);
+	return (true);
 }
 
 static void			check_quote(t_list *tmp)
@@ -50,7 +57,8 @@ static void			check_quote(t_list *tmp)
 void		btree_of_cmd(t_list *input)
 {
 	t_btree	*root;
-
+	t_bool	bool;
+	
 	while (input)
 	{
 		root = 0;
@@ -65,8 +73,8 @@ void		btree_of_cmd(t_list *input)
 		// ft_btree_dfs_inorder(root, &print_token_tab);
 		// print_token_tab(root->right->content);
 		ft_btree_clear(root, &btree_free_content);
-		// printf("\n");
-		// return ;
+		bool = dealt_separator(&input, g_info.ret);
+		if (bool == false)
+			return ;
 	}
-	(void)root;
 }

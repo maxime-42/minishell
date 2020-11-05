@@ -31,7 +31,9 @@ void    print_token(void *ptr)
 		return ;
     token = (t_token *)ptr;
     array = (char *)token->value;
-	printf("[%s] type: [%d]\n", array, token->type);
+	printf("[%s] ", array);
+
+	// printf("[%s] type: [%d]\n", array, token->type);
 }
 
 

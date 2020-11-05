@@ -27,11 +27,8 @@ SRC	=	./src/main.c\
 		./src/bultins/my_setenv.c\
 		./src/bultins/my_unset.c\
 		./src/bultins/put_env_in_array.c\
-		./src/dealt_seperator/double_redir_right.c\
 		./src/dealt_seperator/redirections.c\
 		./src/dealt_seperator/pipeline.c\
-		./src/dealt_seperator/simple_redir_left.c\
-		./src/dealt_seperator/simple_redirection_right.c\
 		./src/variable_env/duplique_value_variable.c\
 		./src/variable_env/get_value_of_variable_env.c\
 		./src/variable_env/init_env.c\

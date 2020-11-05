@@ -1,31 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_node_ancestor.c                                :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/29 10:57:33 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/19 18:08:26 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/11/04 13:37:28 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/04 14:03:52 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-t_btree				*get_node_ancestor(t_btree *node)
-{
-	t_btree			*ancestor;
-
-	ancestor = (t_btree *)g_info.root;
-	if (!node || node == ancestor)
-	{
-		return (0);
-	}
-	while (ancestor && ancestor != node && ancestor->left)
-	{
-		if (ancestor->left == node)
-			return (ancestor);
-		ancestor = ancestor->left;
-	}
-	return (ancestor);
-}
