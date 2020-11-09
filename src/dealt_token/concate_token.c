@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   concate_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:17:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/28 14:28:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/05 23:36:53 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_token	*concate_two_token(t_token *token_1, t_token *token_2, t_token_ty
 */
 void			concate_token_same_type(t_list **begin, t_token_type type)
 {
-	t_token		*new_token;
+	t_token		*new;
 	t_list		*to_del;
 
 	if (!begin || !*begin || !(*begin)->next)
@@ -47,15 +47,13 @@ void			concate_token_same_type(t_list **begin, t_token_type type)
 		return ;
 	if (get_token_type((*begin)->next->content) != type)
 		return ;
-	if (!(new_token = concate_two_token((*begin)->content,
-	(*begin)->next->content, type)))
-	{
+	new = concate_two_token((*begin)->content, (*begin)->next->content, type);
+	if (!new)
 		exit(free_all(&g_info, ERROR));
-	}
 	to_del = *begin;
 	*begin = to_del->next;
 	ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
 	clear_token((*begin)->content);
-	(*begin)->content = new_token;
+	(*begin)->content = new;
 	concate_token_same_type(begin, type);
 }

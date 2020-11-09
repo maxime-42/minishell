@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/04 13:35:52 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/09 16:45:58 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,57 @@ t_bool		dealt_separator(t_list **input_list, int ret)
 		if (ret == SUCCESS)
 			return (false);
 	}
-	printf("%s\n", (char *)token->value);
 	return (true);
 }
 
-static void			check_quote(t_list *tmp)
+t_list		*get_next_cmd(int nb_cmd)
 {
-	t_token_type	type;
-
-	while (tmp)
+	t_list	*tmp;
+	t_token	*token;
+	int		count;
+	
+	count = 0;
+	tmp = g_info.list_input;
+	while (nb_cmd && tmp)
 	{
-		type = get_token_type(tmp->content);
-		if (is_operator(type) == true)
-			return ;
-		dealt_quote(&tmp);
+		token = tmp->content;
+		if (is_separator(token->type) == true)
+			count++;
+		if (count == nb_cmd)
+			return (tmp->next);
 		tmp = tmp->next;
 	}
+	return (g_info.list_input);
 }
-/*
-** ths function prepare a binary for each command  
-** example : A B C || E F G && H I J ; K L M  
-** in example above we are four  binary  tree 
-** the commands is divid by the separotors || , && , ;
-**
-*/
-void		btree_of_cmd(t_list *input)
+
+void		btree_of_cmd()
 {
 	t_btree	*root;
+	int		nb_cmd;
 	t_bool	bool;
-	
-	while (input)
+	t_list	*cmd;
+
+	nb_cmd = 0;
+	cmd = get_next_cmd(nb_cmd);
+	while (cmd)
 	{
 		root = 0;
-		dealt_quote(&input);
-		check_quote(input);
-		dealt_multiples_redirections(input);
-		// ft_lstiter(input, &print_token);
-		// ft_lstiter(g_info.list_input, &print_token);
+		iter_list_1(&cmd);
+		cmd = get_next_cmd(nb_cmd);
+		iter_list_2(cmd);
+		cmd = get_next_cmd(nb_cmd);
+		// dealt_multiples_redirections(input);
+		// ft_lstiter(cmd, &print_token);
 		// exec_operator(&input_list);
-		build_ast(&root, &input);
+		build_ast(&root, &cmd);
 		dealt_exec_cmd(root);
 		// ft_btree_dfs_inorder(root, &print_token_tab);
-		// print_token_tab(root->right->content);
+		// printf("\n\n");
+		// print_token_tab(root->content);
 		ft_btree_clear(root, &btree_free_content);
-		bool = dealt_separator(&input, g_info.ret);
+		bool = dealt_separator(&cmd, g_info.ret);
 		if (bool == false)
 			return ;
+		nb_cmd++;
 	}
 }

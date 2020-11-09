@@ -6,106 +6,105 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/04 17:02:46 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/09 14:33:25 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-** this checkin is for double_quote
-** here i check if open quote and close quote it exist
-** because if we are open we must have closing other is error 
-** step one : if i detect quote i set the bit on one
-** step two : the next time i will detect other quote i fix the on zero
-*/
-void				check_quote_open_and_close(t_token_type type, t_info *info)
-{
-	if (type == single_quote)
-	{
-		if (info->status & (FLAGS_SINGLE_QUOTE))
-			info->status =  info->status & ~ (FLAGS_SINGLE_QUOTE);
-		else
-			info->status =  info->status | (FLAGS_SINGLE_QUOTE);
-	}
-	else if (type == double_quote)
-	{
-		if ((info->status & FLAGS_DOUBLE_QUOTE))
-			info->status =  info->status & ~ (FLAGS_DOUBLE_QUOTE);
-		else
-			info->status =  info->status | (FLAGS_DOUBLE_QUOTE);
-	}
-}
-/*
-** this function check structur of command (cmd)
-** i verify after token of type  operator the next one must be token of type literal excepte space
-** i ignore token of type space
-*/
-void				check_structure_cmd(t_token *token, t_info *info)
-{
-	if (token->type !=  space)
-	{
-		if (is_operator(token->type) == true)
-		{
-			if ((info->status & FLAGS_OPERATOR))
-			{
-				ft_putstr_fd("bash: erreur de syntaxe près du symbole inattendu « ", 1);
-				ft_putstr_fd(token->value, 1);
-				ft_putstr_fd(" »\n", 1);
-				exit(free_all(&g_info, ERROR));
-			}
-			info->status = info->status | (FLAGS_OPERATOR);
-		}
-		else if (token->type == literal)
-		{
-			if ((info->status & FLAGS_OPERATOR))
-				info->status =  info->status & ~ (FLAGS_OPERATOR);
-		}
-	}
-}
 
-/*
-** this let me know if we are inside quote by the flags of quate
-*/
-static t_bool		is_quote(t_info *info)
-{
-	unsigned char status;
-	
-	status = info->status;
-	if ((status & (FLAGS_DOUBLE_QUOTE)))
-		return (true);
-	if ((status & (FLAGS_SINGLE_QUOTE)))
-		return (true);
-	(void)info;
-	return (false);
-}
-
-/*
-** This function allows interpret every character who needs to be interpreted
-** like variables, double quote or simply, backslash and dealt operator
-** every character is located in token of linked list 
-*/
-void				interpret_input(t_list **begin)
+static t_list		*find_next_literal(t_list *current)
 {
 	t_token_type	type;
 
-	g_info.status = 0;
-	while (begin && *begin)
+	while (current)
 	{
-		type = get_token_type((*begin)->content);
-		check_quote_open_and_close(type, &g_info);
-		if (is_quote(&g_info) == false)
+		type = get_token_type(current->content);
+		if (type == literal)
+			return (current);
+		current = current->next;
+	}
+	return (0);
+}
+
+/*
+** if i have something like "> 1 2" this function transforme it "1 > 2"
+*/
+static void				special_case_redirection(t_list *current)
+{
+	t_list			*next_literal;
+	t_list			*after_next_literal;
+
+	next_literal = find_next_literal(current->next);
+	after_next_literal = find_next_literal(next_literal->next);
+	swap_token(next_literal->content, after_next_literal->content);
+	swap_token(current->content, next_literal->content);
+}
+
+/*
+** check if the first token is not a operator
+** example :
+**          && ls 
+**			|| pwd
+**			...
+*/
+static int			first_token_is_not_operator(t_token *token, int count)
+{
+	if (!count && is_operator(token->type) == true)
+	{
+		g_info.ret = ERROR_BASH;
+		ft_putstr_fd("minishell: erreur de syntaxe près du symbole inattendu « ", 1);
+		ft_putstr_fd(token->value, 1);
+		ft_putstr_fd(" »\n", 1);
+		return (ERROR);
+	}
+	return (SUCCESS);
+}
+
+int					iter_list_1(t_list **begin)
+{
+	t_token			*token;
+
+	while (*begin)
+	{
+		token = ((*begin)->content);
+		if (token->type == single_quote || token->type == double_quote)	
+		{
+			if (dealt_quote(begin) == ERROR)
+				return (ERROR);
+		}
+		else if (token->type != space)
 		{
 			interpret_backslashe(begin);
 			interpret_variable(begin);
-			concate_token_same_type(begin, type);
-			check_structure_cmd((*begin)->content, &g_info);
-			check_syntaxe_operator((*begin)->content);
-		}
-		if (g_info.ret == ERROR_BASH)
-		{
-			ft_lstclear(&g_info.list_input, &clear_token);
-			return ;
+			concate_token_same_type(begin, get_token_type((*begin)->content));
+			if (correction_syntaxe_operator((*begin)->content) == ERROR)
+				return (ERROR);
+			if (is_separator(get_token_type((*begin)->content)) == true)
+				return (SUCCESS);
 		}
 		*begin = (*begin)->next;
 	}
+	return (SUCCESS);
+}
+
+int					iter_list_2(t_list *tmp)
+{
+	int				count;
+	t_token			*token;
+
+	count = 0;
+	while (tmp)
+	{
+		token = tmp->content;
+		if (is_separator(token->type))
+			return (true);
+		if (!count && is_right_side_redirection(token->type) == true)
+			special_case_redirection(tmp);
+		if (first_token_is_not_operator(token, count) == ERROR)
+			return (ERROR);
+		if (token->type != space)
+			count += 1;
+		tmp = tmp->next;
+	}
+	return (SUCCESS);
 }

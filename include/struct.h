@@ -2,9 +2,6 @@
 # define STRUCT_H
 #define NB_TOKEN	10
 #define NB_OPERATOR 8
-# define FLAGS_SINGLE_QUOTE	0
-# define FLAGS_DOUBLE_QUOTE	1
-# define FLAGS_OPERATOR	2
 # define NEW_LINE '\n'
 # define CTRL_D '\0'
 

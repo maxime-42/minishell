@@ -11,7 +11,6 @@ SRC	=	./src/main.c\
 		./src/parsing/interpret_backslashe.c\
 		./src/parsing/interpret_input.c\
 		./src/parsing/dealt_multiples_redirections.c\
-		./src/parsing/parsing_input.c\
 		./src/parsing/special_case_redirection.c\
 		./src/dealt_token/concate_token.c\
 		./src/dealt_token/create_token.c\

@@ -16,8 +16,9 @@ void    print_token_tab(void *ptr)
     array = (char **)token->value;
 	while (array[i])
 	{
-		ft_putstr_fd(array[i], 1);
-		ft_putstr_fd(" ", 1);
+		printf("[%d] -> [%s]\n", i, array[i]);
+		// ft_putstr_fd(array[i], 1);
+		// ft_putstr_fd("\n", 1);
 		i++;
 	}
 }
@@ -31,9 +32,9 @@ void    print_token(void *ptr)
 		return ;
     token = (t_token *)ptr;
     array = (char *)token->value;
-	printf("[%s] ", array);
+	// printf("[%s] ", array);
 
-	// printf("[%s] type: [%d]\n", array, token->type);
+	printf("[%s] type: [%d]\n", array, token->type);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:42:20 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/05 21:36:13 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/05 22:53:00 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,12 @@ void				the_pipelines(t_btree *root, int count, int backup_fd)
 			dup2(fd[1], 1);
 		close(fd[0]);
 		if (count)
-		{
 			dealt_exec_cmd(root->left);
-		}
 		else
-		{
 			dealt_exec_cmd(root);
-		}
 		exit(g_info.ret);
 	}
 	close(fd[1]);
 	the_pipelines(root->right, count - 1, fd[0]);
-	// while (pid != -1)
-		pid = wait(NULL);
+	pid = wait(NULL);
 }
