@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/09 14:33:25 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/17 14:28:38 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,18 @@ int					iter_list_1(t_list **begin)
 		if (token->type == single_quote || token->type == double_quote)	
 		{
 			if (dealt_quote(begin) == ERROR)
+			{
+				// printf("dealt retourn error\n");
 				return (ERROR);
+			}
 		}
 		else if (token->type != space)
 		{
-			interpret_backslashe(begin);
-			interpret_variable(begin);
+			interpret_backslashe(begin, true);
+			if (interpret_variable(begin) == SUCCESS)
+			{
+				str_whithout_many_space((*begin)->content);
+			}
 			concate_token_same_type(begin, get_token_type((*begin)->content));
 			if (correction_syntaxe_operator((*begin)->content) == ERROR)
 				return (ERROR);
@@ -102,6 +108,9 @@ int					iter_list_2(t_list *tmp)
 			special_case_redirection(tmp);
 		if (first_token_is_not_operator(token, count) == ERROR)
 			return (ERROR);
+		if (token->type != space)
+			concate_token_same_type(&tmp, token->type);
+		token = tmp->content;
 		if (token->type != space)
 			count += 1;
 		tmp = tmp->next;

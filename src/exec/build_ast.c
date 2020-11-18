@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 15:35:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/04 12:54:24 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/13 16:22:37 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,6 @@ static char			**split_list_in_tab(t_list *tmp)
 	return (tab);
 }
 
-// void				print_tab(char **tab)
-// {
-// 	int				i;
-
-// 	i = 0;
-// 	while (tab[i])
-// 	{
-// 		printf("tab => [%s]\n", tab[i++]);
-// 	}
-// }
 /*
 ** take token who contains arguments then create node for that token
 ** eache node contains token 

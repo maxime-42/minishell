@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:15:01 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/06 16:23:22 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/13 22:48:50 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ char		*duplique_value_variable(t_list *list_env, char *variable_name)
 		}
 		return (duplicate_value);
 	}
-	printf("env nuuuuull\n");
 	return (0);
 }

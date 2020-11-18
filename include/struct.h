@@ -4,7 +4,12 @@
 #define NB_OPERATOR 8
 # define NEW_LINE '\n'
 # define CTRL_D '\0'
-
+# define IS_EVEN 0
+# define ERRR0R_UNSET_VAR 1
+# define IS_NOT_VARIABLE 1
+# define FREE_ALL -1
+# define ERROR_EXPORT 1
+# define PERMISSION_DENIED 126
 typedef enum		s_token_type
 {
 	and,//0
@@ -21,9 +26,7 @@ typedef enum		s_token_type
 	backslash,//11
 	literal,//12
 	variable,//13
-	status,//14
-	space,//15
-	eof,//16
+	space,//14
 }					t_token_type;
 
 typedef struct		s_token
@@ -48,6 +51,7 @@ typedef struct		s_operator
 typedef struct		info
 {
 	t_list			*list_env;
+	void			*ptr;
 	t_list			*list_input;
 	t_list			*list_path;
 	unsigned char	status : 3; 

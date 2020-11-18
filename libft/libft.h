@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:54:21 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/15 20:22:04 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:52:35 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LIBFT_H
 # include <string.h>
 # include <ctype.h>
+#define STOP 0
+#define CONTINUE 1
 
 typedef enum		e_bool
 {
@@ -21,6 +23,19 @@ typedef enum		e_bool
 	true,
 }					t_bool;
 
+typedef struct		s_list
+{
+	void			*content;
+	struct s_list	*prev;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct		s_btree
+{
+	void			*content;
+	struct s_btree	*left;
+	struct s_btree	*right;
+}					t_btree;
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
@@ -73,26 +88,12 @@ void				ft_free_double_array(void *ptr);
 t_bool				ft_is_even(int n);
 void				ft_get_size_array(char **array, int *line, int *column);
 int					ft_nb_line_array(char **array);
-void				ft_double_array_iter(char **array, void (*fct)(char *));
 int					ft_str_count_ncharacter(char *str, char n);
 char				*ft_strndup(const char *s1, int n);
 char				*strrchr(const char *s, int c);
 void				ft_init_tab(char **tab, int nb_line);
-
-
-typedef struct		s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
-typedef struct		s_btree
-{
-	void			*content;
-	struct s_btree	*left;
-	struct s_btree	*right;
-}					t_btree;
-
+void				ft_list_iteration(t_list *lst, int (*f)());
+void				ft_dlst_del_one(t_list *lst, void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **alst, t_list *new);
 int					ft_lstsize(t_list *lst);
@@ -124,4 +125,6 @@ void				ft_btree_insert_data(t_btree **root, void *item,
 					int (*cmpf)());
 void				ft_btree_dfs_inorder(t_btree *root,
 					void (*ptr_function)());
+void				ft_double_array_iter(char **array, void (*fct)());
+
 #endif

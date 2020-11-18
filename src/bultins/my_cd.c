@@ -6,24 +6,12 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 12:43:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/09 17:38:47 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/16 18:15:30 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
-
-static	void	error_(char *path)
-{
-	ft_putstr_fd("bash: ", 1);
-	ft_putstr_fd("cd: ", 1);
-	ft_putstr_fd(path, 1);
-	ft_putstr_fd(": ", 1);
-    // ft_putstr_fd(strerror(errno), 1);
-	ft_putstr_fd("Aucun fichier ou dossier de ce type\n", 1);
-	// ft_putstr_fd("\n", 1);
-	g_info.ret = ERROR_BASH;
-}
 
 static	void	change_directory(char **cmd)
 {
@@ -38,7 +26,11 @@ static	void	change_directory(char **cmd)
 		cmd[1] = current_path;
 	}
 	if (chdir(cmd[1]) == ERROR)
-		error_(cmd[1]);
+	{
+		error_msg("minishell: cd: ", cmd[1], strerror(errno));
+		ft_putstr_fd("\n", 2);
+		g_info.ret = ERROR_BASH;
+	}
 	else	
 		g_info.ret = SUCCESS;
 	my_setenv("OLDPWD", old_pwd);
@@ -51,12 +43,9 @@ void		my_cd(char **cmd)
 	int		size;
 	
 	size = ft_nb_line_array(cmd);
-	// printf("size tab = %d\n", size);
 	if (size > 2)
 	{
-		ft_putstr_fd("bash: ", 1);
-		ft_putstr_fd("cd: ", 1);
-		ft_putstr_fd("too many argument\n", 1);
+		error_msg("minishell: ", "cd: ", "too many argument\n");
 		g_info.ret = ERROR_BASH;		
 	}
 	else

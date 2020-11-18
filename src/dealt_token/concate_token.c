@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:17:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/05 23:36:53 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/13 14:38:13 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,21 @@ static t_token	*concate_two_token(t_token *token_1, t_token *token_2, t_token_ty
 */
 void			concate_token_same_type(t_list **begin, t_token_type type)
 {
-	t_token		*new;
+	t_token		*tmp;
 	t_list		*to_del;
-
-	if (!begin || !*begin || !(*begin)->next)
-		return ;
-	if (get_token_type((*begin)->content) != type)
-		return ;
-	if (get_token_type((*begin)->next->content) != type)
-		return ;
-	new = concate_two_token((*begin)->content, (*begin)->next->content, type);
-	if (!new)
-		exit(free_all(&g_info, ERROR));
-	to_del = *begin;
-	*begin = to_del->next;
-	ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
-	clear_token((*begin)->content);
-	(*begin)->content = new;
-	concate_token_same_type(begin, type);
+	
+	while (begin && *begin && (*begin)->next)
+	{
+		if (get_token_type((*begin)->content) != type)
+			return ;
+		if (get_token_type((*begin)->next->content) != type)
+			return ;
+		tmp = (*begin)->next->content;
+		tmp = concate_two_token((*begin)->content, tmp, type);
+		to_del = *begin;
+		*begin = to_del->next;
+		clear_token((*begin)->content);
+		(*begin)->content = tmp;
+		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
+	}
 }

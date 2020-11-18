@@ -5,30 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/31 17:12:24 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/10/31 17:37:00 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/11/10 12:02:21 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/16 13:29:35 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-void	my_echo(char **cmd)
+static int	check_new_line(char **cmd)
 {
-    int	index;
-    int	new_line;
+	int		index;
+	int		j;
 
-    index = 1;
-	new_line = 1;
-	if (cmd[1])
+	index = 0;
+	while (cmd[++index])
 	{
-    	if (!(new_line = ft_strcmp(cmd[1], "-n")))
-        	index = 2;
+		j = 0;
+		if (cmd[index][j++] == '-')
+		{
+			while (cmd[index][j] == 'n')
+				j++;
+			if (cmd[index][j] && cmd[index][j] != 'n')
+				return (index);
+		}
+		else
+			return (index);
 	}
-    while (cmd[index])
+	return (index);
+}
+
+void		my_echo(char **cmd)
+{
+	int		index;
+	t_bool	new_line;
+
+	index = 1;
+	new_line = true;
+	index = check_new_line(cmd);
+	if (index > 1)
+		new_line = false;
+	while (cmd[index])
 	{
 		ft_putstr_fd(cmd[index], 1);
 		index++;
-    }
-	if (new_line == 2)
-		ft_putstr_fd("\n", 1);    
+		if (cmd[index])
+			ft_putstr_fd(" ", 1);
+	}
+	if (new_line == true)
+		ft_putstr_fd("\n", 1);
+	g_info.ret = SUCCESS;
 }

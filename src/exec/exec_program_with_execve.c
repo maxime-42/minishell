@@ -6,22 +6,65 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/05 17:22:15 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:11:43 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-static	int	error_(char *cmd)
+t_bool			check_permission(char *cmd)
 {
-	ft_putstr_fd("bash:", 1);
-	ft_putstr_fd(cmd, 1);
-	ft_putstr_fd(": ", 1);
-	ft_putstr_fd(strerror(errno), 1);
-	ft_putstr_fd("\n", 1);
-	return (ERROR_BASH);
+	struct stat permstat;
+	t_bool	bool;
+	
+	ft_bzero(&permstat, sizeof(struct stat));
+	stat(cmd, &permstat);
+	bool = true;
+	if ((permstat.st_mode & S_IFMT) == S_IFREG)
+	{
+		if ((permstat.st_mode & S_IXUSR) == 0)
+		{
+			error_msg("minishell: ", cmd, ": Permission denied\n");
+			g_info.ret = PERMISSION_DENIED;
+			bool = false;
+		}
+	}
+	else if ((permstat.st_mode & S_IFMT) == S_IFDIR)
+	{
+		error_msg("minishell: ", cmd, ": Is a directory\n");
+		g_info.ret = PERMISSION_DENIED;
+		bool = false;
+	}
+	return (bool);
+}
+
+int				result_cmd(t_info *info, char **cmd, int ret)
+{
+	char		*msg_to_print;
+	char		*msg;
+
+	errno = 0;
+	if (ret != ERROR)
+		return (SUCCESS);
+	ret = execve(cmd[0], cmd, info->tab_var_env);
+	if (errno == ENOEXEC)
+		return (SUCCESS);
+	if (ret == ERROR)
+	{
+		msg = strerror(errno);
+		msg_to_print = ft_strjoin(": ", msg);
+		error_msg("minishell: ", cmd[0], msg_to_print);
+		ft_putstr_fd("\n", 2);
+		ft_strdel(&msg_to_print);
+	}
+	if (errno == EACCES)
+		exit (PERMISSION_DENIED);
+	return (ERROR_BASH);		
 }
 
 static char		*join_path_and_cmd(char *path, char *cmd)
@@ -37,33 +80,29 @@ static char		*join_path_and_cmd(char *path, char *cmd)
 	return (join_path_and_cmd);
 }
 
-static void		child_process(t_info *info, char **cmd)
+ void			child_process(t_info *info, char **cmd)
 {
 	char		*path_cmd;
 	t_list		*list_path;
 	int		 	ret;
 
-	ret = SUCCESS;
+	ret = ERROR;
 	list_path =  info->list_path;
-	if ((ret = execve(cmd[0], cmd, info->tab_var_env)) == ERROR)
+	while (ret != SUCCESS && list_path)
 	{
-		while (ret != SUCCESS && list_path)
-		{
-			path_cmd = join_path_and_cmd(list_path->content, cmd[0]);
-			ret = execve(path_cmd, cmd, info->tab_var_env);
-			if (ret == ERROR)
-				list_path = list_path->next;
-			else
-				ret = SUCCESS;
-			ft_free_string(path_cmd);
-		}
+		path_cmd = join_path_and_cmd(list_path->content, cmd[0]);
+		ret = execve(path_cmd, cmd, info->tab_var_env);
+		if (ret == ERROR)
+			list_path = list_path->next;
+		else
+			ret = SUCCESS;
+		ft_strdel(&path_cmd);
 	}
-	if (ret != SUCCESS)
-		exit(error_(cmd[0]));
-	exit(SUCCESS);
+	ret = result_cmd(info, cmd, ret);
+	exit(ret);
 }
 
-static void		father_process(t_info *info, int child_pid)
+void		father_process(t_info *info, int child_pid)
 {
 	int			child_status;
 
@@ -108,25 +147,25 @@ static void		father_process(t_info *info, int child_pid)
 	(void)info;
 }
 
+
 void			exec_cmd_syst(t_info *info, char **cmd)
 {
 	int			pid;
+	t_bool		bool;
 	
+	bool = check_permission(cmd[0]);
+	if (bool == false)
+		return ;
 	update_tab_var_env(info->list_env);
 	update_cmd_path(info);
 	if (!info->list_path)
+	{
+		error_msg("minishell: ", cmd[0], ": path is empty\n");
+		info->ret = ERROR_BASH;
 		return ;
+	}
 	if ((pid = fork())== 0)
-	{
 		child_process(info, cmd);
-	}
-	else if (pid == ERROR)
-	{
-		ft_putstr_fd(strerror(errno), 1);
-		exit(free_all(&g_info, ERROR));
-	}
 	else
-	{
 		father_process(info, pid);
-	}
 }

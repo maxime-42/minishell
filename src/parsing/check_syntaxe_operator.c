@@ -6,20 +6,11 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 18:38:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/09 14:07:14 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/16 17:11:11 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void			error_msg(char *value)
-{
-	ft_putstr_fd("minishell: erreur de syntaxe près du symbole inattendu « ", 1);
-	ft_putchar_fd(value[0], 1);
-	ft_putchar_fd(value[1], 1);
-	ft_putstr_fd(" »\n", 1);
-	g_info.ret = ERROR_BASH;
-}
 
 /*
 ** the goal is to change type of token containt >> is to simple redirection 
@@ -32,7 +23,7 @@ static t_bool		correction_redirection(t_token *token)
 	size = ft_strlen(token->value);
 	if (size > 2)
 	{
-		error_msg(token->value);
+		error_msg("minishell: syntaxe error « ", token->value, "»\n");
 		return (false);
 	}
 	else if (size == 2)
@@ -53,7 +44,7 @@ static int			correction_and_pipeline_semicolon(t_token *token)
 	size = ft_strlen(token->value);
 	if (size > 2)
 	{
-		error_msg(token->value);
+		error_msg("minishell: syntaxe error « ", token->value, "»\n");
 		return (ERROR);
 	}
 	else if (size == 2)
@@ -61,7 +52,7 @@ static int			correction_and_pipeline_semicolon(t_token *token)
 		if (token->type == pipeline)
 			token->type = or;
 		else if (token->type == semicolon)
-			error_msg(token->value);
+			error_msg("minishell: syntaxe error « ", token->value, "»\n");
 	}
 	else if (size == 1 && token->type == and)
 		token->type = literal;

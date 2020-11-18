@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/09 16:45:58 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/16 17:05:12 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,18 @@ void		btree_of_cmd()
 	while (cmd)
 	{
 		root = 0;
-		iter_list_1(&cmd);
+		if ((iter_list_1(&cmd)) == ERROR)
+		{
+			printf("btree_of_cmd error !!!\n");
+			return ;
+		}
+		// return ;
 		cmd = get_next_cmd(nb_cmd);
-		iter_list_2(cmd);
+		if ((iter_list_2(cmd)) == ERROR)
+			return ;
 		cmd = get_next_cmd(nb_cmd);
-		// dealt_multiples_redirections(input);
-		// ft_lstiter(cmd, &print_token);
-		// exec_operator(&input_list);
 		build_ast(&root, &cmd);
+		g_info.ptr = root;
 		dealt_exec_cmd(root);
 		// ft_btree_dfs_inorder(root, &print_token_tab);
 		// printf("\n\n");

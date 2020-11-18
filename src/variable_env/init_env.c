@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:10:02 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/14 10:13:34 by lenox            ###   ########.fr       */
+/*   Updated: 2020/11/13 22:36:07 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,14 @@ t_list		*init_env(char **env)
 
 	if (!env || !*env)
 		return (0);
-	index_env = -1;
 	begin = 0;
+	index_env = -1;
 	while (env[++index_env])
 	{
 		if (!(str = ft_strdup(env[index_env])))
-		{
-			ft_putstr_fd("error:\nfailure malloc\n", 1);
-			ft_lstclear(&begin, &ft_free_string);
-			exit(ERROR);
-		}
+			exit(free_all(&g_info, ERROR));
 		if (!(new = ft_lstnew(str)))
-		{
-			ft_lstclear(&begin, &ft_free_string);
-			exit(0);
-		}
+			exit(free_all(&g_info, ERROR));
 		ft_lstadd_back(&begin, new);
 	}
 	return (begin);

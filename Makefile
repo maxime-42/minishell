@@ -31,6 +31,7 @@ SRC	=	./src/main.c\
 		./src/variable_env/duplique_value_variable.c\
 		./src/variable_env/get_value_of_variable_env.c\
 		./src/variable_env/init_env.c\
+		./src/variable_env/str_without_many_space.c\
 		./src/variable_env/interpret_variable.c\
 		./src/variable_env/update_cmd_paths.c\
 		./src/variable_env/update_tab_var_env.c\

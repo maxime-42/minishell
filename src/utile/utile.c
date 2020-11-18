@@ -1,4 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utile.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/16 16:59:24 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/17 15:57:06 by mkayumba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+void		error_msg(char *cmd_name, char *arg, char *msg)
+{
+	ft_putstr_fd(cmd_name, 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(msg, 2);
+}
 
 void    print_token_tab(void *ptr)
 {
@@ -23,6 +42,19 @@ void    print_token_tab(void *ptr)
 	}
 }
 
+void				print_tab(char **tab)
+{
+	int				i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		printf("tab => [%s]\n", tab[i++]);
+	}
+}
+
 void    print_token(void *ptr)
 {
     t_token *token;
@@ -44,7 +76,7 @@ void        print_str(void *ptr)
     char    *array;
     
     array = (char *)ptr;
-    printf("[%s] ", array);
+    printf("[%s]\n", array);
 }
 
 void		print_file(int fd)

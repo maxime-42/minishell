@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/06 14:25:02 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/14 12:23:29 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static	t_token			g_tab_token[] = {
 	{"\v", space},
 	{" ", space},
 	{"$", variable},
-	{"?", status},
 	{0, 0},
 };
+
 /*
 ** type_of_token(char charset)
 ** This function defines the type of token for the character inside token
@@ -95,6 +95,7 @@ void		promp()
 
 	g_info.list_input = 0;
 	buf[0] = '\0';
+	ft_putstr_fd("->", 1);
 	while (buf[0] != '\n')
 	{
 		r = read(0, buf, 1);

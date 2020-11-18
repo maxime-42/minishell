@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 14:33:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/05 14:33:49 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/14 11:58:03 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void			update_cmd_path(t_info *info)
 	if (!info->list_env)
 		return ;
 	ft_lstclear(&info->list_path, ft_free_string);
-	info->list_path = 0;
 	value = get_value_of_variable_env(info->list_env, "PATH");
+	if (!value)
+		return ;
 	while (*value)
 	{
 		value = extract_path(value, &path);

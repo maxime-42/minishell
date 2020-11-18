@@ -60,5 +60,6 @@ int free_all(t_info *info, int code_return)
 	info->list_path = 0;
 	free(info->tab_var_env);
 	info->tab_var_env = 0;
-	return (code_return);
+	// return (code_return);
+	return (info->ret);// new instruction
 }

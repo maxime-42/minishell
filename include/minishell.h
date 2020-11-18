@@ -19,10 +19,8 @@ t_list				*init_env(char **env);
 char				*get_value_of_variable_env(t_list *list_env, char *name);
 void				concate_token_same_type(t_list **begin, t_token_type type);
 t_bool				is_operator(t_token_type type);
-void				interpret_backslashe(t_list **begin);
 void				change_type_of_token(t_list **begin, t_token_type new_type);
 char				*duplique_value_variable(t_list *list_env, char *variable_name);
-void				interpret_variable(t_list **current);
 void				test_free(void *ptr);
 void				my_setenv(char *name, char *value);
 void				my_pwd(char **cmd);
@@ -68,6 +66,11 @@ int					dealt_quote(t_list **begin);
 int					iter_list_1(t_list **begin);
 int					iter_list_2(t_list *tmp);
 void				btree_of_cmd();
-
+int					interpret_variable(t_list **current);
+void				str_whithout_many_space(t_token *token);
+void				error_msg(char *cmd_name, char *arg, char *msg);
+void				interpret_backslashe(t_list **list, t_bool in_quote);
+void				print_tab(char **tab);
+int					check_if_var_exist(char *s1, char *s2);
 
 #endif

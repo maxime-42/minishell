@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_env.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/13 21:56:18 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/13 22:29:02 by mkayumba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void    print_env(void *content)
+static void    print_env(void *content)
 {
-    char    *var_env;
+    char		*var_env;
 
     var_env = (char *)content;
     if (ft_strchr(var_env, '='))
@@ -14,8 +26,6 @@ void    print_env(void *content)
 
 void    my_env(char **cmd)
 {
-    if (!g_info.list_env)
-        return ;
     ft_lstiter(g_info.list_env, print_env);
     (void)cmd;
 }
