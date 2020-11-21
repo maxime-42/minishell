@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:53:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/02 21:25:55 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 13:34:40 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static void				error_(char *file_name)
 {
-	ft_putstr_fd("bash: ", 1);
+	ft_putstr_fd("minishell: ", 1);
 	ft_putstr_fd(file_name, 1);
 	ft_putstr_fd(": ", 1);
 	ft_putstr_fd(strerror(errno), 1);
@@ -35,7 +35,8 @@ static int			fd_simple_redirection_right(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		if ((fd = open(tab[i], O_CREAT | O_RDWR | O_TRUNC, 0644)) == ERROR)
+		fd = open(tab[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
+		if (fd == ERROR)
 		{
 			error_(tab[i]);
 		}
@@ -70,7 +71,7 @@ static int			fd_simple_redirection_left(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		if ((fd = open(tab[i], O_RDONLY)) == ERROR)
+		fd = open(tab[i], O_RDONLY);
 		if (fd == ERROR)
 		{
 			error_(tab[i]);

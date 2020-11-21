@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 13:13:50 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 15:52:09 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,13 @@ int					iter_list_1(t_list **begin)
 		if (token->type == single_quote || token->type == double_quote)	
 		{
 			if (dealt_quote(begin) == ERROR)
-			{
-				// printf("dealt retourn error\n");
 				return (ERROR);
-			}
 		}
 		else if (token->type != space)
 		{
 			interpret_backslashe(begin, true);
 			if (interpret_variable(begin) == SUCCESS)
-			{
 				str_whithout_many_space((*begin)->content);
-			}
 			concate_token_same_type(begin, get_token_type((*begin)->content));
 			if (correction_syntaxe_operator(*begin, (*begin)->content) == ERROR)
 				return (ERROR);
@@ -121,31 +116,26 @@ int					iter_list_2(t_list *tmp)
 
 /****************************************************************************/
 /*
-** 1 > 2  > 3 > 4 become 1 2 3 > 4
 ** 1 > 2  > 3 > 4 become 1 > 2 3 4
 */
-static void			multiple_redirection(t_list *list, t_token *token)
+static t_token		*multiple_redirection(t_token *token, t_token *save)
 {
 	t_bool			bool;
 	int				size;
 	
 	bool = is_right_side_redirection(token->type);
 	if (bool == false)
-		return ;
-	list = list->prev;
-	while (list)
+		return (save);
+	if (!save)
 	{
-		token = list->content;
-		bool = is_right_side_redirection(token->type);
-		if (bool == true)
-		{
-			change_type_of_token(&list, literal);
-			size = ft_strlen(token->value);
-			ft_memcpy(token->value, " ", size);
-			return ;
-		}
-		list = list->prev;
+		return (token);
 	}
+	printf("wsh\n");
+	size = ft_strlen(save->value);
+	ft_memcpy(save->value, " ", size);
+	save->type = space;
+	swap_token(save, token);
+	return (save);
 }
 
 /*
@@ -175,7 +165,9 @@ int					iter_list_3(t_list *list)
 {
 	t_token			*token;
 	t_bool			bool;
+	t_token			*save;
 
+	save = 0;
 	while (list)
 	{
 		token = list->content;
@@ -185,7 +177,7 @@ int					iter_list_3(t_list *list)
 		if (token->type != space)
 		{
 			special_case_echo(list, token);
-			multiple_redirection(list, token);
+			save = multiple_redirection(token, save);
 		}
 		list = list->next;
 	}
