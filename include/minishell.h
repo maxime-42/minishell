@@ -24,7 +24,6 @@ char				*duplique_value_variable(t_list *list_env, char *variable_name);
 void				test_free(void *ptr);
 void				my_setenv(char *name, char *value);
 void				my_pwd(char **cmd);
-int					cmp(char *s1, char *s2);
 void				my_echo(char **cmd);
 void				my_cd(char **cmd);
 void				my_pwd(char **cmd);
@@ -61,7 +60,7 @@ void				parsing_input();
 void				swap_token(t_token *a, t_token *b);
 void				handle_signale_ctrl_c(int sig);
 void				handle_signale_quit(int sig);
-int					correction_syntaxe_operator(t_token *token);
+int					correction_syntaxe_operator(t_list *list, t_token *token);
 int					dealt_quote(t_list **begin);
 int					iter_list_1(t_list **begin);
 int					iter_list_2(t_list *tmp);
@@ -72,5 +71,7 @@ void				error_msg(char *cmd_name, char *arg, char *msg);
 void				interpret_backslashe(t_list **list, t_bool in_quote);
 void				print_tab(char **tab);
 int					check_if_var_exist(char *s1, char *s2);
+int					iter_list_3(t_list *list);
+t_list				*skipt_space(t_list *list);
 
 #endif

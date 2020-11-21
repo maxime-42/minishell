@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 13:04:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/18 21:00:08 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/20 18:15:07 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int			check_syntaxe(char *str)
 	}
 	return (SUCCESS);
 }
+
 /*
 ** dans get_name and_value
 **on on extrait le nom de la variable et ça valeur dans str
@@ -106,7 +107,6 @@ void            my_export(char **cmd)
     int         nb_line;
     t_list      *sorted_list;
 
-	return ;
     nb_line = ft_nb_line_array(cmd);
     if (nb_line == 1)
     {

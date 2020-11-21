@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:59:40 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/17 15:13:35 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:30:32 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,6 @@ void				interpret_backslashe(t_list **list, t_bool in_quote)
 	bool = where_is_backslash(&next, nb_backslash, in_quote);
 	if (bool == false)
 	{
-		// printf("dans false\n");
 		ft_list_iteration(next, &check_last_token);
 	}
-	// else
-		// printf("dans true\n");
-
 }

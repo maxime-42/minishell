@@ -9,6 +9,7 @@
 # define IS_NOT_VARIABLE 1
 # define FREE_ALL -1
 # define ERROR_EXPORT 1
+# define SYNTAXE_ERROR 2
 # define PERMISSION_DENIED 126
 typedef enum		s_token_type
 {

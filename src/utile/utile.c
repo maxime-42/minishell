@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 16:59:24 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/17 15:57:06 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/20 16:26:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@ void		error_msg(char *cmd_name, char *arg, char *msg)
 	ft_putstr_fd(cmd_name, 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(msg, 2);
+}
+
+t_list				*skipt_space(t_list *list)
+{
+	t_token			*token;
+	
+	while (list)
+	{
+		token = list->content;
+		if (token->type != space)
+		{
+			return (list);
+		}
+		list = list->next;
+	}
+	return (0);
 }
 
 void    print_token_tab(void *ptr)
@@ -36,8 +52,6 @@ void    print_token_tab(void *ptr)
 	while (array[i])
 	{
 		printf("[%d] -> [%s]\n", i, array[i]);
-		// ft_putstr_fd(array[i], 1);
-		// ft_putstr_fd("\n", 1);
 		i++;
 	}
 }

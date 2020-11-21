@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/18 20:11:43 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:29:21 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_bool			check_permission(char *cmd)
 	return (bool);
 }
 
-int				result_cmd(t_info *info, char **cmd, int ret)
+static int		result_cmd(t_info *info, char **cmd, int ret)
 {
 	char		*msg_to_print;
 	char		*msg;

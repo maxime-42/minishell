@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/17 14:28:38 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 13:13:50 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ static t_list		*find_next_literal(t_list *current)
 /*
 ** if i have something like "> 1 2" this function transforme it "1 > 2"
 */
-static void				special_case_redirection(t_list *current)
+static void			special_case_redirection(t_list *current)
 {
 	t_list			*next_literal;
 	t_list			*after_next_literal;
 
 	next_literal = find_next_literal(current->next);
-	after_next_literal = find_next_literal(next_literal->next);
+	if (next_literal)
+		after_next_literal = find_next_literal(next_literal->next);
 	swap_token(next_literal->content, after_next_literal->content);
 	swap_token(current->content, next_literal->content);
 }
@@ -43,9 +44,9 @@ static void				special_case_redirection(t_list *current)
 /*
 ** check if the first token is not a operator
 ** example :
-**          && ls 
+**			&& ls 
 **			|| pwd
-**			...
+**			etc
 */
 static int			first_token_is_not_operator(t_token *token, int count)
 {
@@ -83,7 +84,7 @@ int					iter_list_1(t_list **begin)
 				str_whithout_many_space((*begin)->content);
 			}
 			concate_token_same_type(begin, get_token_type((*begin)->content));
-			if (correction_syntaxe_operator((*begin)->content) == ERROR)
+			if (correction_syntaxe_operator(*begin, (*begin)->content) == ERROR)
 				return (ERROR);
 			if (is_separator(get_token_type((*begin)->content)) == true)
 				return (SUCCESS);
@@ -114,6 +115,79 @@ int					iter_list_2(t_list *tmp)
 		if (token->type != space)
 			count += 1;
 		tmp = tmp->next;
+	}
+	return (SUCCESS);
+}
+
+/****************************************************************************/
+/*
+** 1 > 2  > 3 > 4 become 1 2 3 > 4
+** 1 > 2  > 3 > 4 become 1 > 2 3 4
+*/
+static void			multiple_redirection(t_list *list, t_token *token)
+{
+	t_bool			bool;
+	int				size;
+	
+	bool = is_right_side_redirection(token->type);
+	if (bool == false)
+		return ;
+	list = list->prev;
+	while (list)
+	{
+		token = list->content;
+		bool = is_right_side_redirection(token->type);
+		if (bool == true)
+		{
+			change_type_of_token(&list, literal);
+			size = ft_strlen(token->value);
+			ft_memcpy(token->value, " ", size);
+			return ;
+		}
+		list = list->prev;
+	}
+}
+
+/*
+** if i have echo > file_name msg 
+** it become echo msg > file_name
+*/
+ static void		special_case_echo(t_list *list, t_token *token)
+{
+	int				ret;
+	t_bool			bool;
+
+	ret = ft_strcmp("echo", token->value);
+	if (ret)
+		return ;
+	list = skipt_space(list->next);
+	if (list)
+	{
+		token = list->content;
+		bool = is_right_side_redirection(token->type);
+		if (bool != true)
+			return ;
+		special_case_redirection(list);
+	}
+}
+
+int					iter_list_3(t_list *list)
+{
+	t_token			*token;
+	t_bool			bool;
+
+	while (list)
+	{
+		token = list->content;
+		bool = is_separator(token->type);
+		if (bool == true)
+			return (SUCCESS);
+		if (token->type != space)
+		{
+			special_case_echo(list, token);
+			multiple_redirection(list, token);
+		}
+		list = list->next;
 	}
 	return (SUCCESS);
 }

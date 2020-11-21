@@ -39,7 +39,6 @@ SRC	=	./src/main.c\
 		./src/exec/dealt_exec_cmd.c\
 		./src/exec/btree_of_cmd.c\
 		./src/exec/exec_program_with_execve.c\
-		./src/utile/cmp.c\
 		./src/utile/free_all.c\
 		./src/utile/handle_signal.c\
 		./src/utile/utile.c\
