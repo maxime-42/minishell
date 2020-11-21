@@ -6,17 +6,11 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:27:02 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/14 12:25:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:48:49 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** if $ 
-** if the token after $ is not literal type :
-** 			this function change type of above token in type literal
-*/
 
 /*
 ** if in put is $?
@@ -59,7 +53,6 @@ int					interpret_variable(t_list **current)
 	type = get_token_type((*current)->content);
 	if (type != literal)
 		return (0);
-	// printf("wsh ???\n");
 	concate_token_same_type(current, type);
 	token = (*current)->content;
 	value = duplique_value_variable(g_info.list_env, token->value);

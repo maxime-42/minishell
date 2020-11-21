@@ -6,12 +6,12 @@ CC = gcc -g -Wall -Wextra -Werror -I./include/
 NAME= minishell
 
 SRC	=	./src/main.c\
+		./src/parsing/utile_iter_list.c\
 		./src/parsing/check_syntaxe_operator.c\
 		./src/parsing/dealt_quote.c\
 		./src/parsing/interpret_backslashe.c\
-		./src/parsing/interpret_input.c\
-		./src/parsing/dealt_multiples_redirections.c\
-		./src/parsing/special_case_redirection.c\
+		./src/parsing/iter_list.c\
+		./src/parsing/utile_backslash.c\
 		./src/dealt_token/concate_token.c\
 		./src/dealt_token/create_token.c\
 		./src/dealt_token/get_elem_token.c\

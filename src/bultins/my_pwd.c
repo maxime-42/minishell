@@ -3,7 +3,7 @@
 
 static	void	error_(char *path)
 {
-	ft_putstr_fd("bash: ", 1);
+	ft_putstr_fd("minishell: ", 1);
 	ft_putstr_fd("pwd: ", 1);
 	ft_putstr_fd(path, 1);
 	ft_putstr_fd(": ", 1);
@@ -24,14 +24,8 @@ void			my_pwd(char **cmd)
 		{
 			ft_putstr_fd(current_path, 1);
 			ft_free_string(current_path);
-			g_info.ret = 0;
+			g_info.ret = SUCCESS;
 		}
-	}
-	else
-	{
-	   	ft_putstr_fd("bash: ", 1);
-		ft_putstr_fd("too many agument", 1);
-		g_info.ret = 0;
 	}
 	ft_putstr_fd("\n", 1); 
 }

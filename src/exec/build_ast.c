@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 15:35:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/13 16:22:37 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:47:33 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void			btree_insert(t_btree **root, t_token *token)
 	else
 		btree_insert(&(*root)->right, token);
 }
+
 /*
 ** the goal is to put every argument in list
 ** example ls a b c && ps
@@ -56,6 +57,7 @@ static void			join_arg(t_list **list, t_token *token)
 		ft_lstadd_back(list, new);
 	}
 }
+
 /*
 ** the idea of this function consist to put all character string of linked list in tab
  **example :
@@ -81,18 +83,29 @@ static char			**split_list_in_tab(t_list *tmp)
 	return (tab);
 }
 
+static void			btree_add_literal(t_list **list, void *ptr, t_btree **root)
+{
+	if (list)
+	{
+		ptr = split_list_in_tab(*list);
+		ft_lstclear(list, free_nothing);
+		ptr = (void *)create_token(ptr, literal);
+		btree_insert(root, ptr);
+	}	
+}
+
 /*
 ** take token who contains arguments then create node for that token
 ** eache node contains token 
-**  step one    :	join arguments then if the the are operator
+**  step one   :	join arguments then if the the are operator
 **	step two   :	put this arguments in token then create node for this token
 **	step three :	create node for operator
 */
-void			build_ast(t_btree **root, t_list **input)
+void				build_ast(t_btree **root, t_list **input)
 {
-	t_token		*token;
-	void		*ptr;
-	t_list		*list;
+	t_token			*token;
+	void			*ptr;
+	t_list			*list;
 
 	list = 0;
 	while (*input && is_separator(get_token_type((*input)->content)) == false)
@@ -100,11 +113,7 @@ void			build_ast(t_btree **root, t_list **input)
 		token = (*input)->content;
 		if (is_operator(token->type) == true)
 		{
-			ptr = split_list_in_tab(list);
-			ft_lstclear(&list, free_nothing);
-			ptr = (void *)create_token(ptr, literal);
-			btree_insert(root, ptr);
-
+			btree_add_literal(&list, ptr, root);
 			ptr = ft_split(token->value, "");
 			ptr = create_token(ptr, token->type);
 			btree_insert(root, ptr);
@@ -113,11 +122,5 @@ void			build_ast(t_btree **root, t_list **input)
 			join_arg(&list, token);
 		*input = (*input)->next;
 	}
-	if (list)
-	{
-		ptr = split_list_in_tab(list);
-		ft_lstclear(&list, free_nothing);
-		ptr = create_token(ptr, literal);
-		btree_insert(root, ptr);
-	}
+	btree_add_literal(&list, ptr, root);
 }

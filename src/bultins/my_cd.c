@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 12:43:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/16 18:15:30 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:56:30 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@ static	void	change_directory(char **cmd)
 		ft_putstr_fd("\n", 2);
 		g_info.ret = ERROR_BASH;
 	}
-	else	
+	else
 		g_info.ret = SUCCESS;
 	my_setenv("OLDPWD", old_pwd);
 	my_setenv("PWD", current_path);
 	free(current_path);
 }
 
-void		my_cd(char **cmd)
+void			my_cd(char **cmd)
 {
-	int		size;
-	
+	int			size;
+
 	size = ft_nb_line_array(cmd);
 	if (size > 2)
 	{
 		error_msg("minishell: ", "cd: ", "too many argument\n");
-		g_info.ret = ERROR_BASH;		
+		g_info.ret = ERROR_BASH;
 	}
 	else
 	{

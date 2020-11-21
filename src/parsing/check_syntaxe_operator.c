@@ -6,16 +6,17 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 18:38:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/20 17:06:23 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:27:21 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** the goal is to change type of token containt >> is to simple redirection 
+** the goal is to change type of token containt >> is to simple redirection
 ** become double redirection right
 */
+
 static t_bool		correction_redirection(t_token *token)
 {
 	int				size;
@@ -37,6 +38,7 @@ static t_bool		correction_redirection(t_token *token)
 /*
 **	double pipe || become type or
 */
+
 static int			correction_and_pipeline_semicolon(t_token *token)
 {
 	int				size;
@@ -61,14 +63,15 @@ static int			correction_and_pipeline_semicolon(t_token *token)
 
 static void			error_(char *value)
 {
-		error_msg("minishell: syntaxe error « ", value, "»\n");
-		g_info.ret = SYNTAXE_ERROR;
+	error_msg("minishell: syntaxe error « ", value, "»\n");
+	g_info.ret = SYNTAXE_ERROR;
 }
 
 /*
 ** two operator succesif it is an error
-** && >> , ; , >; ...  
+** && >> , ; , >; ...
 */
+
 int					check_op(t_list *list, t_token *token)
 {
 	if (ft_strlen(token->value) > 2)

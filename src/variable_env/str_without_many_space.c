@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 20:56:20 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/14 11:51:01 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:50:11 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static char			*need_new_str(t_token *token)
 ** example str = "a    b     c"
 ** str_whithout_many_space will return a string new_str = "a b c"
 */
-//1  2  3
 void				str_whithout_many_space(t_token *token)
 {
 	char			*new_str;

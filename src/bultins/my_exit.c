@@ -6,19 +6,20 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 14:31:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/16 17:04:54 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 18:33:33 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
+
 /*
 ** this function check the arguments of exit function
 */
-static int		check_arg(char *arg)
+
+static int			check_arg(char *arg)
 {
-	int nb;
-	int space;
+	int				nb;
+	int				space;
 
 	nb = 0;
 	space = 0;
@@ -39,9 +40,9 @@ static int		check_arg(char *arg)
 	return (SUCCESS);
 }
 
-void    	my_exit(char **cmd)
+void				my_exit(char **cmd)
 {
-	int		nb;
+	int				nb;
 
 	nb = g_info.ret;
 	if (cmd[1])
@@ -56,7 +57,7 @@ void    	my_exit(char **cmd)
 			nb = ft_atoi(cmd[1]);
 			if (nb <= 0 && ft_strlen(cmd[1]) > 14)
 			{
-				nb = 255; 
+				nb = 255;
 				error_msg("minishell: exit: ", cmd[1], ": numeric argument required\n");
 			}
 		}

@@ -50,13 +50,11 @@ void				btree_free_content(void *content);
 void				print_token_tab(void *ptr);
 void				build_ast(t_btree **btree_root, t_list **input);
 void				dealt_exec_cmd(t_btree *root);
-void				dealt_multiples_redirections(t_list *list);
 t_bool				is_right_side_redirection(t_token_type type);
 void				*get_token_value(t_token *token);
 void				redirections(t_btree *root);
 void				promp();
 void				the_pipelines(t_btree *root, int count, int backup_fd);
-void				parsing_input();
 void				swap_token(t_token *a, t_token *b);
 void				handle_signale_ctrl_c(int sig);
 void				handle_signale_quit(int sig);
@@ -73,5 +71,12 @@ void				print_tab(char **tab);
 int					check_if_var_exist(char *s1, char *s2);
 int					iter_list_3(t_list *list);
 t_list				*skipt_space(t_list *list);
+t_list				*find_next_literal(t_list *current);
+void				special_case_redirection(t_list *current);
+int					first_token_is_not_operator(t_token *token, int count);
+t_token				*multiple_redirection(t_token *token, t_token *save);
+ void				special_case_echo(t_list *list, t_token *token);
+int					count_backslash(t_list *list);
+int					check_last_token(t_list **list);
 
 #endif
