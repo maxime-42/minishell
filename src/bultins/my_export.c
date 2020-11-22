@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:07:39 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 18:38:03 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:12:40 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,6 @@ static t_list		*sort_var_env(t_list *tmp)
 		tmp = tmp->next;
 	}
 	return (sort_list);
-}
-
-/*
-** the name of variable must be composed of alphabet
-** name=value
-*/
-
-static int			check_syntaxe(char *str)
-{
-	int				r;
-	int				i;
-
-	i = -1;
-	if (str[0] == '=')
-	{
-		error_msg("minishell: export: `", str, "': not a valid identifier\n");
-		return (g_info.ret = ERROR_EXPORT);
-	}
-	while (str[++i] && str[i] != '=')
-	{
-		r = ft_isalnum(str[i]);
-		if (r == 0 && str[i] != '_')
-		{
-			error_msg("minishell: export: `", str, "': not a valid identifier\n");
-			g_info.ret = ERROR_EXPORT;
-			return (ERROR);
-		}
-	}
-	return (SUCCESS);
 }
 
 /*

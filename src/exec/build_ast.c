@@ -6,20 +6,11 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 15:35:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 16:47:33 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 15:49:29 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void			btree_init_node(t_btree **node, t_token *token)
-{
-	*node = ft_btree_create_node(token);
-	if (!*node)
-	{
-		exit(free_all(&g_info, ERROR));
-	}
-}
 
 static void			btree_insert(t_btree **root, t_token *token)
 {
@@ -45,6 +36,7 @@ static void			btree_insert(t_btree **root, t_token *token)
 ** the spaces is ignore
 ** agument it is type literal
 */
+
 static void			join_arg(t_list **list, t_token *token)
 {
 	t_list			*new;
@@ -59,12 +51,14 @@ static void			join_arg(t_list **list, t_token *token)
 }
 
 /*
-** the idea of this function consist to put all character string of linked list in tab
- **example :
-** 		linked list ls->a->b->c 
+** the idea of this function consist to put
+** all character string of linked list in tab
+** example :
+** 		linked list ls->a->b->c
 ** 		tab tab[0] = "ls", tab[1] = "a", tab[2]= "b" , tab[3] = "c"
 ** the function return tab
 */
+
 static char			**split_list_in_tab(t_list *tmp)
 {
 	int				size_tab;
@@ -85,22 +79,23 @@ static char			**split_list_in_tab(t_list *tmp)
 
 static void			btree_add_literal(t_list **list, void *ptr, t_btree **root)
 {
-	if (list)
+	if (*list)
 	{
 		ptr = split_list_in_tab(*list);
 		ft_lstclear(list, free_nothing);
 		ptr = (void *)create_token(ptr, literal);
 		btree_insert(root, ptr);
-	}	
+	}
 }
 
 /*
 ** take token who contains arguments then create node for that token
-** eache node contains token 
+** eache node contains token
 **  step one   :	join arguments then if the the are operator
 **	step two   :	put this arguments in token then create node for this token
 **	step three :	create node for operator
 */
+
 void				build_ast(t_btree **root, t_list **input)
 {
 	t_token			*token;

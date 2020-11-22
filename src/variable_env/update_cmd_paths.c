@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 14:33:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/14 11:58:03 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:54:49 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 ** call three 	=> path = "/usr/local/games/"
 ** ...
 */
+
 static char		*extract_path(char *value, char **path)
 {
 	int			size;
@@ -48,11 +49,12 @@ static char		*extract_path(char *value, char **path)
 /*
 ** this function creat linked list of path
 */
+
 void			update_cmd_path(t_info *info)
 {
 	char		*value;
 	char		*path;
-	t_list  	*new;
+	t_list		*new;
 
 	if (!info->list_env)
 		return ;

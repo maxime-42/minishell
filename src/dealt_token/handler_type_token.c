@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   handler_type_token.c							   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mkayumba <mkayumba@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2020/10/05 17:01:08 by user42			#+#	#+#			 */
-/*   Updated: 2020/11/18 21:24:05 by mkayumba		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handler_type_token.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/21 21:50:42 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/21 21:51:12 by mkayumba         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -16,10 +16,10 @@ void				swap_token(t_token *a, t_token *b)
 {
 	void			*value_a;
 	t_token_type	type_a;
-	
+
 	value_a = a->value;
 	type_a = a->type;
-	a->value = b->value; 
+	a->value = b->value;
 	a->type = b->type;
 	b->value = value_a;
 	b->type = type_a;

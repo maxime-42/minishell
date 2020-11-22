@@ -1,26 +1,26 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   free_all.c										 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mkayumba <mkayumba@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2020/08/22 18:20:17 by mkayumba		  #+#	#+#			 */
-/*   Updated: 2020/10/12 15:07:54 by mkayumba		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_all.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/21 22:26:22 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/21 22:28:31 by mkayumba         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				free_nothing(void *ptr)
+void			free_nothing(void *ptr)
 {
 	(void)ptr;
 }
 
-void	clear_token(void *content)
+void			clear_token(void *content)
 {
-   t_token  *token;
-   
+	t_token		*token;
+
 	if (!content)
 		return ;
 	token = (t_token *)content;
@@ -33,10 +33,10 @@ void	clear_token(void *content)
 	(void)content;
 }
 
-void	btree_free_content(void *content)
+void			btree_free_content(void *content)
 {
-   t_token  *token;
-   
+	t_token		*token;
+
 	if (!content)
 		return ;
 	token = (t_token *)content;
@@ -46,9 +46,8 @@ void	btree_free_content(void *content)
 	(void)content;
 }
 
-int free_all(t_info *info, int code_return)
+int				free_all(t_info *info, int code_return)
 {
-	// ft_btree_clear(info->root, &clear_token);
 	ft_lstclear(&info->list_input, &clear_token);
 	info->list_input = 0;
 	if (code_return == ERROR)
@@ -60,6 +59,5 @@ int free_all(t_info *info, int code_return)
 	info->list_path = 0;
 	free(info->tab_var_env);
 	info->tab_var_env = 0;
-	// return (code_return);
-	return (info->ret);// new instruction
+	return (info->ret);
 }

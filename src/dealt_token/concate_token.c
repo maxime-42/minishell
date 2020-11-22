@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:17:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/13 14:38:13 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:48:18 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 **  un nouveau token avec avec le type passer en parametre
 */
 
-static t_token	*concate_two_token(t_token *token_1, t_token *token_2, t_token_type type)
+static t_token	*concate_two_token(t_token *token_1, t_token *token_2,
+t_token_type type)
 {
 	char		*str_token1;
 	char		*str_token2;
@@ -36,11 +37,12 @@ static t_token	*concate_two_token(t_token *token_1, t_token *token_2, t_token_ty
 /*
 ** this function join all next closeness token who have the same type
 */
+
 void			concate_token_same_type(t_list **begin, t_token_type type)
 {
 	t_token		*tmp;
 	t_list		*to_del;
-	
+
 	while (begin && *begin && (*begin)->next)
 	{
 		if (get_token_type((*begin)->content) != type)

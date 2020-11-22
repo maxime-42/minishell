@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:53:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 13:34:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:29:39 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-static void				error_(char *file_name)
+static void			error_(char *file_name)
 {
 	ft_putstr_fd("minishell: ", 1);
 	ft_putstr_fd(file_name, 1);
@@ -86,7 +86,7 @@ void				redirections(t_btree *root)
 	int				fd;
 	t_token			*token;
 	int				redirection;
-	
+
 	redirection = 1;
 	token = root->content;
 	if (token->type == simple_redir_right)
@@ -103,7 +103,7 @@ void				redirections(t_btree *root)
 		dup2(fd, redirection);
 		close(fd);
 		dealt_exec_cmd(root->left);
-		exit (g_info.ret);
+		exit(g_info.ret);
 	}
 	wait(NULL);
 }

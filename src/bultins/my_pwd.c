@@ -1,16 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_pwd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/21 21:20:05 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/21 21:21:20 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <errno.h>
-
-static	void	error_(char *path)
-{
-	ft_putstr_fd("minishell: ", 1);
-	ft_putstr_fd("pwd: ", 1);
-	ft_putstr_fd(path, 1);
-	ft_putstr_fd(": ", 1);
-	ft_putstr_fd(strerror(errno), 1);
-	ft_putstr_fd("\n", 1);
-	g_info.ret = 127;
-}
 
 void			my_pwd(char **cmd)
 {
@@ -18,8 +19,10 @@ void			my_pwd(char **cmd)
 
 	if (ft_nb_line_array(cmd) == 1)
 	{
-	   	if (!(current_path = getcwd((char *)NULL, 0)))
-			error_(cmd[0]);
+		if (!(current_path = getcwd((char *)NULL, 0)))
+		{
+			g_info.ret = ERROR_BASH;
+		}
 		else
 		{
 			ft_putstr_fd(current_path, 1);
@@ -27,5 +30,5 @@ void			my_pwd(char **cmd)
 			g_info.ret = SUCCESS;
 		}
 	}
-	ft_putstr_fd("\n", 1); 
+	ft_putstr_fd("\n", 1);
 }

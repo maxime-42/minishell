@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 13:07:34 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/10 12:10:11 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:23:54 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,3 @@ void	handle_signale_ctrl_c(int sig)
 	ft_putstr_fd("\n->", 1);
 	(void)sig;
 }
-
-// void	handle_signale_quit(int sig)
-// {
-// 	g_info.ret = 131;
-// 	ft_putstr_fd("\n>", 0);
-// 	(void)sig;
-// }

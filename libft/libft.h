@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:54:21 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/17 17:52:35 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:59:53 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define LIBFT_H
 # include <string.h>
 # include <ctype.h>
-#define STOP 0
-#define CONTINUE 1
+# define STOP 0
+# define CONTINUE 1
 
 typedef enum		e_bool
 {

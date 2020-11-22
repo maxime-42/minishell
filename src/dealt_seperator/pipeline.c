@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:42:20 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/05 22:53:00 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:29:59 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void				the_pipelines(t_btree *root, int count, int backup_fd)
 {
 	int				fd[2];
 	int				pid;
-	
+
 	if (!root)
-		return;
+		return ;
 	pipe(fd);
 	if ((pid = fork()) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/14 12:23:29 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:55:48 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*
 ** Each character  will be identifier by one of these types
 */
+
 static	t_token			g_tab_token[] = {
 	{"&", and},
 	{"|", pipeline},
@@ -40,12 +41,13 @@ static	t_token			g_tab_token[] = {
 ** This function defines the type of token for the character inside token
 ** the type of token depend of table => g_tab_token
 */
-static	t_token_type	define_type(char charset)
+
+static t_token_type		define_type(char charset)
 {
 	int					i;
 	char				*str;
 	t_token_type		type;
-	
+
 	i = 0;
 	type = literal;
 	while (g_tab_token[i].value)
@@ -66,8 +68,8 @@ static	t_token_type	define_type(char charset)
 ** this function transforme input string in sequence of token
 ** This function puts each character of string input in token,
 ** then put this token in linked list
-** Step one get one character of the input string 
-** step two create token with this character 
+** Step one get one character of the input string
+** step two create token with this character
 ** step three add this token in linked list
 */
 
@@ -88,10 +90,10 @@ void					tokenizer(char *input)
 	ft_lstadd_back(&g_info.list_input, new);
 }
 
-void		promp()
+void					promp(void)
 {
-	char	buf[2];
-	int		r;
+	char				buf[2];
+	int					r;
 
 	g_info.list_input = 0;
 	buf[0] = '\0';

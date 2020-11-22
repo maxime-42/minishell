@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:27:02 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 16:48:49 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:53:40 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 /*
 ** if in put is $?
 */
+
 static void			if_is_var_status(char **value_var, char *value_token)
 {
 	if (!value_var[0][0])
 	{
-		if (!(ft_strcmp(value_token, "?")))	
+		if (!(ft_strcmp(value_token, "?")))
 		{
 			ft_free_string(value_var[0]);
 			value_var[0] = ft_itoa(g_info.ret);
 		}
 	}
 }
+
 /*
 **	le but de cette fonction de trouver la valeur d'une variable
 **	dans le tableau qui contient  les variable environementaz
@@ -38,6 +40,7 @@ static void			if_is_var_status(char **value_var, char *value_token)
 **		aller chercher la string USER dans le tableau qui contient
 **		les variable environement
 */
+
 int					interpret_variable(t_list **current)
 {
 	t_token_type	type;

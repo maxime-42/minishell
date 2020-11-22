@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 16:07:39 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 15:49:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool			dealt_separator(t_list **input_list, int ret)
 {
-	t_token 	*token;
+	t_token		*token;
 
 	if (!*input_list)
 		return (false);
@@ -32,17 +32,19 @@ t_bool			dealt_separator(t_list **input_list, int ret)
 	}
 	return (true);
 }
+
 /*
 ** 1-2-&&-3-4
 **if nb_cmd == 0 this function will return un ptr on 1
 ** if nb_cmd == 1 this function will return pointer on 3
 */
+
 t_list			*get_next_cmd(int nb_cmd)
 {
 	t_list		*tmp;
 	t_token		*token;
 	int			count;
-	
+
 	count = 0;
 	tmp = g_info.list_input;
 	while (nb_cmd && tmp)
@@ -70,7 +72,7 @@ static int		parsing(t_list *cmd, int nb_cmd)
 	return (SUCCESS);
 }
 
-void			btree_of_cmd()
+void			btree_of_cmd(void)
 {
 	t_btree		*root;
 	int			nb_cmd;
@@ -83,10 +85,14 @@ void			btree_of_cmd()
 		root = 0;
 		if (parsing(cmd, nb_cmd) == ERROR)
 			return ;
-		cmd = get_next_cmd(nb_cmd);
-		// ft_lstiter(cmd, print_token);
+		// ft_lstiter(g_info.list_input, print_token);
 		// return ;
+		cmd = get_next_cmd(nb_cmd);
 		build_ast(&root, &cmd);
+		// if (root)
+		// {
+		// 	printf("root n'est pas null\n");
+		// }
 		g_info.ptr = root;
 		dealt_exec_cmd(root);
 		ft_btree_clear(root, &btree_free_content);

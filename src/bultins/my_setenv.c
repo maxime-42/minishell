@@ -6,21 +6,22 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 14:04:59 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/17 17:30:17 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:23:36 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 /*
 ** check if the variable already exist in the enrinement
 */
+
 int					check_if_var_exist(char *s1, char *s2)
 {
 	int				size;
 
 	size = 0;
-	if(!s2[size])
+	if (!s2[size])
 		return (1);
 	while (s1[size] && s1[size] != '=')
 	{

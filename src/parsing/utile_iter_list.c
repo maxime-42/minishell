@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:13:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 18:35:39 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:42:56 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,8 @@ int					first_token_is_not_operator(t_token *token, int count)
 {
 	if (!count && is_operator(token->type) == true)
 	{
-		g_info.ret = ERROR_BASH;
-		ft_putstr_fd("minishell: erreur de syntaxe près	du symbole inattendu « ", 1);
-		ft_putstr_fd(token->value, 1);
-		ft_putstr_fd(" »\n", 1);
+		g_info.ret = SYNTAXE_ERROR;
+		error_msg("minishell: erreur de syntaxe « ", token->value, " »\n");
 		return (ERROR);
 	}
 	return (SUCCESS);

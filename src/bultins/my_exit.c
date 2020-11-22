@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 14:31:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 18:33:33 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:08:18 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ static int			check_arg(char *arg)
 	return (SUCCESS);
 }
 
+static int			err_(char **cmd)
+{
+	error_msg("minishell: exit: ", cmd[1], ": numeric argument required\n");
+	return (255);
+}
+
 void				my_exit(char **cmd)
 {
 	int				nb;
@@ -49,16 +55,14 @@ void				my_exit(char **cmd)
 	{
 		if (check_arg(cmd[1]) == ERROR)
 		{
-			error_msg("minishell: exit: ", cmd[1], ": numeric argument required\n");
-			nb = 255;
+			nb = err_(cmd);
 		}
 		else
 		{
 			nb = ft_atoi(cmd[1]);
 			if (nb <= 0 && ft_strlen(cmd[1]) > 14)
 			{
-				nb = 255;
-				error_msg("minishell: exit: ", cmd[1], ": numeric argument required\n");
+				nb = err_(cmd);
 			}
 		}
 	}

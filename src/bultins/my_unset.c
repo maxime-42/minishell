@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 18:41:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/18 21:15:10 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:25:24 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		cmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	if(!s2[i])
+	if (!s2[i])
 		return (1);
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 	{
@@ -26,7 +26,7 @@ static int		cmp(char *s1, char *s2)
 	return ((s2[i] == '=' || !s2[i]) ? 0 : 1);
 }
 
-static  void	error_(char *str)
+static void		error_(char *str)
 {
 	error_msg("minishell: unset: `", str, "': not a valid identifier\n");
 	g_info.ret = ERRR0R_UNSET_VAR;
