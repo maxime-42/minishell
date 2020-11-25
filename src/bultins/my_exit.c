@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 14:31:13 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/24 13:46:15 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 14:07:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,11 @@ void				my_exit(char **cmd)
 	if (cmd[1])
 	{
 		if (check_arg(cmd[1]) == ERROR)
-		{
 			nb = err_(cmd);
-		}
 		else
 		{
 			nb = ft_atoi(cmd[1]);
+			nb = nb % 256;
 			if (nb <= 0 && ft_strlen(cmd[1]) > 14)
 			{
 				nb = err_(cmd);

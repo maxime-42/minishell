@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:13:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/25 12:19:46 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 14:06:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,25 +79,13 @@ t_token				*multiple_redirection(t_token *token, t_token *save)
 ** if i have something like "> 1 2" this function transforme it "1 > 2"
 */
 
-// void				special_case_redirection(t_list *current, t_list *next_literal, t_list *after_next_literal)
-// {
-// 	next_literal = find_next_literal(current->next);
-// 	if (next_literal)
-// 		after_next_literal = find_next_literal(next_literal->next);
-
-// }
-
-/*
-** if i have something like "> 1 2" this function transforme it "1 > 2"
-*/
-
 t_list				*special_case_echo(t_list *list, t_token *token)
 {
 	t_bool			bool;
 	t_token			*token_2;
 	t_list			*next_literal;
 	t_list			*after_next_literal;
-	
+
 	bool = is_right_side_redirection(token->type);
 	if (bool != true)
 		return (list);
