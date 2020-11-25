@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/22 15:49:44 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:20:54 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,18 @@ static int		parsing(t_list *cmd, int nb_cmd)
 	return (SUCCESS);
 }
 
+void			special_case_redirection(t_list *current)
+{
+	t_list			*next_literal;
+	t_list			*after_next_literal;
+
+	next_literal = find_next_literal(current->next);
+	if (next_literal)
+		after_next_literal = find_next_literal(next_literal->next);
+	swap_token(next_literal->content, after_next_literal->content);
+	swap_token(current->content, next_literal->content);
+}
+
 void			btree_of_cmd(void)
 {
 	t_btree		*root;
@@ -85,14 +97,10 @@ void			btree_of_cmd(void)
 		root = 0;
 		if (parsing(cmd, nb_cmd) == ERROR)
 			return ;
-		// ft_lstiter(g_info.list_input, print_token);
-		// return ;
 		cmd = get_next_cmd(nb_cmd);
+		// ft_lstiter(cmd, print_token);
+		// return ;
 		build_ast(&root, &cmd);
-		// if (root)
-		// {
-		// 	printf("root n'est pas null\n");
-		// }
 		g_info.ptr = root;
 		dealt_exec_cmd(root);
 		ft_btree_clear(root, &btree_free_content);

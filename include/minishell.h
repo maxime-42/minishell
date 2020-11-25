@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 15:02:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/22 15:05:18 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 00:11:15 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_list				*find_next_literal(t_list *current);
 void				special_case_redirection(t_list *current);
 int					first_token_is_not_operator(t_token *token, int count);
 t_token				*multiple_redirection(t_token *token, t_token *save);
-void				special_case_echo(t_list *list, t_token *token);
+t_list				*special_case_echo(t_list *list, t_token *token);
 int					count_backslash(t_list *list);
 int					check_last_token(t_list **list);
 void				promp(void);

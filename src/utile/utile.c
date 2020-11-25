@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 16:59:24 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/22 15:38:05 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 00:09:20 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
 void    print_token(void *ptr)
 {
     t_token *token;
@@ -23,9 +24,21 @@ void    print_token(void *ptr)
 		return ;
     token = (t_token *)ptr;
     array = (char *)token->value;
-	// printf("[%s] ", array);
-
 	printf("[%s] type: [%d]\n", array, token->type);
+}
+
+
+void				print_tab(char **tab)
+{
+	int				i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		printf("tab => [%s]\n", tab[i++]);
+	}
 }
 
 void			error_msg(char *cmd_name, char *arg, char *msg)
@@ -68,20 +81,4 @@ t_bool			check_permission(char *cmd)
 		bool = false;
 	}
 	return (bool);
-}
-
-t_list			*skipt_space(t_list *list)
-{
-	t_token		*token;
-
-	while (list)
-	{
-		token = list->content;
-		if (token->type != space)
-		{
-			return (list);
-		}
-		list = list->next;
-	}
-	return (0);
 }

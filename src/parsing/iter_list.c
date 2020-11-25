@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 17:11:06 by lenox            ###   ########.fr       */
+/*   Updated: 2020/11/25 12:20:55 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int					iter_list_2(t_list *tmp)
 		token = tmp->content;
 		if (is_separator(token->type))
 			return (true);
-		if (!count && is_right_side_redirection(token->type) == true)
-			special_case_redirection(tmp);
 		if (first_token_is_not_operator(token, count) == ERROR)
 			return (ERROR);
 		if (token->type != space)
@@ -80,8 +78,8 @@ int					iter_list_3(t_list *list)
 			return (SUCCESS);
 		if (token->type != space)
 		{
-			special_case_echo(list, token);
-			save = multiple_redirection(token, save);
+			list = special_case_echo(list, token);
+			save = multiple_redirection(list->content, save);
 		}
 		list = list->next;
 	}

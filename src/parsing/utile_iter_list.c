@@ -6,11 +6,15 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:13:09 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/22 14:42:56 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:19:46 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** this function return next token and ignore token type space
+*/
 
 t_list				*find_next_literal(t_list *current)
 {
@@ -19,27 +23,11 @@ t_list				*find_next_literal(t_list *current)
 	while (current)
 	{
 		type = get_token_type(current->content);
-		if (type == literal)
+		if (type != space)
 			return (current);
 		current = current->next;
 	}
 	return (0);
-}
-
-/*
-** if i have something like "> 1 2" this function transforme it "1 > 2"
-*/
-
-void				special_case_redirection(t_list *current)
-{
-	t_list			*next_literal;
-	t_list			*after_next_literal;
-
-	next_literal = find_next_literal(current->next);
-	if (next_literal)
-		after_next_literal = find_next_literal(next_literal->next);
-	swap_token(next_literal->content, after_next_literal->content);
-	swap_token(current->content, next_literal->content);
 }
 
 /*
@@ -52,7 +40,10 @@ void				special_case_redirection(t_list *current)
 
 int					first_token_is_not_operator(t_token *token, int count)
 {
-	if (!count && is_operator(token->type) == true)
+	t_bool			bool;
+
+	bool = is_right_side_redirection(token->type);
+	if (bool != true && !count && is_operator(token->type) == true)
 	{
 		g_info.ret = SYNTAXE_ERROR;
 		error_msg("minishell: erreur de syntaxe « ", token->value, " »\n");
@@ -85,25 +76,41 @@ t_token				*multiple_redirection(t_token *token, t_token *save)
 }
 
 /*
-** if i have echo > file_name msg
-** it become echo msg > file_name
+** if i have something like "> 1 2" this function transforme it "1 > 2"
 */
 
-void				special_case_echo(t_list *list, t_token *token)
-{
-	int				ret;
-	t_bool			bool;
+// void				special_case_redirection(t_list *current, t_list *next_literal, t_list *after_next_literal)
+// {
+// 	next_literal = find_next_literal(current->next);
+// 	if (next_literal)
+// 		after_next_literal = find_next_literal(next_literal->next);
 
-	ret = ft_strcmp("echo", token->value);
-	if (ret)
-		return ;
-	list = skipt_space(list->next);
-	if (list)
-	{
-		token = list->content;
-		bool = is_right_side_redirection(token->type);
-		if (bool != true)
-			return ;
-		special_case_redirection(list);
-	}
+// }
+
+/*
+** if i have something like "> 1 2" this function transforme it "1 > 2"
+*/
+
+t_list				*special_case_echo(t_list *list, t_token *token)
+{
+	t_bool			bool;
+	t_token			*token_2;
+	t_list			*next_literal;
+	t_list			*after_next_literal;
+	
+	bool = is_right_side_redirection(token->type);
+	if (bool != true)
+		return (list);
+	next_literal = find_next_literal(list->next);
+	if (next_literal)
+		after_next_literal = find_next_literal(next_literal->next);
+	if (!after_next_literal)
+		return (list);
+	token = next_literal->content;
+	token_2 = after_next_literal->content;
+	if (token->type != literal || token_2->type != literal)
+		return (list);
+	swap_token(next_literal->content, after_next_literal->content);
+	swap_token(list->content, next_literal->content);
+	return ((list->prev) ? list->prev : list);
 }

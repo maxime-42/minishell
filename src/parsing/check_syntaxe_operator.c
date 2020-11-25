@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 18:38:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 17:27:21 by lenox            ###   ########.fr       */
+/*   Updated: 2020/11/25 00:15:05 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int					check_op(t_list *list, t_token *token)
 		error_(token->value);
 		return (ERROR);
 	}
-	list = skipt_space(list->next);
+	list = find_next_literal(list->next);
 	if (!list)
 	{
 		error_(token->value);
