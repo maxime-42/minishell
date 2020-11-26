@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 15:02:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/25 00:11:15 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:30:35 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void				my_export(char **cmd);
 void				my_unset(char **cmd);
 void				my_env(char **cmd);
 void				my_exit(char **my_exit);
-void				update_cmd_path(t_info *info);
 void				update_tab_var_env(t_list *list_env);
 pid_t				create_process(void);
 void				exec_cmd_syst(t_info *info, char **cmd);
@@ -91,5 +90,5 @@ void				btree_of_cmd(void);
 void				btree_init_node(t_btree **node, t_token *token);
 t_bool				check_permission(char *cmd);
 int					check_syntaxe(char *str);
-
+t_bool				get_absolut_path(char **cmd);
 #endif

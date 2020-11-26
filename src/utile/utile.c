@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 16:59:24 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/25 00:09:20 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:37:38 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,43 @@ void			btree_init_node(t_btree **node, t_token *token)
 	}
 }
 
-t_bool			check_permission(char *cmd)
+static t_bool	is_executable(struct stat	permstat, char *name)
 {
-	struct stat	permstat;
 	t_bool		bool;
 
-	ft_bzero(&permstat, sizeof(struct stat));
-	stat(cmd, &permstat);
 	bool = true;
 	if ((permstat.st_mode & S_IFMT) == S_IFREG)
 	{
 		if ((permstat.st_mode & S_IXUSR) == 0)
 		{
-			error_msg("minishell: ", cmd, ": Permission denied\n");
+			error_msg("minishell: ", name, ": Permission denied\n");
 			g_info.ret = PERMISSION_DENIED;
 			bool = false;
 		}
 	}
 	else if ((permstat.st_mode & S_IFMT) == S_IFDIR)
 	{
-		error_msg("minishell: ", cmd, ": Is a directory\n");
+		error_msg("minishell: ", name, ": Is a directory\n");
 		g_info.ret = PERMISSION_DENIED;
 		bool = false;
 	}
+	return (bool);
+}
+
+t_bool			check_permission(char *cmd)
+{
+	struct stat	permstat;
+	t_bool		bool;
+	int			ret;
+	
+	ft_bzero(&permstat, sizeof(struct stat));
+	ret = stat(cmd, &permstat);
+	if (ret == ERROR)
+	{
+		error_msg("minishell: ", cmd, ": command not found\n");
+		g_info.ret = ERROR_BASH;
+		return (false);
+	}
+	bool = is_executable(permstat, cmd);
 	return (bool);
 }

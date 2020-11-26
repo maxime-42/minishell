@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:54:21 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/22 14:59:53 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 14:27:48 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ void				ft_btree_insert_data(t_btree **root, void *item,
 void				ft_btree_dfs_inorder(t_btree *root,
 					void (*ptr_function)());
 void				ft_double_array_iter(char **array, void (*fct)());
+char				*ft_strrchr(char *s, int c);
 
 #endif

@@ -82,6 +82,7 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./ft_strchr.c\
 			./ft_btree_dfs.c\
 			./ft_init_tab.c\
+			./ft_strrchr.c\
 
 MANDATORY_SRCS	=	${MANDATORY}
 

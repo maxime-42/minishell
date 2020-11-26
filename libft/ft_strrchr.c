@@ -6,13 +6,13 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 16:03:17 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/25 16:03:36 by lenox            ###   ########.fr       */
+/*   Updated: 2020/11/26 14:27:38 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
+char	*ft_strrchr(char *s, int c)
 {
 	int index_s;
 

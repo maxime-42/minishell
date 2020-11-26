@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/25 14:01:20 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/25 14:30:23 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ static int		parsing(t_list *cmd, int nb_cmd)
 		return (ERROR);
 	return (SUCCESS);
 }
-
-// void			special_case_redirection(t_list *current)
-// {
-// 	t_list			*next_literal;
-// 	t_list			*after_next_literal;
-
-// 	next_literal = find_next_literal(current->next);
-// 	if (next_literal)
-// 		after_next_literal = find_next_literal(next_literal->next);
-// 	swap_token(next_literal->content, after_next_literal->content);
-// 	swap_token(current->content, next_literal->content);
-// }
 
 void			btree_of_cmd(void)
 {
