@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 17:58:32 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:03:40 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void					promp(void)
 			else
 				buf[r] = '\0';
 		}
-		else
+		else if (buf[0] != '\n')
 			tokenizer(buf);
 	}
 }

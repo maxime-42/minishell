@@ -6,26 +6,50 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:07:39 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/22 14:12:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:23:25 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// static void			print_env(void *content)
+// {
+// 	ft_putstr_fd("declare -x ", 1);
+// 	if (ft_strchr((char *)content, '='))
+// 	{
+// 		ft_putstr_fd("\"", 1);
+// 		ft_putstr_fd((char *)content, 1);
+// 		ft_putstr_fd("\"", 1);
+// 		ft_putstr_fd("\n", 1);
+// 	}
+// 	else
+// 	{
+// 		ft_putstr_fd((char *)content, 1);
+// 	}
+// 	(void)content;
+// }
+
+
 static void			print_env(void *content)
 {
+	char			*str;
+	int				i;
+
+	i = -1;
 	ft_putstr_fd("declare -x ", 1);
 	if (ft_strchr((char *)content, '='))
 	{
-		ft_putstr_fd("\"", 1);
-		ft_putstr_fd((char *)content, 1);
+		str = content;
+		while (str[++i] != '=')
+			ft_putchar_fd(str[i], 1);
+		i++;
+		ft_putstr_fd("=\"", 1);
+		ft_putstr_fd(str + i, 1);
 		ft_putstr_fd("\"", 1);
 		ft_putstr_fd("\n", 1);
 	}
 	else
-	{
 		ft_putstr_fd((char *)content, 1);
-	}
 	(void)content;
 }
 
