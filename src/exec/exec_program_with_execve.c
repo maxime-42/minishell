@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 14:37:13 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 17:53:22 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			father_process(t_info *info, int child_pid)
 	int			child_status;
 
 	child_status = 0;
+	signal(SIGINT, SIG_IGN);
 	wait(&child_status);
 	if (WIFSIGNALED(child_status))
 	{
@@ -74,8 +75,13 @@ void			exec_cmd_syst(t_info *info, char **cmd)
 	if (bool == false)
 		return ;
 	if ((pid = fork()) == 0)
+	{
+		// signal(SIGQUIT, SIG_DFL);
 		child_process(info, cmd);
+	}
 	else
+	{
 		father_process(info, pid);
+	}
 	(void)bool;
 }

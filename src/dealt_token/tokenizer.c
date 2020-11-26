@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 21:55:48 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/26 17:58:32 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ void					promp(void)
 		if (buf[0] == CTRL_D)
 		{
 			if (!g_info.list_input)
+			{
+				ft_putstr_fd("exit\n", 1);
 				exit(free_all(&g_info, ERROR));
+			}
 			else
 				buf[r] = '\0';
 		}

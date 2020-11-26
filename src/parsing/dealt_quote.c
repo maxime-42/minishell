@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:58:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/21 17:32:28 by lenox            ###   ########.fr       */
+/*   Updated: 2020/11/26 16:41:01 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int			iter_list(t_list *tmp, t_token_type type_quote)
 		tmp = tmp->next;
 	}
 	error_msg("minishel : ", "missing quote", "around string\n");
-	g_info.ret = ERROR_BASH;
+	g_info.ret = SYNTAXE_ERROR;
 	return (ERROR);
 }
 
