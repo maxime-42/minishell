@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 15:02:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 12:14:16 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:00:04 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int					iter_list_2(t_list *tmp);
 int					interpret_variable(t_list **current);
 void				str_whithout_many_space(t_token *token);
 void				error_msg(char *cmd_name, char *arg, char *msg);
-void				interpret_backslashe(t_list **list, t_bool in_quote);
 void				print_tab(char **tab);
 int					check_if_var_exist(char *s1, char *s2);
 int					iter_list_3(t_list *list);
@@ -91,4 +90,6 @@ void				btree_init_node(t_btree **node, t_token *token);
 t_bool				check_permission(char *cmd);
 int					check_syntaxe(char *str);
 char				*get_absolut_path(char **cmd);
+int					interpret_backslashe(t_list **list, t_bool in_quote);
+t_list				*node_after_back_backslash(t_list *list, int nb_backslash);
 #endif

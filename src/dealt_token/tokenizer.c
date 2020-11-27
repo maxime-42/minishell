@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 18:03:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:22:53 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ void					promp(void)
 {
 	char				buf[2];
 	int					r;
+	int					i;
 
-	g_info.list_input = 0;
+	i = 0;
 	buf[0] = '\0';
 	ft_putstr_fd("->", 1);
 	while (buf[0] != '\n')
@@ -113,6 +114,11 @@ void					promp(void)
 				buf[r] = '\0';
 		}
 		else if (buf[0] != '\n')
+		{
+			i++;
+			if (i == 1)
+				tokenizer(" ");
 			tokenizer(buf);
+		}
 	}
 }

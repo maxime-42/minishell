@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 18:38:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 13:56:57 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 14:02:20 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int					check_op(t_list *list, t_token *token)
 	list = find_next_literal(list->next);
 	if (!list)
 	{
-		// printf("quel by\n");
 		error_(token->value);
 		return (ERROR);
 	}

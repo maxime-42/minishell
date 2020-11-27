@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 12:58:11 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 16:41:01 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 14:54:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static int			iter_list(t_list *tmp, t_token_type type_quote)
 			return (SUCCESS);
 		if (type_quote == double_quote)
 		{
-			interpret_backslashe(&tmp, false);
+			if (interpret_backslashe(&tmp, false) == ERROR)
+				return (ERROR);
 			interpret_variable(&tmp);
 		}
 		token = tmp->content;

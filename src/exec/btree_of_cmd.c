@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 13:53:43 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:34:30 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static t_bool			dealt_separator(t_list **input_list, int ret)
 	if (!*input_list)
 		return (false);
 	token = (*input_list)->content;
-	// print_token(token);
 	*input_list = (*input_list)->next;
 	if (token->type == and)
 	{

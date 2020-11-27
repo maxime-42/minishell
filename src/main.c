@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 17:11:11 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:35:38 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void    print_env(void *content)
     }
 }
 
-int             main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
     g_info.list_env = init_env(env);
     g_info.list_path = 0;
+	g_info.list_input = 0;
+
 	g_info.ret = 0;
 	g_info.tab_var_env = 0;
 	if (ac == 3)
@@ -61,7 +63,6 @@ int             main(int ac, char **av, char **env)
 	}
 	else
 	{
-		// ft_lstiter(g_info.list_env , print_env);
 		while (1)
 		{
 			signal(SIGINT, &handle_signale_ctrl_c);

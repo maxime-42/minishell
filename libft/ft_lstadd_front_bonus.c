@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:46:32 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/09/09 13:51:36 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 15:47:13 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ void	ft_lstadd_front(t_list **alst, t_list *new)
 {
 	if (alst)
 		new->next = *alst;
+	else
+		new->next = 0;
+	*alst = new;
+}
+
+void	ft_dlstadd_front(t_list **alst, t_list *new)
+{
+	if (alst)
+	{
+		new->next = *alst;
+		(*alst)->prev = new;
+	}
 	else
 		new->next = 0;
 	*alst = new;
