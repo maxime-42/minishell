@@ -6,29 +6,11 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:07:39 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 18:23:25 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 12:04:25 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static void			print_env(void *content)
-// {
-// 	ft_putstr_fd("declare -x ", 1);
-// 	if (ft_strchr((char *)content, '='))
-// 	{
-// 		ft_putstr_fd("\"", 1);
-// 		ft_putstr_fd((char *)content, 1);
-// 		ft_putstr_fd("\"", 1);
-// 		ft_putstr_fd("\n", 1);
-// 	}
-// 	else
-// 	{
-// 		ft_putstr_fd((char *)content, 1);
-// 	}
-// 	(void)content;
-// }
-
 
 static void			print_env(void *content)
 {
@@ -37,7 +19,8 @@ static void			print_env(void *content)
 
 	i = -1;
 	ft_putstr_fd("declare -x ", 1);
-	if (ft_strchr((char *)content, '='))
+	str = ft_strchr((char *)content, '=');
+	if (str)
 	{
 		str = content;
 		while (str[++i] != '=')

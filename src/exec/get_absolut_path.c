@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:26:33 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 13:59:54 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 12:14:32 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char			*get_path(char **tab_dir, char *file)
 ** this function get absolut path of commande
 */
 
-t_bool				get_absolut_path(char **cmd)
+char				*get_absolut_path(char **cmd)
 {
 	char			*value;
 	char			**tab_dir;
@@ -90,11 +90,11 @@ t_bool				get_absolut_path(char **cmd)
 	path_absolut = get_path(tab_dir, cmd[0]);
 	// print_tab(tab_dir);
 	// printf("cmd = [%s]  path_abs =  [%s]\n", cmd[0], path_absolut);
-	if (path_absolut)
-	{
-		ft_strdel(&cmd[0]);
-		cmd[0] = path_absolut;
-	}
+	// if (path_absolut)
+	// {
+	// 	ft_strdel(&cmd[0]);
+	// 	cmd[0] = path_absolut;
+	// }
 	ft_free_double_array(tab_dir);
-	return ((path_absolut) ? true : false);
+	return (path_absolut);
 }

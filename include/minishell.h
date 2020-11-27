@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 15:02:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 14:30:35 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 12:14:16 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void				btree_of_cmd(void);
 void				btree_init_node(t_btree **node, t_token *token);
 t_bool				check_permission(char *cmd);
 int					check_syntaxe(char *str);
-t_bool				get_absolut_path(char **cmd);
+char				*get_absolut_path(char **cmd);
 #endif
