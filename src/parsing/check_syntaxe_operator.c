@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 18:38:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/25 00:15:05 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 13:56:57 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void			error_(char *value)
 
 /*
 ** two operator succesif it is an error
-** && >> , ; , >; ...
+** && >> , ; , >; etc...
 */
 
 int					check_op(t_list *list, t_token *token)
@@ -82,6 +82,7 @@ int					check_op(t_list *list, t_token *token)
 	list = find_next_literal(list->next);
 	if (!list)
 	{
+		// printf("quel by\n");
 		error_(token->value);
 		return (ERROR);
 	}
@@ -93,10 +94,13 @@ int					check_op(t_list *list, t_token *token)
 	}
 	return (SUCCESS);
 }
-
+/*
+** "if (!tmp && token->type != semicolon)" example : "pwd;" is not error
+*/
 int					correction_syntaxe_operator(t_list *list, t_token *token)
 {
 	int				code_err;
+	t_list			*tmp;
 
 	code_err = SUCCESS;
 	if (is_operator(token->type) == true)
@@ -109,7 +113,9 @@ int					correction_syntaxe_operator(t_list *list, t_token *token)
 			code_err = correction_redirection(token);
 		else if (token->type == simple_redir_left)
 			code_err = correction_redirection(token);
-		code_err = check_op(list, token);
+		tmp = find_next_literal(list->next);
+		if (!tmp && token->type != semicolon)
+			code_err = check_op(list, token);
 	}
 	return (code_err);
 }

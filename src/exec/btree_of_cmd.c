@@ -6,19 +6,20 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/25 14:30:23 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 13:53:43 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool			dealt_separator(t_list **input_list, int ret)
+static t_bool			dealt_separator(t_list **input_list, int ret)
 {
 	t_token		*token;
 
 	if (!*input_list)
 		return (false);
 	token = (*input_list)->content;
+	// print_token(token);
 	*input_list = (*input_list)->next;
 	if (token->type == and)
 	{
