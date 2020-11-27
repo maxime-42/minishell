@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 17:22:53 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 18:11:54 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,17 @@ void					tokenizer(char *input)
 	ft_lstadd_back(&g_info.list_input, new);
 }
 
+static void				handler_ctrl_d(char *buf, int r)
+{
+	if (!g_info.list_input)
+	{
+		ft_putstr_fd("exit\n", 1);
+		exit(free_all(&g_info, ERROR));
+	}
+	else
+		buf[r] = '\0';	
+}
+
 void					promp(void)
 {
 	char				buf[2];
@@ -104,15 +115,7 @@ void					promp(void)
 		r = read(0, buf, 1);
 		buf[r] = '\0';
 		if (buf[0] == CTRL_D)
-		{
-			if (!g_info.list_input)
-			{
-				ft_putstr_fd("exit\n", 1);
-				exit(free_all(&g_info, ERROR));
-			}
-			else
-				buf[r] = '\0';
-		}
+			handler_ctrl_d(buf, r);
 		else if (buf[0] != '\n')
 		{
 			i++;
