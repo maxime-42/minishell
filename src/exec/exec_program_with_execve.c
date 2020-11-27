@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 14:45:38 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 18:22:26 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 19:00:43 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			father_process(t_info *info, int child_pid)
 	wait(&child_status);
 	if (WIFSIGNALED(child_status))
 	{
-		ft_putstr_fd("->\n", 2);
+		ft_putstr_fd("\n", 2);
 		g_info.ret = WTERMSIG(child_status);
 	}
 	if (WIFEXITED(child_status))
