@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 16:59:24 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 23:23:21 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:59:05 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-void    print_token(void *ptr)
-{
-    t_token *token;
-    char    *array;
-
-	if (!ptr)
-		return ;
-    token = (t_token *)ptr;
-    array = (char *)token->value;
-	printf("[%s] type: [%d]\n", array, token->type);
-}
-
-
-void				print_tab(char **tab)
-{
-	int				i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		printf("tab => [%s]\n", tab[i++]);
-	}
-}
 
 void			error_msg(char *cmd_name, char *arg, char *msg)
 {
@@ -85,7 +59,7 @@ t_bool			check_permission(char *cmd)
 	struct stat	permstat;
 	t_bool		bool;
 	int			ret;
-	
+
 	ft_bzero(&permstat, sizeof(struct stat));
 	ret = stat(cmd, &permstat);
 	if (ret == ERROR)
