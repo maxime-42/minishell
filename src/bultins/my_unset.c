@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 18:41:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/28 01:51:42 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 12:40:17 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void		error_(char *str)
 	int r;
 
 	i = -1;
+	if (!ft_isalpha(str[0]))
+		return (ERROR);
 	while (str[++i])
 	{
 		r = ft_isalnum(str[i]);
@@ -59,8 +61,6 @@ void			my_unset(char **cmd)
 	begin = g_info.list_env;
 	while (cmd[++index])
 	{
-		// if (ft_strchr(cmd[index], '='))
-		// printf("index = [%d]\n", index);
 		if (check(cmd[index]) == ERROR)
 			error_(cmd[index]);
 		else if ((to_del = ft_list_find(begin, cmd[index], cmp)))
@@ -70,7 +70,6 @@ void			my_unset(char **cmd)
 		}
 		else
 			g_info.ret = SUCCESS;
-		// 	error_(cmd[index]);
 	}
 }
 
