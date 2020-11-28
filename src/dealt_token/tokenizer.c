@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:31:18 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 18:11:54 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:30:29 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void				handler_ctrl_d(char *buf, int r)
 		exit(free_all(&g_info, ERROR));
 	}
 	else
-		buf[r] = '\0';	
+		buf[r] = '\0';
 }
 
 void					promp(void)

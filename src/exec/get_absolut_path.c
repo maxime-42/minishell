@@ -6,17 +6,18 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 15:26:33 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 12:14:32 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:36:22 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include "minishell.h"
+
 /*
-** the is to find path absolut of commande 
+** the is to find path absolut of commande
 ** if i have "ls" the path absolut is "/bin/ls"
 ** for find path absolut
-** step one find directory of file 
+** step one find directory of file
 ** step two join name direcatory and the name file "/bin/" "ls"
 ** step three return the join string
 */
@@ -24,9 +25,10 @@
 /*
 ** this function find directory of file "file_to_search"
 */
+
 static char			*find_dir(char *name_dir, char *file_to_search)
 {
- 	DIR				*folder;
+	DIR				*folder;
 	struct dirent	*entry;
 
 	folder = opendir(name_dir);
@@ -36,7 +38,6 @@ static char			*find_dir(char *name_dir, char *file_to_search)
 	{
 		if (!ft_strcmp(entry->d_name, file_to_search))
 		{
-		// printf("entry->d_name = [%s] | file_to_search = [%s] | name_dir [%s]\n", entry->d_name, file_to_search, name_dir);
 			closedir(folder);
 			return (name_dir);
 		}
@@ -48,6 +49,7 @@ static char			*find_dir(char *name_dir, char *file_to_search)
 /*
 **this function join name directory and file name
 */
+
 static char			*get_path(char **tab_dir, char *file)
 {
 	int				index;
@@ -84,17 +86,10 @@ char				*get_absolut_path(char **cmd)
 		g_info.ret = ERROR_BASH;
 		return (false);
 	}
-	tab_dir =  ft_split(value, ":");
+	tab_dir = ft_split(value, ":");
 	if (!tab_dir)
 		return (false);
 	path_absolut = get_path(tab_dir, cmd[0]);
-	// print_tab(tab_dir);
-	// printf("cmd = [%s]  path_abs =  [%s]\n", cmd[0], path_absolut);
-	// if (path_absolut)
-	// {
-	// 	ft_strdel(&cmd[0]);
-	// 	cmd[0] = path_absolut;
-	// }
 	ft_free_double_array(tab_dir);
 	return (path_absolut);
 }

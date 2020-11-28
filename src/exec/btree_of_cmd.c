@@ -6,13 +6,13 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 22:17:00 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:31:54 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool			dealt_separator(t_list **input_list, int ret)
+static t_bool	dealt_separator(t_list **input_list, int ret)
 {
 	t_token		*token;
 
