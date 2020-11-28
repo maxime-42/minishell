@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 12:43:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/24 16:30:22 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 12:57:09 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void			change_directory(char *go_to_path)
 static char			*path_is_variable(char *path)
 {
 	char			*go_to;
-	
+
 	if (path && path[0] == '-')
 		go_to = duplique_value_variable(g_info.list_env, "OLDPWD");
 	if (!path || path[0] == '~' || path[0] == '\0' || !go_to)

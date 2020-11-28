@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 17:59:37 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/24 16:37:42 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:00:29 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,19 @@ static void		print_env(void *content)
 	}
 }
 
+static void		error_(char **cmd)
+{
+	error_msg("minishell : env: «", cmd[1], "» : No such file or directory\n");
+	g_info.ret = ERROR_BASH;
+}
+
 void			my_env(char **cmd)
 {
 	if (!cmd[1])
 		ft_lstiter(g_info.list_env, print_env);
 	else
 	{
-		error_msg("minishell : env: «", cmd[1], "» : No such file or directory\n");
-		g_info.ret = ERROR_BASH;
+		error_(cmd);
 	}
 	(void)cmd;
 }

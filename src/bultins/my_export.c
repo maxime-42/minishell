@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:07:39 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/28 02:08:27 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:07:09 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void			get_name_and_value(char *str)
 
 	if (check_syntaxe(str) == ERROR)
 		return ;
-	// printf("wsh\n");
 	value = "";
 	if ((ptr = ft_strchr(str, '=')))
 	{
@@ -91,7 +90,6 @@ void				my_export(char **cmd)
 	t_list			*sorted_list;
 
 	nb_line = ft_nb_line_array(cmd);
-	// print_tab(cmd);
 	if (nb_line == 1)
 	{
 		sorted_list = sort_var_env(g_info.list_env);
