@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 17:10:55 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 17:34:30 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/27 22:17:00 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void			btree_of_cmd(void)
 		if (parsing(cmd, nb_cmd) == ERROR)
 			return ;
 		cmd = get_next_cmd(nb_cmd);
-		// ft_lstiter(cmd, print_token);
-		// return ;
 		build_ast(&root, &cmd);
 		g_info.ptr = root;
 		dealt_exec_cmd(root);

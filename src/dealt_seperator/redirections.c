@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 20:53:27 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/23 15:57:30 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 04:42:15 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,27 @@ void				redirections(t_btree *root)
 	t_token			*token;
 	int				redirection;
 	char			**tab;
+	int				child_status;
 
+	child_status = 0;
 	redirection = 1;
 	tab = get_token_value(root->right->content);
 	token = root->content;
 	if (token->type == simple_redir_left)
 		redirection = 0;
 	fd = create_file(token->type, tab);
-	if (fd != ERROR && fork() == 0)
+	if (fd == ERROR)
+		return ;
+	if (fork() == 0)
 	{
 		dup2(fd, redirection);
 		close(fd);
 		dealt_exec_cmd(root->left);
 		exit(g_info.ret);
 	}
-	wait(NULL);
+	else
+	{
+		wait(&child_status);
+		g_info.ret = WEXITSTATUS(child_status);
+	}
 }

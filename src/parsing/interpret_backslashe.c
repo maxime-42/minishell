@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:59:40 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 17:28:44 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 01:31:59 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int					del_useless_backslash(t_list **list)
 	if (value[0] == '\\')
 	{
 		to_del = (*list)->next;
-		(*list)->next = to_del->next;
-		ft_lstdelone(to_del, clear_token);
+		// (*list)->next = to_del->next;
+		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
+		// ft_lstdelone(to_del, clear_token);
 	}
 	else
 		return (STOP);
@@ -117,7 +118,9 @@ int					interpret_backslashe(t_list **list, t_bool in_quote)
 	ft_list_iteration(next, &put_to_literal);
 	bool = where_is_backslash(&next, nb_backslash, in_quote);
 	if (bool == false)
+	{
 		ft_list_iteration(next, &check_last_token);
+	}
 	return (SUCCESS);
 }
 // void				interpret_backslashe(t_list **list, t_bool in_quote)

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:07:39 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 12:04:25 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 02:08:27 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void			print_env(void *content)
 		ft_putstr_fd("\n", 1);
 	}
 	else
+	{
 		ft_putstr_fd((char *)content, 1);
+		ft_putstr_fd("\n", 1);
+	}
 	(void)content;
 }
 
@@ -65,6 +68,7 @@ static void			get_name_and_value(char *str)
 
 	if (check_syntaxe(str) == ERROR)
 		return ;
+	// printf("wsh\n");
 	value = "";
 	if ((ptr = ft_strchr(str, '=')))
 	{
@@ -87,6 +91,7 @@ void				my_export(char **cmd)
 	t_list			*sorted_list;
 
 	nb_line = ft_nb_line_array(cmd);
+	// print_tab(cmd);
 	if (nb_line == 1)
 	{
 		sorted_list = sort_var_env(g_info.list_env);
