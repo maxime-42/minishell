@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 15:02:07 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/28 13:21:15 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:47:34 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ char				*get_absolut_path(char **cmd);
 int					interpret_backslashe(t_list **list, t_bool in_quote);
 t_list				*node_after_back_backslash(t_list *list, int nb_backslash);
 int					create_file(t_token_type type, char **file_name);
+void				err_backslash(void);
 #endif

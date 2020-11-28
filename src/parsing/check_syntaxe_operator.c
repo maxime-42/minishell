@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 18:38:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 14:02:20 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:38:44 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,11 @@ int					check_op(t_list *list, t_token *token)
 	}
 	return (SUCCESS);
 }
+
 /*
 ** "if (!tmp && token->type != semicolon)" example : "pwd;" is not error
 */
+
 int					correction_syntaxe_operator(t_list *list, t_token *token)
 {
 	int				code_err;

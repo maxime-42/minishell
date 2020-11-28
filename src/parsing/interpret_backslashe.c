@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 15:59:40 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/28 01:31:59 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:49:21 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int					del_useless_backslash(t_list **list)
 	if (value[0] == '\\')
 	{
 		to_del = (*list)->next;
-		// (*list)->next = to_del->next;
 		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
-		// ft_lstdelone(to_del, clear_token);
 	}
 	else
 		return (STOP);
@@ -92,6 +90,7 @@ t_bool				where_is_backslash(t_list **list, int nb, t_bool in_quote)
 ** if in_quote == true we are ouside quate
 ** else if in_quote == false we are in quote
 */
+
 int					interpret_backslashe(t_list **list, t_bool in_quote)
 {
 	t_token_type	type;
@@ -109,8 +108,7 @@ int					interpret_backslashe(t_list **list, t_bool in_quote)
 	tmp = node_after_back_backslash(next, nb_backslash);
 	if (in_quote == true && (nb_backslash % 2) && !tmp)
 	{
-		error_msg("minishell : ", "syntaxe error", "\n");
-		g_info.ret = SYNTAXE_ERROR;
+		err_backslash();
 		return (ERROR);
 	}
 	ft_list_iteration(next, &off_backslash);
@@ -118,31 +116,6 @@ int					interpret_backslashe(t_list **list, t_bool in_quote)
 	ft_list_iteration(next, &put_to_literal);
 	bool = where_is_backslash(&next, nb_backslash, in_quote);
 	if (bool == false)
-	{
 		ft_list_iteration(next, &check_last_token);
-	}
 	return (SUCCESS);
 }
-// void				interpret_backslashe(t_list **list, t_bool in_quote)
-// {
-// 	t_token_type	type;
-// 	t_list			*next;
-// 	t_bool			bool;
-// 	int				nb_backslash;
-
-// 	type = get_token_type((*list)->content);
-// 	if (type != backslash)
-// 		return ;
-// 	*list = (*list)->prev;
-// 	next = (*list)->next;
-// 	nb_backslash = count_backslash(next);
-	
-// 	ft_list_iteration(next, &off_backslash);
-// 	ft_list_iteration(next, &del_useless_backslash);
-// 	ft_list_iteration(next, &put_to_literal);
-// 	bool = where_is_backslash(&next, nb_backslash, in_quote);
-// 	if (bool == false)
-// 	{
-// 		ft_list_iteration(next, &check_last_token);
-// 	}
-// }

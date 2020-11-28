@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 17:19:32 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/28 01:43:59 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:50:20 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,6 @@ int					count_backslash(t_list *list)
 	return (count);
 }
 
-// int					check_last_token(t_list **list)
-// {
-// 	char			*value;
-// 	t_list			*to_del;
-
-// 	if (!(*list)->next)
-// 		return (STOP);
-// 	if (get_token_type((*list)->next->content) != literal)
-// 		return (STOP);
-// 	value = get_token_value((*list)->next->content);
-// 	if (value[0] == '$' || value[0] == '"')
-// 	{
-// 		to_del = *list;
-// 		*list = to_del->next;
-// 		print_token(to_del->content);
-// 		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
-// 		return (STOP);
-// 	}
-// 	return (CONTINUE);
-// }
-
 int					check_last_token(t_list **list)
 {
 	char			*value;
@@ -64,7 +43,6 @@ int					check_last_token(t_list **list)
 	{
 		to_del = *list;
 		*list = to_del->next;
-		// print_token(to_del->content);
 		ft_list_remove_current_node(&g_info.list_input, to_del, clear_token);
 		return (STOP);
 	}
@@ -81,10 +59,15 @@ t_list				*node_after_back_backslash(t_list *list, int nb_backslash)
 	int				n;
 
 	n = 0;
-	// printf("nb_backslash = [%d]\n", nb_backslash);
 	while (++n <= nb_backslash)
 	{
 		list = list->next;
 	}
 	return (list);
+}
+
+void				err_backslash(void)
+{
+	error_msg("minishell : ", "syntaxe error", "\n");
+	g_info.ret = SYNTAXE_ERROR;
 }

@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:22:47 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 16:26:49 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:53:10 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int					iter_list_1(t_list **begin)
 {
 	t_token			*token;
 
-	while (begin && *begin )
+	while (begin && *begin)
 	{
 		token = ((*begin)->content);
 		if (token->type == single_quote || token->type == double_quote)
@@ -32,9 +32,7 @@ int					iter_list_1(t_list **begin)
 				str_whithout_many_space((*begin)->content);
 			concate_token_same_type(begin, get_token_type((*begin)->content));
 			if (correction_syntaxe_operator(*begin, (*begin)->content) == ERROR)
-			{
 				return (ERROR);
-			}
 			if (is_separator(get_token_type((*begin)->content)) == true)
 				return (SUCCESS);
 		}
