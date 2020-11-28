@@ -5,25 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/27 13:39:25 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/27 17:35:38 by mkayumba         ###   ########.fr       */
+/*   Created: 2020/11/28 14:04:04 by mkayumba          #+#    #+#             */
+/*   Updated: 2020/11/28 14:43:19 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-**  si s1 < s2 retour negatif
-**  si si s1 > retour positive 
-*/
 #include "minishell.h"
 #include <signal.h>
 
-void			for_the_tester(char *str)
+static void		no_interactive_mode(char *str)
 {
 	int			i;
 	char		*new;
-	
+	int			size;
+
 	i = 0;
-	int size = ft_strlen(str);
+	size = ft_strlen(str);
 	while (i < size)
 	{
 		new = ft_strndup(str + i, 1);
@@ -33,33 +30,18 @@ void			for_the_tester(char *str)
 	}
 }
 
-void    print_env(void *content)
+int				main(int ac, char **av, char **env)
 {
-    char		*var_env;
-
-    var_env = (char *)content;
-    if (ft_strchr(var_env, '='))
-    {
-        ft_putstr_fd(var_env, 1);
-        ft_putstr_fd("\n", 1);
-    }
-}
-
-int			main(int ac, char **av, char **env)
-{
-    g_info.list_env = init_env(env);
-    g_info.list_path = 0;
+	g_info.list_env = init_env(env);
+	g_info.list_path = 0;
 	g_info.list_input = 0;
-
 	g_info.ret = 0;
 	g_info.tab_var_env = 0;
-	if (ac == 3)
+	if (ac == 3 && !ft_strcmp(av[1], "-c"))
 	{
-		for_the_tester(av[2]);
+		no_interactive_mode(av[2]);
 		btree_of_cmd();
 		free_all(&g_info, ERROR);
-		// printf("g_info.ret [%d]\n", g_info.ret);
-
 	}
 	else
 	{
@@ -72,8 +54,5 @@ int			main(int ac, char **av, char **env)
 			free_all(&g_info, 0);
 		}
 	}
-	(void)ac;
-	(void)av;
-	(void)env;
 	return (g_info.ret);
 }

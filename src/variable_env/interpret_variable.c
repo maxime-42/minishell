@@ -6,12 +6,11 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 10:27:02 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/24 15:09:37 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 14:02:14 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 /*
 **	le but de cette fonction de trouver la valeur d'une variable
@@ -26,10 +25,10 @@
 **		les variable environement
 */
 
-static void				dealt_value(t_token *token)
+static void			dealt_value(t_token *token)
 {
-	char				*dup;
-	int					ret;
+	char			*dup;
+	int				ret;
 
 	ret = ft_strcmp(token->value, "?");
 	if (!ret)

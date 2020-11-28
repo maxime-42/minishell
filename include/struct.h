@@ -6,7 +6,7 @@
 /*   By: mkayumba <mkayumba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 15:10:36 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/11/26 12:15:34 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/11/28 14:47:53 by mkayumba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@
 
 typedef enum		e_token_type
 {
-	and,//0
-	or,//1
-	semicolon,//2
-	simple_redir_left,//3
-	simple_redir_right,//4
-	double_redir_left,//5
-	double_redir_right,//6
-	pipeline,//7
-	option_command,//8
-	single_quote,//9
-	double_quote,//10
-	backslash,//11
-	literal,//12
-	variable,//13
-	space,//14
+	and,
+	or,
+	semicolon,
+	simple_redir_left,
+	simple_redir_right,
+	double_redir_left,
+	double_redir_right,
+	pipeline,
+	option_command,
+	single_quote,
+	double_quote,
+	backslash,
+	literal,
+	variable,
+	space,
 }					t_token_type;
 
 typedef struct		s_token
