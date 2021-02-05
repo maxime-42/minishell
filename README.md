@@ -1,5 +1,5 @@
-# minishell
-this projet is in progress<br>
+# minishell<br>
+this projet is in progress <br>
 https://www.geeksforgeeks.org/fork-system-call/ <br>
 https://gist.github.com/iomonad/a66f6e9cfb935dc12c0244c1e48db5c8 <br>
 https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Redirections <br>
@@ -16,7 +16,7 @@ https://shapeshed.com/unix-exit-codes/ <br>
 https://stackoverflow.com/questions/13098620/using-stat-to-check-if-a-file-is-executable-in-c <br>
 https://c-for-dummies.com/blog/?p=3246 <br><br>
 
-for ast : 
+for ast : <br>
 https://tomassetti.me/guide-parsing-algorithms-terminology/<br>
 https://pastebin.com/K1YZchMK <br>
 https://files.gogaz.org/42sh-appsinges.html<br>
