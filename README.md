@@ -27,4 +27,7 @@ for ast : <br>
 9   https://ruslanspivak.com/lsbasi-part6/ <br>
 10  https://ruslanspivak.com/lsbasi-part7/ <br>
 
-![alt text](https://github.com/maxime-42/minishell/blob/master/tutorials/tuto_minishell.pdf)
+look at this plan to understand my logic how i coded the project <br>
+![alt text](https://github.com/maxime-42/minishell/blob/master/tutorials/tuto_minishell.pdf) <br>
+![alt text](https://github.com/maxime-42/minishell/blob/master/tutorials/lot_of_commandes%20(1).pdf)
+
