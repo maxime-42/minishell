@@ -29,5 +29,6 @@ for ast : <br>
 
 look at this plan to understand my logic how i coded the project <br>
 ![alt text](https://github.com/maxime-42/minishell/blob/master/tutorials/tuto_minishell.pdf) <br>
+[embed]https://github.com/maxime-42/minishell/blob/master/tutorials/tuto_minishell.pdf[/embed]
 ![alt text](https://github.com/maxime-42/minishell/blob/master/tutorials/lot_of_commandes%20(1).pdf)
 
