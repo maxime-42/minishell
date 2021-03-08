@@ -26,3 +26,5 @@ for ast : <br>
 8   https://ruslanspivak.com/lsbasi-part5/ <br>
 9   https://ruslanspivak.com/lsbasi-part6/ <br>
 10  https://ruslanspivak.com/lsbasi-part7/ <br>
+
+![alt text](https://github.com/maxime-42/minishell/blob/master/tutorials/tuto_minishell.pdf)
